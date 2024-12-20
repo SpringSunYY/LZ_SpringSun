@@ -13,6 +13,7 @@
         <module>litchi-modules-gen</module>
         <module>litchi-modules-job</module>
         <module>litchi-modules-file</module>
+        <module>litchi-modules-config</module>
     </modules>
 
     <artifactId>litchi-modules</artifactId>
