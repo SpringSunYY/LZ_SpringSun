@@ -131,6 +131,7 @@ import { getGenTable, updateGenTable } from "@/api/tool/gen";
 import { optionselect as getDictOptionselect } from "@/api/system/dict/type";
 import basicInfoForm from "./basicInfoForm";
 import genInfoForm from "./genInfoForm";
+import {useRoute} from "vue-router";
 
 const route = useRoute();
 const { proxy } = getCurrentInstance();

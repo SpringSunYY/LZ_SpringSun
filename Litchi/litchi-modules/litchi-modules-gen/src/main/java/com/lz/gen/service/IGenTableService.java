@@ -2,6 +2,8 @@ package com.lz.gen.service;
 
 import java.util.List;
 import java.util.Map;
+
+import com.lz.gen.domain.GenInfo;
 import com.lz.gen.domain.GenTable;
 
 /**
@@ -118,4 +120,11 @@ public interface IGenTableService
      * @param genTable 业务信息
      */
     public void validateEdit(GenTable genTable);
+
+    /**
+     * 生成数据
+     * @param genInfo
+     * @return
+     */
+    int genValue(GenInfo genInfo);
 }

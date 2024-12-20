@@ -2,6 +2,7 @@ package com.lz.gen.mapper;
 
 import java.util.List;
 import com.lz.gen.domain.GenTable;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 业务 数据层
@@ -80,4 +81,6 @@ public interface GenTableMapper
      * @return 结果
      */
     public int deleteGenTableByIds(Long[] ids);
+
+    int genValue(@Param("sql") String sql);
 }
