@@ -5,7 +5,7 @@
           v-for="(column, index) in columns"
           :key="column?.columnId"
           :label="column?.columnName"
-          :v-if="column?.pk"
+          :v-show="column?.pk"
       >
         <template #label>
                  <span slot="label"><svg-icon v-if="column.required" icon-class="star" style="color: red"/> {{
@@ -148,7 +148,7 @@ const submitForm = () => {
 };
 
 function close() {
-  const obj = {path: "/tool/gen", query: {t: Date.now(), pageNum: route.query.pageNum}};
+  const obj = {path: "/tool/gen"};
   proxy.$tab.closeOpenPage(obj);
 }
 
