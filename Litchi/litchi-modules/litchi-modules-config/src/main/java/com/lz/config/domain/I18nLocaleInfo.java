@@ -1,5 +1,8 @@
 package com.lz.config.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.lz.common.core.annotation.Excel;
@@ -11,11 +14,14 @@ import com.lz.common.core.web.domain.BaseEntity;
  * @author YY
  * @date 2024-12-20
  */
+@TableName("c_i18n_locale_info")
 public class I18nLocaleInfo extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 编号 */
+
+    @TableId("message_id")
     private Long messageId;
 
     /** 国家地区 */

@@ -29,6 +29,7 @@ public class I18nLocaleInfoServiceImpl implements II18nLocaleInfoService
     @Override
     public I18nLocaleInfo selectI18nLocaleInfoByMessageId(Long messageId)
     {
+        i18nLocaleInfoMapper.selectById(messageId);
         return i18nLocaleInfoMapper.selectI18nLocaleInfoByMessageId(messageId);
     }
 

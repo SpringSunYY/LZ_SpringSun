@@ -1,6 +1,8 @@
 package com.lz.config.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lz.config.domain.I18nLocaleInfo;
 
 /**
@@ -9,7 +11,7 @@ import com.lz.config.domain.I18nLocaleInfo;
  * @author YY
  * @date 2024-12-20
  */
-public interface I18nLocaleInfoMapper 
+public interface I18nLocaleInfoMapper extends BaseMapper<I18nLocaleInfo>
 {
     /**
      * 查询国际化国家

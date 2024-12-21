@@ -1,1 +1,2 @@
 com.lz.common.core.utils.SpringUtils
+com.lz.common.core.config.MybatisPlusConfig
