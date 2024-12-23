@@ -77,7 +77,8 @@
             icon="Plus"
             @click="handleAdd"
             v-hasPermi="['config:i18nLocaleInfo:add']"
-        >新增</el-button>
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -87,7 +88,8 @@
             :disabled="single"
             @click="handleUpdate"
             v-hasPermi="['config:i18nLocaleInfo:edit']"
-        >修改</el-button>
+        >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -97,7 +99,8 @@
             :disabled="multiple"
             @click="handleDelete"
             v-hasPermi="['config:i18nLocaleInfo:remove']"
-        >删除</el-button>
+        >删除
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -106,38 +109,51 @@
             icon="Download"
             @click="handleExport"
             v-hasPermi="['config:i18nLocaleInfo:export']"
-        >导出</el-button>
+        >导出
+        </el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="i18nLocaleInfoList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="messageId" v-if="columns[0].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="国家地区" align="center" prop="localeName" v-if="columns[1].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="简称" align="center" prop="locale" v-if="columns[2].visible" :show-overflow-tooltip="true"/>
+      <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="编号" align="center" prop="messageId" v-if="columns[0].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="国家地区" align="center" prop="localeName" v-if="columns[1].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="简称" align="center" prop="locale" v-if="columns[2].visible"
+                       :show-overflow-tooltip="true"/>
       <el-table-column label="状态" align="center" prop="localeStatus" v-if="columns[3].visible">
         <template #default="scope">
           <dict-tag :options="c_locale_status" :value="scope.row.localeStatus"/>
         </template>
       </el-table-column>
-      <el-table-column label="创建人" align="center" prop="createBy" v-if="columns[4].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180" v-if="columns[5].visible" :show-overflow-tooltip="true">
+      <el-table-column label="创建人" align="center" prop="createBy" v-if="columns[4].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180" v-if="columns[5].visible"
+                       :show-overflow-tooltip="true">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新人" align="center" prop="updateBy" v-if="columns[6].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="更新时间" align="center" prop="updateTime" width="180" v-if="columns[7].visible" :show-overflow-tooltip="true">
+      <el-table-column label="更新人" align="center" prop="updateBy" v-if="columns[6].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="180" v-if="columns[7].visible"
+                       :show-overflow-tooltip="true">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center" prop="remark" v-if="columns[8].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="备注" align="center" prop="remark" v-if="columns[8].visible"
+                       :show-overflow-tooltip="true"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['config:i18nLocaleInfo:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['config:i18nLocaleInfo:remove']">删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
+                     v-hasPermi="['config:i18nLocaleInfo:edit']">修改
+          </el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
+                     v-hasPermi="['config:i18nLocaleInfo:remove']">删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -154,10 +170,10 @@
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="i18nLocaleInfoRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="国家地区" prop="localeName">
-          <el-input v-model="form.localeName" placeholder="请输入国家地区" />
+          <el-input v-model="form.localeName" placeholder="请输入国家地区"/>
         </el-form-item>
         <el-form-item label="简称" prop="locale">
-          <el-input v-model="form.locale" placeholder="请输入简称" />
+          <el-input v-model="form.locale" placeholder="请输入简称"/>
         </el-form-item>
         <el-form-item label="状态" prop="localeStatus">
           <el-radio-group v-model="form.localeStatus">
@@ -165,11 +181,12 @@
                 v-for="dict in c_locale_status"
                 :key="dict.value"
                 :label="dict.value"
-            >{{dict.label}}</el-radio>
+            >{{ dict.label }}
+            </el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"/>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -183,10 +200,16 @@
 </template>
 
 <script setup name="I18nLocaleInfo">
-import { listI18nLocaleInfo, getI18nLocaleInfo, delI18nLocaleInfo, addI18nLocaleInfo, updateI18nLocaleInfo } from "@/api/config/i18nLocaleInfo";
+import {
+  listI18nLocaleInfo,
+  getI18nLocaleInfo,
+  delI18nLocaleInfo,
+  addI18nLocaleInfo,
+  updateI18nLocaleInfo
+} from "@/api/config/i18nLocaleInfo";
 
-const { proxy } = getCurrentInstance();
-const { c_locale_status } = proxy.useDict('c_locale_status');
+const {proxy} = getCurrentInstance();
+const {c_locale_status} = proxy.useDict('c_locale_status');
 
 const i18nLocaleInfoList = ref([]);
 const open = ref(false);
@@ -215,36 +238,36 @@ const data = reactive({
   },
   rules: {
     localeName: [
-      { required: true, message: "国家地区不能为空", trigger: "blur" }
+      {required: true, message: "国家地区不能为空", trigger: "blur"}
     ],
     locale: [
-      { required: true, message: "简称不能为空", trigger: "blur" }
+      {required: true, message: "简称不能为空", trigger: "blur"}
     ],
     localeStatus: [
-      { required: true, message: "状态不能为空", trigger: "change" }
+      {required: true, message: "状态不能为空", trigger: "change"}
     ],
     createBy: [
-      { required: true, message: "创建人不能为空", trigger: "blur" }
+      {required: true, message: "创建人不能为空", trigger: "blur"}
     ],
     createTime: [
-      { required: true, message: "创建时间不能为空", trigger: "blur" }
+      {required: true, message: "创建时间不能为空", trigger: "blur"}
     ],
   },
   //表格展示列
   columns: [
-    { key: 0, label: '编号', visible: true },
-    { key: 1, label: '国家地区', visible: true },
-    { key: 2, label: '简称', visible: true },
-    { key: 3, label: '状态', visible: true },
-    { key: 4, label: '创建人', visible: true },
-    { key: 5, label: '创建时间', visible: true },
-    { key: 6, label: '更新人', visible: true },
-    { key: 7, label: '更新时间', visible: true },
-    { key: 8, label: '备注', visible: true },
+    {key: 0, label: '编号', visible: true},
+    {key: 1, label: '国家地区', visible: true},
+    {key: 2, label: '简称', visible: true},
+    {key: 3, label: '状态', visible: true},
+    {key: 4, label: '创建人', visible: true},
+    {key: 5, label: '创建时间', visible: true},
+    {key: 6, label: '更新人', visible: true},
+    {key: 7, label: '更新时间', visible: true},
+    {key: 8, label: '备注', visible: true},
   ],
 });
 
-const { queryParams, form, rules,columns } = toRefs(data);
+const {queryParams, form, rules, columns} = toRefs(data);
 
 /** 查询国际化国家列表 */
 function getList() {
@@ -350,12 +373,13 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _messageIds = row.messageId || ids.value;
-  proxy.$modal.confirm('是否确认删除国际化国家编号为"' + _messageIds + '"的数据项？').then(function() {
+  proxy.$modal.confirm('是否确认删除国际化国家编号为"' + _messageIds + '"的数据项？').then(function () {
     return delI18nLocaleInfo(_messageIds);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
+  }).catch(() => {
+  });
 }
 
 /** 导出按钮操作 */

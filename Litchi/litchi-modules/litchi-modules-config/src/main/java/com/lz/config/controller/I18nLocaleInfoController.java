@@ -1,5 +1,8 @@
 package com.lz.config.controller;
 
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.io.IOException;
 import jakarta.servlet.http.HttpServletResponse;
@@ -101,5 +104,13 @@ public class I18nLocaleInfoController extends BaseController
     public AjaxResult remove(@PathVariable Long[] messageIds)
     {
         return toAjax(i18nLocaleInfoService.deleteI18nLocaleInfoByMessageIds(messageIds));
+    }
+
+    @GetMapping("/time")
+    public String getTime() {
+        ZonedDateTime time = ZonedDateTime.now(ZoneOffset.UTC);
+        String format = time.format(DateTimeFormatter.ISO_INSTANT);
+        System.err.println("format = " + format);
+        return format;  // 返回 UTC 时间
     }
 }

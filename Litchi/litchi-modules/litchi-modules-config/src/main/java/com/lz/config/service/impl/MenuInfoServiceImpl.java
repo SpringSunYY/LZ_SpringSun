@@ -2,6 +2,7 @@ package com.lz.config.service.impl;
 
 import java.util.List;
 import com.lz.common.core.utils.DateUtils;
+import com.lz.common.security.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lz.config.mapper.MenuInfoMapper;
@@ -53,6 +54,7 @@ public class MenuInfoServiceImpl implements IMenuInfoService
     @Override
     public int insertMenuInfo(MenuInfo menuInfo)
     {
+        menuInfo.setCreateBy(SecurityUtils.getUsername());
         menuInfo.setCreateTime(DateUtils.getNowDate());
         return menuInfoMapper.insertMenuInfo(menuInfo);
     }
@@ -66,6 +68,7 @@ public class MenuInfoServiceImpl implements IMenuInfoService
     @Override
     public int updateMenuInfo(MenuInfo menuInfo)
     {
+        menuInfo.setUpdateBy(SecurityUtils.getUsername());
         menuInfo.setUpdateTime(DateUtils.getNowDate());
         return menuInfoMapper.updateMenuInfo(menuInfo);
     }

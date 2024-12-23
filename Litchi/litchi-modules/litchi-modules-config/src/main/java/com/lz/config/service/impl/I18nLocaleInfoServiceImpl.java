@@ -42,7 +42,11 @@ public class I18nLocaleInfoServiceImpl implements II18nLocaleInfoService
     @Override
     public List<I18nLocaleInfo> selectI18nLocaleInfoList(I18nLocaleInfo i18nLocaleInfo)
     {
-        return i18nLocaleInfoMapper.selectI18nLocaleInfoList(i18nLocaleInfo);
+        List<I18nLocaleInfo> i18nLocaleInfos = i18nLocaleInfoMapper.selectI18nLocaleInfoList(i18nLocaleInfo);
+        for (I18nLocaleInfo info : i18nLocaleInfos) {
+            System.err.println(info);
+        }
+        return i18nLocaleInfos;
     }
 
     /**

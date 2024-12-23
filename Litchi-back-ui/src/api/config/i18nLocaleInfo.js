@@ -35,6 +35,13 @@ export function updateI18nLocaleInfo(data) {
   })
 }
 
+export function getTimeZone() {
+  return request({
+    url: '/config/i18nLocaleInfo/time',
+    method: 'get',
+  })
+}
+
 // 删除国际化国家
 export function delI18nLocaleInfo(messageId) {
   return request({

@@ -3,54 +3,54 @@
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="配置名称" prop="configName">
         <el-input
-          v-model="queryParams.configName"
-          placeholder="请输入配置名称"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.configName"
+            placeholder="请输入配置名称"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="配置键名" prop="configKey">
         <el-input
-          v-model="queryParams.configKey"
-          placeholder="请输入配置键名"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.configKey"
+            placeholder="请输入配置键名"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="创建人" prop="createBy">
         <el-input
-          v-model="queryParams.createBy"
-          placeholder="请输入创建人"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.createBy"
+            placeholder="请输入创建人"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="创建时间" style="width: 308px">
         <el-date-picker
-          v-model="daterangeCreateTime"
-          value-format="YYYY-MM-DD"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+            v-model="daterangeCreateTime"
+            value-format="YYYY-MM-DD"
+            type="daterange"
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
         ></el-date-picker>
       </el-form-item>
       <el-form-item label="更新人" prop="updateBy">
         <el-input
-          v-model="queryParams.updateBy"
-          placeholder="请输入更新人"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.updateBy"
+            placeholder="请输入更新人"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="更新时间" style="width: 308px">
         <el-date-picker
-          v-model="daterangeUpdateTime"
-          value-format="YYYY-MM-DD"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+            v-model="daterangeUpdateTime"
+            value-format="YYYY-MM-DD"
+            type="daterange"
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
         ></el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -62,65 +62,65 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['config:configInfo:add']"
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handleAdd"
+            v-hasPermi="['config:configInfo:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['config:configInfo:edit']"
+            type="success"
+            plain
+            icon="Edit"
+            :disabled="single"
+            @click="handleUpdate"
+            v-hasPermi="['config:configInfo:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['config:configInfo:remove']"
+            type="danger"
+            plain
+            icon="Delete"
+            :disabled="multiple"
+            @click="handleDelete"
+            v-hasPermi="['config:configInfo:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="warning"
-          plain
-          icon="Download"
-          @click="handleExport"
-          v-hasPermi="['config:configInfo:export']"
+            type="warning"
+            plain
+            icon="Download"
+            @click="handleExport"
+            v-hasPermi="['config:configInfo:export']"
         >导出</el-button>
       </el-col>
-      <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="configInfoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="configId" />
-      <el-table-column label="配置名称" align="center" prop="configName" />
-      <el-table-column label="配置键名" align="center" prop="configKey" />
-      <el-table-column label="配置键值" align="center" prop="configValue" />
-      <el-table-column label="配置类型" align="center" prop="configType" />
-      <el-table-column label="创建人" align="center" prop="createBy" />
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+      <el-table-column label="编号" align="center" prop="configId" v-if="columns[0].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="配置名称" align="center" prop="configName" v-if="columns[1].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="配置键名" align="center" prop="configKey" v-if="columns[2].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="配置键值" align="center" prop="configValue" v-if="columns[3].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="配置类型" align="center" prop="configType" v-if="columns[4].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="创建人" align="center" prop="createBy" v-if="columns[5].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180" v-if="columns[6].visible" :show-overflow-tooltip="true">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {hh}:{mm}:{ss}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新人" align="center" prop="updateBy" />
-      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
+      <el-table-column label="更新人" align="center" prop="updateBy" v-if="columns[7].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="180" v-if="columns[8].visible" :show-overflow-tooltip="true">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d}') }}</span>
+          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {hh}:{mm}:{ss}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center" prop="remark" />
+      <el-table-column label="备注" align="center" prop="remark" v-if="columns[9].visible" :show-overflow-tooltip="true"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['config:configInfo:edit']">修改</el-button>
@@ -128,13 +128,13 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getList"
+        v-show="total>0"
+        :total="total"
+        v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize"
+        @pagination="getList"
     />
 
     <!-- 添加或修改配置对话框 -->
@@ -213,10 +213,23 @@ const data = reactive({
     createTime: [
       { required: true, message: "创建时间不能为空", trigger: "blur" }
     ],
-  }
+  },
+  //表格展示列
+  columns: [
+    { key: 0, label: '编号', visible: true },
+    { key: 1, label: '配置名称', visible: true },
+    { key: 2, label: '配置键名', visible: true },
+    { key: 3, label: '配置键值', visible: true },
+    { key: 4, label: '配置类型', visible: true },
+    { key: 5, label: '创建人', visible: true },
+    { key: 6, label: '创建时间', visible: true },
+    { key: 7, label: '更新人', visible: true },
+    { key: 8, label: '更新时间', visible: true },
+    { key: 9, label: '备注', visible: true },
+  ],
 });
 
-const { queryParams, form, rules } = toRefs(data);
+const { queryParams, form, rules,columns } = toRefs(data);
 
 /** 查询配置列表 */
 function getList() {
