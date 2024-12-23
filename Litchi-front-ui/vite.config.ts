@@ -1,10 +1,15 @@
-import {defineConfig} from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'node:path';
 
-// https://vite.dev/config/
 export default defineConfig({
     plugins: [react()],
     optimizeDeps: {
         include: ['@mui/material', '@emotion/react', '@emotion/styled'],
     },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+        }
+    }
 })
