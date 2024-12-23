@@ -180,7 +180,7 @@
             <el-radio
                 v-for="dict in c_locale_status"
                 :key="dict.value"
-                :label="dict.value"
+                :value="dict.value"
             >{{ dict.label }}
             </el-radio>
           </el-radio-group>
