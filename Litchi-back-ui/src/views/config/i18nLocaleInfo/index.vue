@@ -3,64 +3,64 @@
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="国家地区" prop="localeName">
         <el-input
-          v-model="queryParams.localeName"
-          placeholder="请输入国家地区"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.localeName"
+            placeholder="请输入国家地区"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="简称" prop="locale">
         <el-input
-          v-model="queryParams.locale"
-          placeholder="请输入简称"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.locale"
+            placeholder="请输入简称"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="状态" prop="localeStatus">
         <el-select v-model="queryParams.localeStatus" placeholder="请选择状态" clearable>
           <el-option
-            v-for="dict in c_locale_status"
-            :key="dict.value"
-            :label="dict.label"
-            :value="dict.value"
+              v-for="dict in c_locale_status"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
           />
         </el-select>
       </el-form-item>
       <el-form-item label="创建人" prop="createBy">
         <el-input
-          v-model="queryParams.createBy"
-          placeholder="请输入创建人"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.createBy"
+            placeholder="请输入创建人"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="创建时间" style="width: 308px">
         <el-date-picker
-          v-model="daterangeCreateTime"
-          value-format="YYYY-MM-DD"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+            v-model="daterangeCreateTime"
+            value-format="YYYY-MM-DD"
+            type="daterange"
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
         ></el-date-picker>
       </el-form-item>
       <el-form-item label="更新人" prop="updateBy">
         <el-input
-          v-model="queryParams.updateBy"
-          placeholder="请输入更新人"
-          clearable
-          @keyup.enter="handleQuery"
+            v-model="queryParams.updateBy"
+            placeholder="请输入更新人"
+            clearable
+            @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="更新时间" style="width: 308px">
         <el-date-picker
-          v-model="daterangeUpdateTime"
-          value-format="YYYY-MM-DD"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+            v-model="daterangeUpdateTime"
+            value-format="YYYY-MM-DD"
+            type="daterange"
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
         ></el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -72,68 +72,68 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="Plus"
-          @click="handleAdd"
-          v-hasPermi="['config:i18nLocaleInfo:add']"
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handleAdd"
+            v-hasPermi="['config:i18nLocaleInfo:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="success"
-          plain
-          icon="Edit"
-          :disabled="single"
-          @click="handleUpdate"
-          v-hasPermi="['config:i18nLocaleInfo:edit']"
+            type="success"
+            plain
+            icon="Edit"
+            :disabled="single"
+            @click="handleUpdate"
+            v-hasPermi="['config:i18nLocaleInfo:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="danger"
-          plain
-          icon="Delete"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['config:i18nLocaleInfo:remove']"
+            type="danger"
+            plain
+            icon="Delete"
+            :disabled="multiple"
+            @click="handleDelete"
+            v-hasPermi="['config:i18nLocaleInfo:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
-          type="warning"
-          plain
-          icon="Download"
-          @click="handleExport"
-          v-hasPermi="['config:i18nLocaleInfo:export']"
+            type="warning"
+            plain
+            icon="Download"
+            @click="handleExport"
+            v-hasPermi="['config:i18nLocaleInfo:export']"
         >导出</el-button>
       </el-col>
-      <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="i18nLocaleInfoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="messageId" />
-      <el-table-column label="国家地区" align="center" prop="localeName" />
-      <el-table-column label="简称" align="center" prop="locale" />
-      <el-table-column label="状态" align="center" prop="localeStatus">
+      <el-table-column label="编号" align="center" prop="messageId" v-if="columns[0].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="国家地区" align="center" prop="localeName" v-if="columns[1].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="简称" align="center" prop="locale" v-if="columns[2].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="状态" align="center" prop="localeStatus" v-if="columns[3].visible">
         <template #default="scope">
           <dict-tag :options="c_locale_status" :value="scope.row.localeStatus"/>
         </template>
       </el-table-column>
-      <el-table-column label="创建人" align="center" prop="createBy" />
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+      <el-table-column label="创建人" align="center" prop="createBy" v-if="columns[4].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180" v-if="columns[5].visible" :show-overflow-tooltip="true">
         <template #default="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新人" align="center" prop="updateBy" />
-      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
+      <el-table-column label="更新人" align="center" prop="updateBy" v-if="columns[6].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="180" v-if="columns[7].visible" :show-overflow-tooltip="true">
         <template #default="scope">
           <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center" prop="remark" />
+      <el-table-column label="备注" align="center" prop="remark" v-if="columns[8].visible" :show-overflow-tooltip="true"/>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['config:i18nLocaleInfo:edit']">修改</el-button>
@@ -141,13 +141,13 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
-      :total="total"
-      v-model:page="queryParams.pageNum"
-      v-model:limit="queryParams.pageSize"
-      @pagination="getList"
+        v-show="total>0"
+        :total="total"
+        v-model:page="queryParams.pageNum"
+        v-model:limit="queryParams.pageSize"
+        @pagination="getList"
     />
 
     <!-- 添加或修改国际化国家对话框 -->
@@ -162,9 +162,9 @@
         <el-form-item label="状态" prop="localeStatus">
           <el-radio-group v-model="form.localeStatus">
             <el-radio
-              v-for="dict in c_locale_status"
-              :key="dict.value"
-              :label="dict.value"
+                v-for="dict in c_locale_status"
+                :key="dict.value"
+                :label="dict.value"
             >{{dict.label}}</el-radio>
           </el-radio-group>
         </el-form-item>
@@ -229,10 +229,22 @@ const data = reactive({
     createTime: [
       { required: true, message: "创建时间不能为空", trigger: "blur" }
     ],
-  }
+  },
+  //表格展示列
+  columns: [
+    { key: 0, label: '编号', visible: true },
+    { key: 1, label: '国家地区', visible: true },
+    { key: 2, label: '简称', visible: true },
+    { key: 3, label: '状态', visible: true },
+    { key: 4, label: '创建人', visible: true },
+    { key: 5, label: '创建时间', visible: true },
+    { key: 6, label: '更新人', visible: true },
+    { key: 7, label: '更新时间', visible: true },
+    { key: 8, label: '备注', visible: true },
+  ],
 });
 
-const { queryParams, form, rules } = toRefs(data);
+const { queryParams, form, rules,columns } = toRefs(data);
 
 /** 查询国际化国家列表 */
 function getList() {
