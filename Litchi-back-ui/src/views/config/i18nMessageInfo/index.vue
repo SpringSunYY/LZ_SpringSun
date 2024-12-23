@@ -110,13 +110,13 @@
       <el-table-column label="创建人" align="center" prop="createBy" v-if="columns[4].visible" :show-overflow-tooltip="true"/>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" v-if="columns[5].visible" :show-overflow-tooltip="true">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {hh}:{mm}:{ss}') }}</span>
+          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="更新人" align="center" prop="updateBy" v-if="columns[6].visible" :show-overflow-tooltip="true"/>
       <el-table-column label="更新时间" align="center" prop="updateTime" width="180" v-if="columns[7].visible" :show-overflow-tooltip="true">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {hh}:{mm}:{ss}') }}</span>
+          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="备注" align="center" prop="remark" v-if="columns[8].visible" :show-overflow-tooltip="true"/>
@@ -329,12 +329,13 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _messageIds = row.messageId || ids.value;
-  proxy.$modal.confirm('是否确认删除国际化信息编号为"' + _messageIds + '"的数据项？').then(function() {
+  proxy.$modal.confirm('是否确认删除国际化信息编号为"' + _messageIds + '"的数据项？').then(function () {
     return delI18nMessageInfo(_messageIds);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
+  }).catch(() => {
+  });
 }
 
 /** 导出按钮操作 */

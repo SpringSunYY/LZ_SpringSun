@@ -198,7 +198,7 @@
       <el-table-column label="创建人" align="center" prop="createBy" v-if="columns[16].visible" :show-overflow-tooltip="true"/>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" v-if="columns[17].visible" :show-overflow-tooltip="true">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {HH}:{mm}:{ss}') }}</span>
+          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
       <el-table-column label="更新人" align="center" prop="updateBy" v-if="columns[18].visible" :show-overflow-tooltip="true"/>
@@ -217,7 +217,7 @@
       </el-table-column>
     </el-table>
 
-    <!-- 添加或修改菜单信息对话框 -->
+    <!-- 添加或修改菜单信息哦对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="menuInfoRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="菜单名称" prop="menuName">
@@ -314,7 +314,7 @@
           <el-input v-model="form.icon" placeholder="请输入菜单图标" />
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.remark" placeholder="请输入备注" />
         </el-form-item>
       </el-form>
       <template #footer>
@@ -412,7 +412,7 @@ const data = reactive({
 
 const { queryParams, form, rules,columns } = toRefs(data);
 
-/** 查询菜单信息列表 */
+/** 查询菜单信息哦列表 */
 function getList() {
   loading.value = true;
   queryParams.value.params = {};
@@ -430,7 +430,7 @@ function getList() {
   });
 }
 
-/** 查询菜单信息下拉树结构 */
+/** 查询菜单信息哦下拉树结构 */
 function getTreeselect() {
   listMenuInfo().then(response => {
     menuInfoOptions.value = [];
@@ -497,7 +497,7 @@ function handleAdd(row) {
     form.value.parentId = 0;
   }
   open.value = true;
-  title.value = "添加菜单信息";
+  title.value = "添加菜单信息哦";
 }
 
 /** 展开/折叠操作 */
@@ -519,7 +519,7 @@ async function handleUpdate(row) {
   getMenuInfo(row.menuId).then(response => {
     form.value = response.data;
     open.value = true;
-    title.value = "修改菜单信息";
+    title.value = "修改菜单信息哦";
   });
 }
 
@@ -546,7 +546,7 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  proxy.$modal.confirm('是否确认删除菜单信息编号为"' + row.menuId + '"的数据项？').then(function() {
+  proxy.$modal.confirm('是否确认删除菜单信息哦编号为"' + row.menuId + '"的数据项？').then(function() {
     return delMenuInfo(row.menuId);
   }).then(() => {
     getList();
