@@ -150,8 +150,8 @@
       />
 
       <!-- 操作日志详细 -->
-      <el-dialog title="操作日志详细" v-model="open" width="800px" append-to-body>
-         <el-form :model="form" label-width="100px">
+      <el-dialog title="操作日志详细" v-model="open" width="1000px" append-to-body>
+         <el-form :model="form" label-width="100px" style="max-width: 100%; overflow-x: auto;">
             <el-row>
                <el-col :span="12">
                   <el-form-item label="操作模块：">{{ form.title }} / {{ typeFormat(form) }}</el-form-item>
