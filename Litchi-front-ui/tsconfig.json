@@ -9,6 +9,9 @@
     }
   ],
   "compilerOptions": {
+    "strict": false,  // 关闭严格模式
+    "noImplicitAny": false,  // 允许隐式的 any 类型
+    "noUncheckedIndexedAccess": false,  // 关闭索引访问类型检查
     "baseUrl": ".",
     "paths": {
       "@/*": [

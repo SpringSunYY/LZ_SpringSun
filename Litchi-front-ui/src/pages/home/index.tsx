@@ -1,13 +1,52 @@
-import {getCodeImage} from "@/apis/test.ts";
+import {getCodeImage, listUser} from "@/apis/test";
+import Button from "@mui/material/Button";
+import {useState} from "react";
+import {ToastContainer} from "react-toastify";
 
 const Home = () => {
     const getCodeMsg = () => {
         getCodeImage().then((res) => {
-            console.log(res)
-        })
-    }
-    getCodeMsg();
-    return <div>this is Home</div>
-}
+            console.log('res', res.msg);
+        }).catch((error) => {
+            console.error('获取用户列表失败:', error);
+        });
+    };
 
-export default Home
+    const [userList, setUserList] = useState([{
+        userName: '',
+        userId: ''
+    }]);
+
+    const getUserList = () => {
+        listUser().then((res) => {
+            setUserList(res.rows)
+        }).catch((error) => {
+            console.error('获取用户列表失败:', error);
+        });
+    };
+    getCodeMsg();
+    return (
+        <div>
+            <ToastContainer
+                style={{
+                    top: '20%',         // 距离顶部 10px
+                    left: '50%',         // 居中
+                    transform: 'translateX(-50%)', // 调整位置为水平居中
+                }}/>
+            <Button variant="contained" color="primary" onClick={getUserList}>
+                获取用户
+            </Button>
+            {userList.length > 0 ? (
+                userList.map((item) => (
+                    <div key={item?.userId}>
+                        <p>1 </p>{item?.userName}
+                    </div>
+                ))
+            ) : (
+                <p>没有用户数据</p>  // Show a message if there are no users
+            )}
+        </div>
+    );
+};
+
+export default Home;
