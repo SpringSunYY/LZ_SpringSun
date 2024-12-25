@@ -15,4 +15,9 @@ declare namespace API {
         data?: object,
         msg?: string;
     }
+    interface ResponseUserInfo {
+        user?: object,
+        roles?: Array<string>,
+        permissions?: Array<string>,
+    }
 }

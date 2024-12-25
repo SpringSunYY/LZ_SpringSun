@@ -1,15 +1,16 @@
 import {FormEvent, useState} from "react";
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
-import {LoginUser} from "@/types/test.d.ts";
-import {login} from "@/apis/test.ts";
-import {getToken, setToken} from "@/utils/token.ts";
+import {LoginUser} from "@/types/common";
+import {useDispatch} from "react-redux";
+import {fetchLogin, fetchUserInfo} from "@/store/module/user";
 
 const Login = () => {
     const [loginUser, setLoginUser] = useState<LoginUser>({
         username: "admin",
         password: "admin123",
     });
+    const dispatch = useDispatch()
 
     // 处理输入框的变化
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,15 +22,12 @@ const Login = () => {
     };
 
     // 提交表单
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        console.log("Login data:", loginUser);
-        login(loginUser).then((data) => {
-            // console.log(data);
-            console.log("login user:", data?.data.access_token);
-            console.log(getToken());
-            setToken(data.data.access_token);
-        });
+        // @ts-ignore
+        await dispatch(fetchLogin(loginUser))
+        // @ts-ignore
+        await dispatch(fetchUserInfo())
     };
 
     return (

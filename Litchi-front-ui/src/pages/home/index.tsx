@@ -2,6 +2,8 @@ import {getCodeImage, listUser} from "@/apis/test";
 import Button from "@mui/material/Button";
 import {useState} from "react";
 import {ToastContainer} from "react-toastify";
+import {useSelector} from "react-redux";
+import {RootState} from "@/store";
 
 const Home = () => {
     const getCodeMsg = () => {
@@ -19,11 +21,15 @@ const Home = () => {
 
     const getUserList = () => {
         listUser().then((res) => {
-            setUserList(res.rows)
+            setUserList(res?.rows || [])
         }).catch((error) => {
             console.error('获取用户列表失败:', error);
         });
     };
+    const userInfo = useSelector((state: RootState) => state.user.userInfo);  // 从 Redux 中获取用户数据
+    const getUserInfo = () => {
+        console.log(userInfo);
+    }
     getCodeMsg();
     return (
         <div>
@@ -35,6 +41,9 @@ const Home = () => {
                 }}/>
             <Button variant="contained" color="primary" onClick={getUserList}>
                 获取用户
+            </Button>
+            <Button variant="contained" color="primary" onClick={getUserInfo}>
+                获取用户信息
             </Button>
             {userList.length > 0 ? (
                 userList.map((item) => (
