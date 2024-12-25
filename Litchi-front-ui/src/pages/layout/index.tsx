@@ -1,156 +1,114 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {
-    AppBar,
-    Box,
-    Drawer,
-    IconButton,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemText,
-    MenuItem,
-    Popover,
-    Toolbar,
-    Typography
-} from "@mui/material";
-import {Article, Create, Home, Logout} from "@mui/icons-material";
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {clearUserInfo, fetchUserInfo} from "@/store/module/user.ts";
+import {useDispatch} from "react-redux";
+import {fetchUserInfo} from "@/store/module/user.ts";
 import {store} from "@/store";
+import {Menu, MenuItem} from "@mui/material";
+import './index.scss';
+import Button from "@mui/material/Button";
+import {Outlet, useNavigate} from "react-router-dom";
 
-// 定义菜单项
-const menuItems = [
+// 定义带子菜单的菜单数据
+const menus = [
     {
-        label: "首页",
-        key: "/",
-        icon: <Home/>,
+        label: "用户",
+        key: "Dashboard",
+        menuId: 1,
+        path: "/login",
+        children: [
+            {label: "登录", key: "Dashboard-Profile", menuId: 2, path: "/login"},
+            {label: "My account", key: "Dashboard-MyAccount", menuId: 3, path: "/login"},
+            {label: "Logout", key: "Dashboard-Logout", menuId: 4, path: "/login"},
+        ],
     },
     {
-        label: "文章管理",
-        key: "/home",
-        icon: <Article/>,
-    },
-    {
-        label: "创建文章",
-        key: "/login",
-        icon: <Create/>,
+        label: "Settings",
+        key: "Settings",
+        menuId: 4,
+        path: "/login",
+        children: [
+            {label: "General", key: "Settings-General", menuId: 5, path: "/login"},
+            {label: "Security", key: "Settings-Security", menuId: 6, path: "/login"},
+        ],
     },
 ];
 
 const GeekLayout: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
-    const name = useSelector((state: any) => state.user.userInfo.name); // 用户名从 Redux 中获取
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
     useEffect(() => {
         const loadUserInfo = async () => {
             try {
-                // 等待异步操作完成
                 await store.dispatch(fetchUserInfo());
-                console.log('用户信息已加载');
+                console.log("用户信息已加载");
             } catch (error) {
-                console.error('获取用户信息失败', error);
+                console.error("获取用户信息失败", error);
             }
         };
 
-        loadUserInfo(); // 调用同步封装的异步函数
+        loadUserInfo();
     }, [dispatch]);
 
-    // 路由点击
-    const onMenuClick = (path: string) => {
-        navigate(path);
-    };
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [openMenu, setOpenMenu] = useState<string | null>(null);
 
-    // 获取当前选中的菜单项
-    const selectedKey = location.pathname;
-
-    // 弹出菜单
-    const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>, menuKey: string) => {
         setAnchorEl(event.currentTarget);
+        setOpenMenu(menuKey);
     };
 
-    const handlePopoverClose = () => {
+    const handleClose = () => {
         setAnchorEl(null);
+        setOpenMenu(null);
     };
 
-    const open = Boolean(anchorEl);
-
-    // 退出确认
-    const onConfirmLogout = () => {
-        store.dispatch(clearUserInfo());
-        navigate("/login");
+    const handleMenuItemClick = (child: { label: string; key: string; menuId: number, path?: string }) => {
+        console.log("点击的菜单项是：", child); // 输出点击的子菜单项
+        if (child.path != undefined) {
+            navigate(child.path);
+        }
+        handleClose(); // 关闭菜单
     };
+
+    // const handleClickMenuItem=(item)=>{
+    //     console.log(item);
+    // }
 
     return (
-        <Box sx={{display: "flex"}}>
-            {/* Drawer 部分 */}
-            <Drawer
-                sx={{
-                    width: 240,
-                    flexShrink: 0,
-                    "& .MuiDrawer-paper": {
-                        width: 240,
-                        boxSizing: "border-box",
-                    },
-                }}
-                variant="permanent"
-                anchor="left"
-            >
-                <List>
-                    {menuItems.map((item) => (
-                        <ListItem button key={item.key} selected={selectedKey === item.key}
-                                  onClick={() => onMenuClick(item.key)}>
-                            <ListItemButton>
-                                {item.icon}
-                                <ListItemText primary={item.label}/>
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
+        <div>
+            <div className="title">SpringSun</div>
 
-            <Box sx={{flexGrow: 1}}>
-                {/* AppBar 部分 */}
-                <AppBar position="sticky">
-                    <Toolbar>
-                        <Typography variant="h6" sx={{flexGrow: 1}}>
-                            Geek Layout
-                        </Typography>
-                        <Box sx={{display: "flex", alignItems: "center"}}>
-                            <Typography variant="body1" sx={{marginRight: 2}}>
-                                {name}
-                            </Typography>
-                            <IconButton color="inherit" onClick={handlePopoverOpen}>
-                                <Logout/>
-                            </IconButton>
-                            <Popover
-                                open={open}
-                                anchorEl={anchorEl}
-                                onClose={handlePopoverClose}
-                                anchorOrigin={{
-                                    vertical: "bottom",
-                                    horizontal: "center",
-                                }}
-                                transformOrigin={{
-                                    vertical: "top",
-                                    horizontal: "center",
-                                }}
-                            >
-                                <MenuItem onClick={onConfirmLogout}>确认退出</MenuItem>
-                            </Popover>
-                        </Box>
-                    </Toolbar>
-                </AppBar>
+            {menus.map((menu) => (
+                <span key={menu.menuId}>
+                    <Button
+                        id={`basic-button`}
+                        aria-controls={`basic-menu-${menu.menuId}`}
+                        aria-haspopup="true"
+                        aria-expanded={openMenu === menu.key ? "true" : undefined}
+                        onClick={(event) => handleClick(event, menu.key)}
+                    >
+                        {menu.label}
+                    </Button>
+                    <Menu
+                        id={`basic-menu`}
+                        anchorEl={anchorEl}
+                        open={openMenu === menu.key}
+                        onClose={handleClose}
+                        MenuListProps={{
+                            "aria-labelledby": `basic-button-${menu.menuId}`,
+                        }}
+                    >
+                        {menu.children.map((child) => (
+                            <MenuItem key={child.menuId} onClick={() => handleMenuItemClick(child)}>
+                                {child.label}
+                            </MenuItem>
+                        ))}
+                    </Menu>
+                </span>
+            ))}
 
-                {/* 内容区 */}
-                <Box sx={{padding: 3}}>
-                    <Outlet/>
-                </Box>
-            </Box>
-        </Box>
+            {/* 在这里显示子路由内容 */}
+            <Outlet/>
+        </div>
     );
 };
 
