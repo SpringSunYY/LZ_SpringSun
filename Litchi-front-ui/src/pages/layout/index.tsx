@@ -17,6 +17,7 @@ import {
 import {Article, Create, Home, Logout} from "@mui/icons-material";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import {clearUserInfo, fetchUserInfo} from "@/store/module/user.ts";
+import {store} from "@/store";
 
 // 定义菜单项
 const menuItems = [
@@ -44,10 +45,18 @@ const GeekLayout: React.FC = () => {
     const name = useSelector((state: any) => state.user.userInfo.name); // 用户名从 Redux 中获取
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-    // 触发获取个人用户信息
     useEffect(() => {
-        // @ts-ignore
-        dispatch(fetchUserInfo());
+        const loadUserInfo = async () => {
+            try {
+                // 等待异步操作完成
+                await store.dispatch(fetchUserInfo());
+                console.log('用户信息已加载');
+            } catch (error) {
+                console.error('获取用户信息失败', error);
+            }
+        };
+
+        loadUserInfo(); // 调用同步封装的异步函数
     }, [dispatch]);
 
     // 路由点击
@@ -71,7 +80,7 @@ const GeekLayout: React.FC = () => {
 
     // 退出确认
     const onConfirmLogout = () => {
-        dispatch(clearUserInfo());
+        store.dispatch(clearUserInfo());
         navigate("/login");
     };
 

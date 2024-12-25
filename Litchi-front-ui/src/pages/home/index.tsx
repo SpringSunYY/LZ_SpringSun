@@ -4,6 +4,7 @@ import {useState} from "react";
 import {ToastContainer} from "react-toastify";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
+import {checkPermiSingle} from "@/utils/permission.ts";
 
 const Home = () => {
     const getCodeMsg = () => {
@@ -42,7 +43,8 @@ const Home = () => {
             <Button variant="contained" color="primary" onClick={getUserList}>
                 获取用户
             </Button>
-            <Button variant="contained" color="primary" onClick={getUserInfo}>
+            <Button disabled={!checkPermiSingle('system:config:remove')} variant="contained" color="primary"
+                    onClick={getUserInfo}>
                 获取用户信息
             </Button>
             {userList.length > 0 ? (

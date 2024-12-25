@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
 import userReducer from "@/store/module/user.ts";
 
 // 定义 Redux store 的类型
