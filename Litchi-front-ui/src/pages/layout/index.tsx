@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import {Button, Menu, MenuItem, Drawer, useMediaQuery, AppBar, Toolbar} from "@mui/material";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/system";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
 import './index.scss'
 import MySvgIcon from "@/compoents/SvgIcon";
 // 菜单数据
@@ -36,6 +38,12 @@ const menus = [
             {label: "General", key: "Settings-General", menuId: 11, path: "/home"},
             {label: "安全", key: "Settings-Security", menuId: 12, path: "/home"},
         ],
+    }, {
+        label: "无子集",
+        key: "Home",
+        menuId: 14,
+        path: "/home",
+
     },
 ];
 
@@ -77,7 +85,7 @@ const GeekLayout: React.FC = () => {
             <header className="header">
                 <AppBar className="appBar" position="sticky">
                     <Toolbar className={"toolBar"}>
-                        <div className="title"><MySvgIcon name={"lz"} size={"1em"} />SpringSun</div>
+                        <div className="title"><MySvgIcon name={"lz"} size={"1.2em"}/>SpringSun</div>
 
                         <div className="menu">
                             {/* 当是小屏幕时，点击按钮展开折叠菜单 */}
@@ -86,14 +94,33 @@ const GeekLayout: React.FC = () => {
                             ) : (
                                 <div>
                                     {menus.map((menu) => (
-                                        <span  key={menu.menuId}>
+                                        <span key={menu.menuId}>
                                     {/* 菜单按钮 */}
                                             <Button
                                                 onClick={(event) => handleClick(event, menu.key)} // 点击时设置锚点并展开菜单
                                                 aria-controls={`menu-${menu.menuId}`}
                                                 aria-haspopup="true"
                                             >
-                                        <span style={{color: "white"}}>{menu.label}</span>
+                                   <span style={{
+                                       color: "white",
+                                   }}>
+                                      {menu.label}
+                                       {/* 如果有下级菜单，显示带旋转动画的箭头 */}
+                                       {menu?.children && menu?.children.length > 0 && (
+                                           <span
+                                               style={{
+                                                   textAlign: "center",
+                                                   alignItems: "center",
+                                                   display: 'inline-block',
+                                                   marginLeft: 1,
+                                                   transition: 'transform 0.3s ease', // 添加过渡效果
+                                                   transform: openMenu === menu.key ? 'rotate(360deg)' : 'rotate(270deg)',
+                                               }}
+                                           >
+                                            <ArrowDropDownIcon/>
+                                          </span>
+                                       )}
+                                 </span>
                                     </Button>
                                             {/* 大屏幕下的菜单项 */}
                                             <Menu
@@ -104,7 +131,7 @@ const GeekLayout: React.FC = () => {
                                                     "aria-labelledby": `menu-${menu.menuId}`,
                                                 }}
                                             >
-                                        {menu.children.map((child) => (
+                                        {menu?.children?.map((child) => (
                                             <MenuItem key={child.menuId} onClick={() => handleMenuItemClick(child)}>
                                                 {child.label}
                                             </MenuItem>
@@ -115,6 +142,8 @@ const GeekLayout: React.FC = () => {
                                 </div>
                             )}
                         </div>
+
+
                     </Toolbar>
                 </AppBar>
 
@@ -124,7 +153,7 @@ const GeekLayout: React.FC = () => {
                         {menus.map((menu) => (
                             <div key={menu.menuId}>
                                 <h3>{menu.label}</h3>
-                                {menu.children.map((child) => (
+                                {menu?.children?.map((child) => (
                                     <Button key={child.menuId} onClick={() => handleMenuItemClick(child)}>
                                         {child.label}
                                     </Button>
