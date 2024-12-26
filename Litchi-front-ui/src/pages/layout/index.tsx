@@ -1,13 +1,9 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
-import {fetchUserInfo} from "@/store/module/user.ts";
-import {store} from "@/store";
-import {Menu, MenuItem} from "@mui/material";
-import './index.scss';
-import Button from "@mui/material/Button";
+import React, {useState} from "react";
+import {Button, Menu, MenuItem, Drawer, useMediaQuery, AppBar, Toolbar} from "@mui/material";
 import {Outlet, useNavigate} from "react-router-dom";
-
-// 定义带子菜单的菜单数据
+import {useTheme} from "@mui/system";
+import './index.scss'
+// 菜单数据
 const menus = [
     {
         label: "用户",
@@ -21,93 +17,126 @@ const menus = [
         ],
     },
     {
-        label: "Settings",
+        label: "设置",
         key: "Settings",
         menuId: 4,
         path: "/login",
         children: [
             {label: "General", key: "Settings-General", menuId: 5, path: "/login"},
-            {label: "Security", key: "Settings-Security", menuId: 6, path: "/login"},
+            {label: "安全", key: "Settings-Security", menuId: 6, path: "/login"},
+        ],
+    },
+    {
+        label: "Home",
+        key: "Home",
+        menuId: 10,
+        path: "/home",
+        children: [
+            {label: "General", key: "Settings-General", menuId: 11, path: "/home"},
+            {label: "安全", key: "Settings-Security", menuId: 12, path: "/home"},
         ],
     },
 ];
 
 const GeekLayout: React.FC = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    useEffect(() => {
-        const loadUserInfo = async () => {
-            try {
-                await store.dispatch(fetchUserInfo());
-                console.log("用户信息已加载");
-            } catch (error) {
-                console.error("获取用户信息失败", error);
-            }
-        };
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // 当前菜单的锚点
+    const [openMenu, setOpenMenu] = useState<string | null>(null); // 当前打开的菜单
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // 检测屏幕尺寸
 
-        loadUserInfo();
-    }, [dispatch]);
-
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [openMenu, setOpenMenu] = useState<string | null>(null);
-
+    // 处理点击按钮显示菜单
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>, menuKey: string) => {
-        setAnchorEl(event.currentTarget);
-        setOpenMenu(menuKey);
+        setAnchorEl(event.currentTarget); // 设置当前按钮为锚点
+        setOpenMenu(menuKey); // 设置当前菜单为打开状态
     };
 
+    // 关闭菜单
     const handleClose = () => {
         setAnchorEl(null);
         setOpenMenu(null);
     };
 
-    const handleMenuItemClick = (child: { label: string; key: string; menuId: number, path?: string }) => {
-        console.log("点击的菜单项是：", child); // 输出点击的子菜单项
-        if (child.path != undefined) {
+    // 处理点击菜单项
+    const handleMenuItemClick = (child: { label: string; key: string; menuId: number; path?: string }) => {
+        if (child.path) {
             navigate(child.path);
         }
         handleClose(); // 关闭菜单
     };
 
-    // const handleClickMenuItem=(item)=>{
-    //     console.log(item);
-    // }
+    // 切换折叠菜单
+    const toggleDrawer = () => {
+        setDrawerOpen(!drawerOpen);
+    };
 
     return (
         <div>
-            <div className="title">SpringSun</div>
+            <AppBar position="sticky">
+                <Toolbar>
+                    <div className="title">SpringSun</div>
 
-            {menus.map((menu) => (
-                <span key={menu.menuId}>
-                    <Button
-                        id={`basic-button`}
-                        aria-controls={`basic-menu-${menu.menuId}`}
-                        aria-haspopup="true"
-                        aria-expanded={openMenu === menu.key ? "true" : undefined}
-                        onClick={(event) => handleClick(event, menu.key)}
-                    >
-                        {menu.label}
-                    </Button>
-                    <Menu
-                        id={`basic-menu`}
-                        anchorEl={anchorEl}
-                        open={openMenu === menu.key}
-                        onClose={handleClose}
-                        MenuListProps={{
-                            "aria-labelledby": `basic-button-${menu.menuId}`,
-                        }}
-                    >
-                        {menu.children.map((child) => (
-                            <MenuItem key={child.menuId} onClick={() => handleMenuItemClick(child)}>
-                                {child.label}
-                            </MenuItem>
-                        ))}
-                    </Menu>
-                </span>
-            ))}
+                    <div className="menu">
+                        {/* 当是小屏幕时，点击按钮展开折叠菜单 */}
+                        {isSmallScreen ? (
+                            <Button onClick={toggleDrawer}> <span style={{color: "white"}}>菜单</span></Button>
+                        ) : (
+                            <div>
+                                {menus.map((menu) => (
+                                    <span  key={menu.menuId}>
+                                    {/* 菜单按钮 */}
+                                        <Button
+                                            onClick={(event) => handleClick(event, menu.key)} // 点击时设置锚点并展开菜单
+                                            aria-controls={`menu-${menu.menuId}`}
+                                            aria-haspopup="true"
+                                        >
+                                        <span style={{color: "white"}}>{menu.label}</span>
+                                    </Button>
+                                        {/* 大屏幕下的菜单项 */}
+                                        <Menu
+                                            anchorEl={anchorEl} // 当前按钮作为菜单的锚点
+                                            open={openMenu === menu.key} // 根据状态控制是否打开菜单
+                                            onClose={handleClose} // 关闭菜单
+                                            MenuListProps={{
+                                                "aria-labelledby": `menu-${menu.menuId}`,
+                                            }}
+                                        >
+                                        {menu.children.map((child) => (
+                                            <MenuItem key={child.menuId} onClick={() => handleMenuItemClick(child)}>
+                                                {child.label}
+                                            </MenuItem>
+                                        ))}
+                                    </Menu>
+                                </span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </Toolbar>
+            </AppBar>
 
-            {/* 在这里显示子路由内容 */}
-            <Outlet/>
+            {/* 使用 Drawer 在小屏幕上展示折叠菜单 */}
+            <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
+                <div>
+                    {menus.map((menu) => (
+                        <div key={menu.menuId}>
+                            <h3>{menu.label}</h3>
+                            {menu.children.map((child) => (
+                                <Button key={child.menuId} onClick={() => handleMenuItemClick(child)}>
+                                    {child.label}
+                                </Button>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            </Drawer>
+
+            {/* 子路由内容 */}
+            <div>
+                {/* 在这里显示子路由内容 */}
+                <Outlet/>
+            </div>
         </div>
     );
 };

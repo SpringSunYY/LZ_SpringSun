@@ -1,11 +1,20 @@
-#root {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.title{
-  //font-size: 100px;
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  float: left;
+  color: white;
+}
+
+.menu {
+  margin-left: 100px;
   float: left;
 }
+
+
+
