@@ -4,17 +4,28 @@
 }
 
 
-.title {
-  font-size: 30px;
-  font-weight: bold;
-  float: left;
-  color: white;
-}
+.header {
+  .appBar {
+    width: 100%;
+    .toolBar {
+      width: 90%;
+      margin:0 auto;
 
-.menu {
-  margin-left: 100px;
-  float: left;
-}
+      .title {
+        font-size: 40px;
+        font-weight: bold;
+        float: left;
+        color: white;
+        height: 100%;
+        align-items: center; /* 垂直居中 */
+      }
 
+      .menu {
+        margin-left: 100px;
+        float: left;
+      }
+    }
+  }
+}
 
 

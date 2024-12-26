@@ -3,6 +3,7 @@ import {Button, Menu, MenuItem, Drawer, useMediaQuery, AppBar, Toolbar} from "@m
 import {Outlet, useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/system";
 import './index.scss'
+import MySvgIcon from "@/compoents/SvgIcon";
 // 菜单数据
 const menus = [
     {
@@ -73,35 +74,36 @@ const GeekLayout: React.FC = () => {
 
     return (
         <div>
-            <AppBar position="sticky">
-                <Toolbar>
-                    <div className="title">SpringSun</div>
+            <header className="header">
+                <AppBar className="appBar" position="sticky">
+                    <Toolbar className={"toolBar"}>
+                        <div className="title"><MySvgIcon name={"lz"} size={"1em"} />SpringSun</div>
 
-                    <div className="menu">
-                        {/* 当是小屏幕时，点击按钮展开折叠菜单 */}
-                        {isSmallScreen ? (
-                            <Button onClick={toggleDrawer}> <span style={{color: "white"}}>菜单</span></Button>
-                        ) : (
-                            <div>
-                                {menus.map((menu) => (
-                                    <span  key={menu.menuId}>
+                        <div className="menu">
+                            {/* 当是小屏幕时，点击按钮展开折叠菜单 */}
+                            {isSmallScreen ? (
+                                <Button onClick={toggleDrawer}> <span style={{color: "white"}}>菜单</span></Button>
+                            ) : (
+                                <div>
+                                    {menus.map((menu) => (
+                                        <span  key={menu.menuId}>
                                     {/* 菜单按钮 */}
-                                        <Button
-                                            onClick={(event) => handleClick(event, menu.key)} // 点击时设置锚点并展开菜单
-                                            aria-controls={`menu-${menu.menuId}`}
-                                            aria-haspopup="true"
-                                        >
+                                            <Button
+                                                onClick={(event) => handleClick(event, menu.key)} // 点击时设置锚点并展开菜单
+                                                aria-controls={`menu-${menu.menuId}`}
+                                                aria-haspopup="true"
+                                            >
                                         <span style={{color: "white"}}>{menu.label}</span>
                                     </Button>
-                                        {/* 大屏幕下的菜单项 */}
-                                        <Menu
-                                            anchorEl={anchorEl} // 当前按钮作为菜单的锚点
-                                            open={openMenu === menu.key} // 根据状态控制是否打开菜单
-                                            onClose={handleClose} // 关闭菜单
-                                            MenuListProps={{
-                                                "aria-labelledby": `menu-${menu.menuId}`,
-                                            }}
-                                        >
+                                            {/* 大屏幕下的菜单项 */}
+                                            <Menu
+                                                anchorEl={anchorEl} // 当前按钮作为菜单的锚点
+                                                open={openMenu === menu.key} // 根据状态控制是否打开菜单
+                                                onClose={handleClose} // 关闭菜单
+                                                MenuListProps={{
+                                                    "aria-labelledby": `menu-${menu.menuId}`,
+                                                }}
+                                            >
                                         {menu.children.map((child) => (
                                             <MenuItem key={child.menuId} onClick={() => handleMenuItemClick(child)}>
                                                 {child.label}
@@ -109,28 +111,29 @@ const GeekLayout: React.FC = () => {
                                         ))}
                                     </Menu>
                                 </span>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </Toolbar>
+                </AppBar>
+
+                {/* 使用 Drawer 在小屏幕上展示折叠菜单 */}
+                <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
+                    <div>
+                        {menus.map((menu) => (
+                            <div key={menu.menuId}>
+                                <h3>{menu.label}</h3>
+                                {menu.children.map((child) => (
+                                    <Button key={child.menuId} onClick={() => handleMenuItemClick(child)}>
+                                        {child.label}
+                                    </Button>
                                 ))}
                             </div>
-                        )}
+                        ))}
                     </div>
-                </Toolbar>
-            </AppBar>
-
-            {/* 使用 Drawer 在小屏幕上展示折叠菜单 */}
-            <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
-                <div>
-                    {menus.map((menu) => (
-                        <div key={menu.menuId}>
-                            <h3>{menu.label}</h3>
-                            {menu.children.map((child) => (
-                                <Button key={child.menuId} onClick={() => handleMenuItemClick(child)}>
-                                    {child.label}
-                                </Button>
-                            ))}
-                        </div>
-                    ))}
-                </div>
-            </Drawer>
+                </Drawer>
+            </header>
 
             {/* 子路由内容 */}
             <div>
