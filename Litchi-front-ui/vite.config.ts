@@ -20,7 +20,20 @@ export default defineConfig(({mode}) => {
                  * @default: __svg__icons__dom__
                  */
                 customDomId: '__svg__icons__dom__',
-            }),],
+                svgoOptions: {
+                    full: true,
+                    plugins: [
+                        {
+                            name: "removeAttrs",
+                            params: {
+                                attrs: "fill"
+                            }
+                        }
+                    ]
+                }
+
+            }),
+        ],
         optimizeDeps: {
             include: ['@mui/material', '@emotion/react', '@emotion/styled'],
         },

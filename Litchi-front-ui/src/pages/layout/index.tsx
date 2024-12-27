@@ -1,11 +1,9 @@
 import React, {useState} from "react";
-import {Button, Menu, MenuItem, Drawer, useMediaQuery, AppBar, Toolbar} from "@mui/material";
+import {AppBar, Button, Drawer, Menu, MenuItem, Toolbar, useMediaQuery} from "@mui/material";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/system";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 import './index.scss'
-import MySvgIcon from "@/compoents/SvgIcon";
 // 菜单数据
 const menus = [
     {
@@ -33,32 +31,30 @@ const menus = [
         label: "Home",
         key: "Home",
         menuId: 10,
-        path: "/home",
-        children: [
-            {label: "General", key: "Settings-General", menuId: 11, path: "/home"},
-            {label: "安全", key: "Settings-Security", menuId: 12, path: "/home"},
-        ],
-    }, {
-        label: "无子集",
-        key: "Home",
-        menuId: 14,
-        path: "/home",
-
-    },
+        path: "/",
+        // children: [
+        //     {label: "General", key: "Settings-General", menuId: 11, path: "/home"},
+        //     {label: "安全", key: "Settings-Security", menuId: 12, path: "/home"},
+        // ],
+    }
 ];
 
 const GeekLayout: React.FC = () => {
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // 当前菜单的锚点
-    const [openMenu, setOpenMenu] = useState<string | null>(null); // 当前打开的菜单
+    const [openMenu, setOpenMenu] = useState<number | null>(null); // 当前打开的菜单
     const [drawerOpen, setDrawerOpen] = useState(false);
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // 检测屏幕尺寸
 
     // 处理点击按钮显示菜单
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>, menuKey: string) => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>, menu: object) => {
         setAnchorEl(event.currentTarget); // 设置当前按钮为锚点
-        setOpenMenu(menuKey); // 设置当前菜单为打开状态
+        if (menu?.children) {
+            setOpenMenu(menu?.menuId); // 设置当前菜单为打开状态
+        }else {
+            navigate(menu.path);
+        }
     };
 
     // 关闭菜单
@@ -85,8 +81,8 @@ const GeekLayout: React.FC = () => {
             <header className="header">
                 <AppBar className="appBar" position="sticky">
                     <Toolbar className={"toolBar"}>
-                        <div className="title"><MySvgIcon name={"lz"} size={"1.2em"}/>SpringSun</div>
-
+                        <div className="title">{/*<MySvgIcon  color={"red"} name={"lz"}/>*/}SpringSun
+                        </div>
                         <div className="menu">
                             {/* 当是小屏幕时，点击按钮展开折叠菜单 */}
                             {isSmallScreen ? (
@@ -97,53 +93,37 @@ const GeekLayout: React.FC = () => {
                                         <span key={menu.menuId}>
                                     {/* 菜单按钮 */}
                                             <Button
-                                                onClick={(event) => handleClick(event, menu.key)} // 点击时设置锚点并展开菜单
+                                                onClick={(event) => handleClick(event, menu)} // 点击时设置锚点并展开菜单
                                                 aria-controls={`menu-${menu.menuId}`}
                                                 aria-haspopup="true"
                                             >
-                                   <span style={{
-                                       color: "white",
-                                   }}>
+                                    <span className={"menu-content"}>
                                       {menu.label}
-                                       {/* 如果有下级菜单，显示带旋转动画的箭头 */}
-                                       {menu?.children && menu?.children.length > 0 && (
-                                           <span
-                                               style={{
-                                                   textAlign: "center",
-                                                   alignItems: "center",
-                                                   display: 'inline-block',
-                                                   marginLeft: 1,
-                                                   transition: 'transform 0.3s ease', // 添加过渡效果
-                                                   transform: openMenu === menu.key ? 'rotate(360deg)' : 'rotate(270deg)',
-                                               }}
-                                           >
-                                            <ArrowDropDownIcon/>
-                                          </span>
-                                       )}
-                                 </span>
+                                     </span>
                                     </Button>
                                             {/* 大屏幕下的菜单项 */}
                                             <Menu
                                                 anchorEl={anchorEl} // 当前按钮作为菜单的锚点
-                                                open={openMenu === menu.key} // 根据状态控制是否打开菜单
+                                                open={openMenu === menu.menuId} // 根据状态控制是否打开菜单
                                                 onClose={handleClose} // 关闭菜单
                                                 MenuListProps={{
                                                     "aria-labelledby": `menu-${menu.menuId}`,
                                                 }}
                                             >
-                                        {menu?.children?.map((child) => (
-                                            <MenuItem key={child.menuId} onClick={() => handleMenuItemClick(child)}>
-                                                {child.label}
-                                            </MenuItem>
-                                        ))}
+                                            {menu?.children && menu.children.length > 0 && (
+                                                menu.children.map((child) => (
+                                                    <MenuItem key={child.menuId}
+                                                              onClick={() => handleMenuItemClick(child)}>
+                                                        {child.label}
+                                                    </MenuItem>
+                                                ))
+                                            )}
                                     </Menu>
                                 </span>
                                     ))}
                                 </div>
                             )}
                         </div>
-
-
                     </Toolbar>
                 </AppBar>
 
