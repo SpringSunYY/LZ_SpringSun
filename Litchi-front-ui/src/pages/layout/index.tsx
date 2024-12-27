@@ -1,9 +1,10 @@
-import React, {useState} from "react";
-import {AppBar, Button, Drawer, Menu, MenuItem, Toolbar, useMediaQuery} from "@mui/material";
+import React, {Fragment, useState} from "react";
+import {AppBar, Button, Drawer, Grid, Menu, MenuItem, useMediaQuery} from "@mui/material";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/system";
-
+import lzIcon from "@/assets/icons/svg/lz.svg"
 import './index.scss'
+import MySvgIcon from "@/compoents/SvgIcon";
 // 菜单数据
 const menus = [
     {
@@ -52,7 +53,7 @@ const GeekLayout: React.FC = () => {
         setAnchorEl(event.currentTarget); // 设置当前按钮为锚点
         if (menu?.children) {
             setOpenMenu(menu?.menuId); // 设置当前菜单为打开状态
-        }else {
+        } else {
             navigate(menu.path);
         }
     };
@@ -80,27 +81,32 @@ const GeekLayout: React.FC = () => {
         <div>
             <header className="header">
                 <AppBar className="appBar" position="sticky">
-                    <Toolbar className={"toolBar"}>
-                        <div className="title">{/*<MySvgIcon  color={"red"} name={"lz"}/>*/}SpringSun
-                        </div>
-                        <div className="menu">
+                    <Grid container className={"toolBar"}>
+                        <Grid item xs={2} className="title"><img src={lzIcon} width="80em" height="80em" alt="lz icon"/>
+                        </Grid>
+                        <Grid item xs={10} className="menu">
                             {/* 当是小屏幕时，点击按钮展开折叠菜单 */}
                             {isSmallScreen ? (
-                                <Button onClick={toggleDrawer}> <span style={{color: "white"}}>菜单</span></Button>
+                                <Button onClick={toggleDrawer}> <span className={"menu-content menu-content-hover"}
+                                                                      style={{marginLeft: "8em"}}>菜单</span></Button>
                             ) : (
-                                <div>
-                                    {menus.map((menu) => (
+                                <Grid container>
+                                    <Grid xs={8} className={"menu-item"}> {menus.map((menu) => (
                                         <span key={menu.menuId}>
-                                    {/* 菜单按钮 */}
+                                            {/* 菜单按钮 */}
                                             <Button
                                                 onClick={(event) => handleClick(event, menu)} // 点击时设置锚点并展开菜单
                                                 aria-controls={`menu-${menu.menuId}`}
                                                 aria-haspopup="true"
+                                                sx={{
+                                                    paddingY: '0em', // 调整上下内边距，例如 0.5em
+                                                    paddingX: '0em',   // 可以调整左右内边距
+                                                }}
                                             >
-                                    <span className={"menu-content"}>
-                                      {menu.label}
-                                     </span>
-                                    </Button>
+                                            <span className={"menu-content menu-content-hover"}>
+                                              {menu.label}
+                                             </span>
+                                            </Button>
                                             {/* 大屏幕下的菜单项 */}
                                             <Menu
                                                 anchorEl={anchorEl} // 当前按钮作为菜单的锚点
@@ -120,11 +126,30 @@ const GeekLayout: React.FC = () => {
                                             )}
                                     </Menu>
                                 </span>
-                                    ))}
-                                </div>
+                                    ))}</Grid>
+                                    <Grid item xs={4} spacing={2} className={"menu-right menu-content"}>
+                                        <Grid container>
+                                            <Grid item xs={2} className={"menu-content-hover"}> <MySvgIcon name={"qq"}
+                                                                                                           size={"1.5em"}/>
+                                            </Grid>
+                                            <Grid item xs={2} className={"menu-content-hover"}><MySvgIcon name={"wx"}
+                                                                                                          size={"1.5em"}/></Grid>
+                                            <Grid item xs={2} className={"menu-content-hover"}><MySvgIcon
+                                                name={"facebook"} size={"1.5em"}/></Grid>
+                                            <Grid item xs={2} className={"menu-content-hover"}><MySvgIcon
+                                                name={"twitter"} size={"1.5em"}/></Grid>
+                                            <Grid item xs={2}
+                                                  className={"menu-content-hover"}><MySvgIcon
+                                                name={"lz"} size={"1.5em"}/></Grid>
+                                            <Grid item xs={2}
+                                                  className={"menu-content-hover"}><MySvgIcon
+                                                name={"search"} size={"1.5em"}/></Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             )}
-                        </div>
-                    </Toolbar>
+                        </Grid>
+                    </Grid>
                 </AppBar>
 
                 {/* 使用 Drawer 在小屏幕上展示折叠菜单 */}

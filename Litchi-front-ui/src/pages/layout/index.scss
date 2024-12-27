@@ -7,11 +7,14 @@
 .header {
   .appBar {
     width: 100%;
+    height: 5em;
     min-width: 375px !important;
 
     .toolBar {
-      width: 90%;
+      width: 80%;
       margin: 0 auto;
+      min-width: 375px !important;
+      height: 6em;
 
       .title {
         font-size: 1.5em;
@@ -20,23 +23,43 @@
         color: white;
         height: 100%;
         align-items: center; /* 垂直居中 */
+
       }
 
       .menu {
-        margin-left: 100px;
-        float: left;
+        height: 5em;
+        align-items: center; /* 垂直居中 */
+        //margin-left: 5em;
+        /* 为所有 .menu-content-hover 统一定义样式 */
+
 
         .menu-content {
+          display: flex;
           color: white;
+          height: 5em;
           font-size: 1.2em;
+          transition: color 0.3s ease; /* 添加平滑的颜色过渡 */
+          align-items: center;
         }
-        /* 鼠标悬停时改变颜色 */
-        .menu-content:hover {
-          color: #5aeab2; /* 这里可以设置你需要的颜色 */
+
+
+        .menu-item {
+          float: left;
+          padding-top: 0 !important;
+        }
+
+        .menu-right {
+          float: right;
+          padding-bottom: 1em;
+          //margin-left: 50em;
         }
       }
     }
   }
+}
+
+.menu-content-hover:hover {
+  color: #5aeab2 !important;
 }
 
 
