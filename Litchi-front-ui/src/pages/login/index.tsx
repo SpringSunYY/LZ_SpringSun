@@ -2,15 +2,14 @@ import {FormEvent, useState} from "react";
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {LoginUser} from "@/types/common";
-import {useDispatch} from "react-redux";
 import {fetchLogin, fetchUserInfo} from "@/store/module/user";
+import {store} from "@/store";
 
 const Login = () => {
     const [loginUser, setLoginUser] = useState<LoginUser>({
         username: "admin",
         password: "admin123",
     });
-    const dispatch = useDispatch()
 
     // 处理输入框的变化
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,10 +23,8 @@ const Login = () => {
     // 提交表单
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        // @ts-ignore
-        await dispatch(fetchLogin(loginUser))
-        // @ts-ignore
-        await dispatch(fetchUserInfo())
+        store.dispatch(fetchLogin(loginUser))
+        store.dispatch(fetchUserInfo())
     };
 
     return (

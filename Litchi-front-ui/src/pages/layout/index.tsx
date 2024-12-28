@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AppBar, Box, Button, Drawer, Grid, Menu, MenuItem, Modal, useMediaQuery} from "@mui/material";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/system";
 import lzIcon from "@/assets/icons/svg/lz.svg"
 import './index.scss'
 import MySvgIcon from "@/compoents/SvgIcon";
+import {store} from "@/store";
+import {fetchUserInfo} from "@/store/module/user.ts";
 // 菜单数据
 const menus = [
     {
@@ -59,6 +61,9 @@ const GeekLayout: React.FC = () => {
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // 检测屏幕尺寸
 
+    useEffect(() => {
+        store.dispatch(fetchUserInfo())
+    },[store])
     const [open, setOpen] = React.useState(false);
     const handleOpenModal = () => {
         setOpen(true);
@@ -110,7 +115,7 @@ const GeekLayout: React.FC = () => {
                                                                       style={{marginLeft: "8em"}}>菜单</span></Button>
                             ) : (
                                 <Grid container columns={12}>
-                                    <Grid xs={8} className={"menu-item"}> {menus.map((menu) => (
+                                    <Grid item xs={8} className={"menu-item"}> {menus.map((menu) => (
                                         <span key={menu.menuId}>
                                                 {/* 菜单按钮 */}
                                             <Button

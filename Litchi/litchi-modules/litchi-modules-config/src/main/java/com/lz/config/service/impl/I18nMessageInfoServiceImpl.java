@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.lz.common.core.constant.RedisConfigConstants.LOCALIZATION;
 
@@ -126,5 +127,10 @@ public class I18nMessageInfoServiceImpl implements II18nMessageInfoService {
     @Override
     public int deleteI18nMessageInfoByMessageId(String messageId) {
         return i18nMessageInfoMapper.deleteI18nMessageInfoByMessageId(messageId);
+    }
+
+    @Override
+    public Map<String, String> getLocalization(String locale) {
+        return redisService.getCacheMap(LOCALIZATION + locale);
     }
 }

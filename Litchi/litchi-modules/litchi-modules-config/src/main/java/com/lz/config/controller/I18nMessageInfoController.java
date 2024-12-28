@@ -102,4 +102,12 @@ public class I18nMessageInfoController extends BaseController
     {
         return toAjax(i18nMessageInfoService.deleteI18nMessageInfoByMessageIds(messageIds));
     }
+
+    /**
+     * 获取到国际化信息
+     */
+    @GetMapping("/ing/{ing}")
+    public AjaxResult getLocalization(@PathVariable("ing") String ing){
+        return success(i18nMessageInfoService.getLocalization(ing));
+    }
 }

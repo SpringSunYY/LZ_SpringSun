@@ -42,7 +42,6 @@ const userStore = createSlice({
 // 异步登录请求
 const fetchLogin = (loginUser: LoginUser) => {
     return async (dispatch: any) => {
-        console.log('loginForm', loginUser);
         // 调用接口
         const res = await login(loginUser);
         // 存入token
@@ -52,7 +51,6 @@ const fetchLogin = (loginUser: LoginUser) => {
 const fetchUserInfo = () => {
     return async (dispatch: any) => {
         const res = await getInfo();
-        console.log(res);
         // 创建 UserInfo 对象
         const info: API.ResponseUserInfo = {
             user: res.user,

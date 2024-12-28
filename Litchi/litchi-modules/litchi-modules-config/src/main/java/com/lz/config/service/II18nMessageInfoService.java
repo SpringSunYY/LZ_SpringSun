@@ -1,6 +1,8 @@
 package com.lz.config.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.lz.config.domain.I18nMessageInfo;
 
 /**
@@ -58,4 +60,16 @@ public interface II18nMessageInfoService
      * @return 结果
      */
     public int deleteI18nMessageInfoByMessageId(String messageId);
+
+
+    /**
+     * description: 获取到语言信息
+     * author: YY
+     * method: getLocalization
+     * date: 2024/12/28 21:03
+     * param:
+     * @param: locale
+     * return: Map<String,String>
+     **/
+    Map<String,String> getLocalization(String locale);
 }
