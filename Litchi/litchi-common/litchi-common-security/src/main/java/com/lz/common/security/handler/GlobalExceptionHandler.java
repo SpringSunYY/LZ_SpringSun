@@ -1,5 +1,6 @@
 package com.lz.common.security.handler;
 
+import com.lz.common.core.exception.sql.MySQLIntegrityConstraintViolationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ import com.lz.common.core.utils.StringUtils;
 import com.lz.common.core.utils.html.EscapeUtil;
 import com.lz.common.core.web.domain.AjaxResult;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 /**
  * 全局异常处理器
  *
@@ -31,6 +34,12 @@ public class GlobalExceptionHandler
 {
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    @ExceptionHandler(MySQLIntegrityConstraintViolationException.class)
+    public AjaxResult MySQLIntegrityConstraintViolationException(MySQLIntegrityConstraintViolationException e,HttpServletRequest request){
+        String requestURI = request.getRequestURI();
+        log.error("请求地址'{}',插入重复数据或者没有的外键'{}'", requestURI, e.getMessage());
+        return AjaxResult.error(HttpStatus.ERROR, "SQL异常，插入重复数据或者没有的外键！！！");
+    }
     /**
      * 权限码异常
      */

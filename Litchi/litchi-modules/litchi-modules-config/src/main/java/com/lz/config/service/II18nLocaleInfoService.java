@@ -58,4 +58,15 @@ public interface II18nLocaleInfoService
      * @return 结果
      */
     public int deleteI18nLocaleInfoByMessageId(Long messageId);
+
+    /**
+     * description:  根据地区简称查询
+     * author: YY
+     * method: selectI18nLocaleInfoByMessageLocale
+     * date: 2024/12/28 16:42
+     * param:
+     * @param: locale
+     * return: com.lz.config.domain.I18nLocaleInfo
+     **/
+    I18nLocaleInfo selectI18nLocaleInfoByMessageLocale(String locale);
 }

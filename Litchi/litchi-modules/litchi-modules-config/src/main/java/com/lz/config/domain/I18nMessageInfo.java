@@ -16,7 +16,7 @@ public class I18nMessageInfo extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    private String messageId;
+    private Long messageId;
 
     /** 键 */
     @Excel(name = "键")
@@ -30,12 +30,12 @@ public class I18nMessageInfo extends BaseEntity
     @Excel(name = "消息")
     private String message;
 
-    public void setMessageId(String messageId) 
+    public void setMessageId(Long messageId)
     {
         this.messageId = messageId;
     }
 
-    public String getMessageId() 
+    public Long getMessageId()
     {
         return messageId;
     }
