@@ -24,7 +24,7 @@ const userStore = createSlice({
             _setToken(state.token);
         },
         setUserInfo(state, action: PayloadAction<API.ResponseUserInfo>) {
-            console.log("setUserInfo", action.payload);
+            // console.log("setUserInfo", action.payload);
             state.userInfo = action.payload;
         },
         clearUserInfo(state) {

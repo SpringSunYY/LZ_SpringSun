@@ -1,6 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
 import userReducer from "@/store/module/user.ts";
-
 // 定义 Redux store 的类型
 export const store = configureStore({
     reducer: {

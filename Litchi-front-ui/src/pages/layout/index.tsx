@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {AppBar, Box, Button, Drawer, Grid, Menu, MenuItem, Modal, useMediaQuery} from "@mui/material";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/system";
 import lzIcon from "@/assets/icons/svg/lz.svg"
 import './index.scss'
 import MySvgIcon from "@/compoents/SvgIcon";
-import {store} from "@/store";
-import {fetchUserInfo} from "@/store/module/user.ts";
+import {useTranslation} from "react-i18next";
+import {switchLanguage} from "@/i18n.ts";
 // 菜单数据
 const menus = [
     {
@@ -41,6 +41,7 @@ const menus = [
         // ],
     }
 ];
+// @ts-ignore
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -60,10 +61,12 @@ const GeekLayout: React.FC = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // 检测屏幕尺寸
-
-    useEffect(() => {
-        store.dispatch(fetchUserInfo())
-    },[store])
+    const {t} = useTranslation();
+    const [openLanguage, setOpenLanguage] = useState<boolean | null>(false);
+    // 切换语言的处理函数
+    const handleSwitchLanguage = (lang: string) => {
+        switchLanguage(lang); // 切换语言
+    };
     const [open, setOpen] = React.useState(false);
     const handleOpenModal = () => {
         setOpen(true);
@@ -73,11 +76,14 @@ const GeekLayout: React.FC = () => {
     };
 
     // 处理点击按钮显示菜单
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>, menu: object) => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>, menu?: object) => {
         setAnchorEl(event.currentTarget); // 设置当前按钮为锚点
+        // @ts-ignore
         if (menu?.children) {
+            // @ts-ignore
             setOpenMenu(menu?.menuId); // 设置当前菜单为打开状态
-        } else {
+        } else if (menu) {
+            // @ts-ignore
             navigate(menu.path);
         }
     };
@@ -87,6 +93,16 @@ const GeekLayout: React.FC = () => {
         setAnchorEl(null);
         setOpenMenu(null);
     };
+
+    const handleCloseLanguage = () => {
+        setOpenLanguage(false);
+    }
+    const handleClickLanguage = (event: React.MouseEvent<HTMLButtonElement>) => {
+        console.log('打开语言')
+        // setOpenMenu(true)
+        setAnchorEl(event.currentTarget)
+        setOpenLanguage(true)
+    }
 
     // 处理点击菜单项
     const handleMenuItemClick = (child: { label: string; key: string; menuId: number; path?: string }) => {
@@ -106,7 +122,8 @@ const GeekLayout: React.FC = () => {
             <header className="header">
                 <AppBar className="appBar" position="sticky">
                     <Grid container className={"toolBar"}>
-                        <Grid item xs={2} className="title-log"><img src={lzIcon} width="80em" height="80em" alt="lz icon"/>
+                        <Grid item xs={2} className="title-log"><img src={lzIcon} width="80em" height="80em"
+                                                                     alt="lz icon"/>
                         </Grid>
                         <Grid item xs={10} className="menu">
                             {/* 当是小屏幕时，点击按钮展开折叠菜单 */}
@@ -153,7 +170,7 @@ const GeekLayout: React.FC = () => {
                                     ))}
                                     </Grid>
                                     <Grid item xs={4} className={"menu-right menu-content"}>
-                                        <Grid container spacing={1} columns={16}>
+                                        <Grid container spacing={1} columns={18}>
                                             <Grid item xs={2} className={"menu-content-hover"}>
                                                 <MySvgIcon name={"qq"} size={"1.5em"}/>
                                             </Grid>
@@ -168,6 +185,26 @@ const GeekLayout: React.FC = () => {
                                             </Grid>
                                             <Grid item xs={2} className={"menu-content-hover"}>
                                                 <MySvgIcon name={"lz"} size={"1.5em"}/>
+                                            </Grid>
+                                            <Grid item xs={2} className={"menu-content-hover"}>
+                                                <MySvgIcon name={"changeLanguage"}
+                                                            // @ts-ignore
+                                                           onClick={(event) => handleClickLanguage(event)}
+                                                           size={"1.5em"}/>
+                                                <Menu
+                                                    anchorEl={anchorEl} // 当前按钮作为菜单的锚点
+                                                    open={openLanguage === true} // 根据状态控制是否打开菜单
+                                                    onClose={handleCloseLanguage} // 关闭菜单
+                                                    MenuListProps={{
+                                                        "aria-labelledby": `language`,
+                                                    }}
+                                                >
+                                                    <MenuItem>
+                                                        <button onClick={() => handleSwitchLanguage('en')}>English
+                                                        </button>
+                                                        <button onClick={() => handleSwitchLanguage('zh')}>中文</button>
+                                                    </MenuItem>
+                                                </Menu>
                                             </Grid>
                                             <Grid item xs={2} className={"menu-content-hover"}>
                                                 <MySvgIcon onClick={handleOpenModal} name={"search"} size={"1.5em"}/>
@@ -188,7 +225,7 @@ const GeekLayout: React.FC = () => {
                                                 </Modal>
                                             </Grid>
                                             <Grid item xs={4}>
-                                                <Button variant="outlined">登录</Button>
+                                                <Button variant="outlined">{t('hello')}</Button>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -214,7 +251,6 @@ const GeekLayout: React.FC = () => {
                     </div>
                 </Drawer>
             </header>
-
             {/* 子路由内容 */}
             <div>
                 {/* 在这里显示子路由内容 */}
