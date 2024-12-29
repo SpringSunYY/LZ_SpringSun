@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.lz.config.mapper.I18nLocaleInfoMapper">
     
     <resultMap type="I18nLocaleInfo" id="I18nLocaleInfoResult">
-        <result property="messageId"    column="message_id"    />
+        <result property="localeId"    column="locale_id"    />
         <result property="localeName"    column="locale_name"    />
         <result property="locale"    column="locale"    />
         <result property="localeStatus"    column="locale_status"    />
@@ -17,14 +17,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectI18nLocaleInfoVo">
-        select message_id, locale_name, locale, locale_status, create_by, create_time, update_by, update_time, remark from c_i18n_locale_info
+        select locale_id, locale_name, locale, locale_status, create_by, create_time, update_by, update_time, remark from c_i18n_locale_info
     </sql>
 
     <select id="selectI18nLocaleInfoList" parameterType="I18nLocaleInfo" resultMap="I18nLocaleInfoResult">
         <include refid="selectI18nLocaleInfoVo"/>
         <where>  
             <if test="localeName != null  and localeName != ''"> and locale_name like concat('%', #{localeName}, '%')</if>
-            <if test="locale != null  and locale != ''"> and locale = #{locale}</if>
+            <if test="locale != null  and locale != ''"> and locale like concat('%', #{locale}, '%')</if>
             <if test="localeStatus != null  and localeStatus != ''"> and locale_status = #{localeStatus}</if>
             <if test="createBy != null  and createBy != ''"> and create_by like concat('%', #{createBy}, '%')</if>
             <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>
@@ -33,12 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectI18nLocaleInfoByMessageId" parameterType="Long" resultMap="I18nLocaleInfoResult">
+    <select id="selectI18nLocaleInfoByLocaleId" parameterType="Long" resultMap="I18nLocaleInfoResult">
         <include refid="selectI18nLocaleInfoVo"/>
-        where message_id = #{messageId}
+        where locale_id = #{localeId}
     </select>
 
-    <insert id="insertI18nLocaleInfo" parameterType="I18nLocaleInfo" useGeneratedKeys="true" keyProperty="messageId">
+    <insert id="insertI18nLocaleInfo" parameterType="I18nLocaleInfo" useGeneratedKeys="true" keyProperty="localeId">
         insert into c_i18n_locale_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="localeName != null and localeName != ''">locale_name,</if>
@@ -74,17 +74,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="remark != null">remark = #{remark},</if>
         </trim>
-        where message_id = #{messageId}
+        where locale_id = #{localeId}
     </update>
 
-    <delete id="deleteI18nLocaleInfoByMessageId" parameterType="Long">
-        delete from c_i18n_locale_info where message_id = #{messageId}
+    <delete id="deleteI18nLocaleInfoByLocaleId" parameterType="Long">
+        delete from c_i18n_locale_info where locale_id = #{localeId}
     </delete>
 
-    <delete id="deleteI18nLocaleInfoByMessageIds" parameterType="String">
-        delete from c_i18n_locale_info where message_id in 
-        <foreach item="messageId" collection="array" open="(" separator="," close=")">
-            #{messageId}
+    <delete id="deleteI18nLocaleInfoByLocaleIds" parameterType="String">
+        delete from c_i18n_locale_info where locale_id in
+        <foreach item="localeId" collection="array" open="(" separator="," close=")">
+            #{localeId}
         </foreach>
     </delete>
 </mapper>

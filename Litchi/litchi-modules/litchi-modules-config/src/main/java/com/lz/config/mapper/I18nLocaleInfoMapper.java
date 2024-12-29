@@ -16,10 +16,10 @@ public interface I18nLocaleInfoMapper extends BaseMapper<I18nLocaleInfo>
     /**
      * 查询国际化国家
      * 
-     * @param messageId 国际化国家主键
+     * @param localeId 国际化国家主键
      * @return 国际化国家
      */
-    public I18nLocaleInfo selectI18nLocaleInfoByMessageId(Long messageId);
+    public I18nLocaleInfo selectI18nLocaleInfoByLocaleId(Long localeId);
 
     /**
      * 查询国际化国家列表
@@ -48,16 +48,16 @@ public interface I18nLocaleInfoMapper extends BaseMapper<I18nLocaleInfo>
     /**
      * 删除国际化国家
      * 
-     * @param messageId 国际化国家主键
+     * @param LocaleId 国际化国家主键
      * @return 结果
      */
-    public int deleteI18nLocaleInfoByMessageId(Long messageId);
+    public int deleteI18nLocaleInfoByLocaleId(Long LocaleId);
 
     /**
      * 批量删除国际化国家
      * 
-     * @param messageIds 需要删除的数据主键集合
+     * @param localeIds 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteI18nLocaleInfoByMessageIds(Long[] messageIds);
+    public int deleteI18nLocaleInfoByLocaleIds(Long[] localeIds);
 }

@@ -10,9 +10,9 @@ export function listI18nLocaleInfo(query) {
 }
 
 // 查询国际化国家详细
-export function getI18nLocaleInfo(messageId) {
+export function getI18nLocaleInfo(localeId) {
   return request({
-    url: '/config/i18nLocaleInfo/' + messageId,
+    url: '/config/i18nLocaleInfo/' + localeId,
     method: 'get'
   })
 }
@@ -43,9 +43,9 @@ export function getTimeZone() {
 }
 
 // 删除国际化国家
-export function delI18nLocaleInfo(messageId) {
+export function delI18nLocaleInfo(localeId) {
   return request({
-    url: '/config/i18nLocaleInfo/' + messageId,
+    url: '/config/i18nLocaleInfo/' + localeId,
     method: 'delete'
   })
 }

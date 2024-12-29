@@ -1,10 +1,14 @@
 package com.lz.config.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lz.common.core.enums.config.CLocaleStatusEnum;
 import com.lz.common.core.exception.ServiceException;
 import com.lz.common.core.exception.sql.MySQLIntegrityConstraintViolationException;
 import com.lz.common.core.utils.DateUtils;
+import com.lz.common.core.utils.StringUtils;
 import com.lz.common.redis.service.RedisService;
 import com.lz.common.security.utils.SecurityUtils;
+import com.lz.config.domain.I18nLocaleInfo;
 import com.lz.config.domain.I18nMessageInfo;
 import com.lz.config.mapper.I18nMessageInfoMapper;
 import com.lz.config.service.II18nLocaleInfoService;
@@ -13,11 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.lz.common.core.constant.RedisConfigConstants.LOCALIZATION;
 
@@ -115,6 +118,12 @@ public class I18nMessageInfoServiceImpl implements II18nMessageInfoService {
      */
     @Override
     public int deleteI18nMessageInfoByMessageIds(String[] messageIds) {
+        QueryWrapper<I18nMessageInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("message_id", messageIds);
+        List<I18nMessageInfo> i18nMessageInfos = i18nMessageInfoMapper.selectList(queryWrapper);
+        for (I18nMessageInfo info : i18nMessageInfos) {
+            redisService.deleteCacheMapValue(LOCALIZATION + info.getLocale(), info.getMessageKey());
+        }
         return i18nMessageInfoMapper.deleteI18nMessageInfoByMessageIds(messageIds);
     }
 
@@ -131,6 +140,21 @@ public class I18nMessageInfoServiceImpl implements II18nMessageInfoService {
 
     @Override
     public Map<String, String> getLocalization(String locale) {
-        return redisService.getCacheMap(LOCALIZATION + locale);
+        Map<String, String> cacheMap = redisService.getCacheMap(LOCALIZATION + locale);
+        //如果有缓存
+        if (StringUtils.isNotEmpty(cacheMap)) {
+            return cacheMap;
+        }
+        I18nLocaleInfo i18nLocaleInfo = i18nLocaleInfoService.selectI18nLocaleInfoByLocaleLocale(locale);
+        if (StringUtils.isNull(i18nLocaleInfo) || !i18nLocaleInfo.getLocaleStatus().equals(CLocaleStatusEnum.LOCALE_STATUS_0.getValue())) {
+            throw new ServiceException("语言不存在！！！");
+        }
+        I18nMessageInfo i18nMessageInfo = new I18nMessageInfo();
+        i18nMessageInfo.setLocale(locale);
+        List<I18nMessageInfo> i18nMessageInfos = i18nMessageInfoMapper.selectI18nMessageInfoList(i18nMessageInfo);
+        //使用stream流转为map
+        cacheMap = i18nMessageInfos.stream().collect(Collectors.toMap(I18nMessageInfo::getMessageKey, I18nMessageInfo::getMessage));
+        redisService.setCacheMap(LOCALIZATION + i18nMessageInfo.getLocale(), cacheMap);
+        return cacheMap;
     }
 }

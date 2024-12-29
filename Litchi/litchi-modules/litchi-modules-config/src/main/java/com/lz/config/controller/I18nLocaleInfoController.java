@@ -67,10 +67,10 @@ public class I18nLocaleInfoController extends BaseController
      * 获取国际化国家详细信息
      */
     @RequiresPermissions("config:i18nLocaleInfo:query")
-    @GetMapping(value = "/{messageId}")
-    public AjaxResult getInfo(@PathVariable("messageId") Long messageId)
+    @GetMapping(value = "/{localeId}")
+    public AjaxResult getInfo(@PathVariable("localeId") Long localeId)
     {
-        return success(i18nLocaleInfoService.selectI18nLocaleInfoByMessageId(messageId));
+        return success(i18nLocaleInfoService.selectI18nLocaleInfoByLocaleId(localeId));
     }
 
     /**
@@ -100,10 +100,10 @@ public class I18nLocaleInfoController extends BaseController
      */
     @RequiresPermissions("config:i18nLocaleInfo:remove")
     @Log(title = "国际化国家", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{messageIds}")
-    public AjaxResult remove(@PathVariable Long[] messageIds)
+	@DeleteMapping("/{localeIds}")
+    public AjaxResult remove(@PathVariable Long[] localeIds)
     {
-        return toAjax(i18nLocaleInfoService.deleteI18nLocaleInfoByMessageIds(messageIds));
+        return toAjax(i18nLocaleInfoService.deleteI18nLocaleInfoByLocaleIds(localeIds));
     }
 
     @GetMapping("/time")

@@ -117,7 +117,7 @@
 
     <el-table v-loading="loading" :data="i18nLocaleInfoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="编号" align="center" prop="messageId" v-if="columns[0].visible"
+      <el-table-column label="编号" align="center" prop="localeId" v-if="columns[0].visible"
                        :show-overflow-tooltip="true"/>
       <el-table-column label="国家地区" align="center" prop="localeName" v-if="columns[1].visible"
                        :show-overflow-tooltip="true"/>
@@ -297,7 +297,7 @@ function cancel() {
 // 表单重置
 function reset() {
   form.value = {
-    messageId: null,
+    localeId: null,
     localeName: null,
     locale: null,
     localeStatus: null,
@@ -326,7 +326,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.messageId);
+  ids.value = selection.map(item => item.localeId);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -341,8 +341,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _messageId = row.messageId || ids.value
-  getI18nLocaleInfo(_messageId).then(response => {
+  const _localeId = row.localeId || ids.value
+  getI18nLocaleInfo(_localeId).then(response => {
     form.value = response.data;
     open.value = true;
     title.value = "修改国际化国家";
@@ -353,7 +353,7 @@ function handleUpdate(row) {
 function submitForm() {
   proxy.$refs["i18nLocaleInfoRef"].validate(valid => {
     if (valid) {
-      if (form.value.messageId != null) {
+      if (form.value.localeId != null) {
         updateI18nLocaleInfo(form.value).then(response => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
@@ -372,9 +372,9 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _messageIds = row.messageId || ids.value;
-  proxy.$modal.confirm('是否确认删除国际化国家编号为"' + _messageIds + '"的数据项？').then(function () {
-    return delI18nLocaleInfo(_messageIds);
+  const _localeIds = row.localeId || ids.value;
+  proxy.$modal.confirm('是否确认删除国际化国家编号为"' + _localeIds + '"的数据项？').then(function () {
+    return delI18nLocaleInfo(_localeIds);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");

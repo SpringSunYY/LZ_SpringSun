@@ -1,6 +1,8 @@
 package com.lz.config.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lz.config.domain.I18nMessageInfo;
 
 /**
@@ -9,7 +11,7 @@ import com.lz.config.domain.I18nMessageInfo;
  * @author YY
  * @date 2024-12-20
  */
-public interface I18nMessageInfoMapper 
+public interface I18nMessageInfoMapper extends BaseMapper<I18nMessageInfo>
 {
     /**
      * 查询国际化信息

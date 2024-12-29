@@ -1,6 +1,5 @@
 package com.lz.config.domain;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -21,8 +20,8 @@ public class I18nLocaleInfo extends BaseEntity
 
     /** 编号 */
 
-    @TableId("message_id")
-    private Long messageId;
+    @TableId
+    private Long localeId;
 
     /** 国家地区 */
     @Excel(name = "国家地区")
@@ -36,14 +35,14 @@ public class I18nLocaleInfo extends BaseEntity
     @Excel(name = "状态")
     private String localeStatus;
 
-    public void setMessageId(Long messageId) 
+    public void setLocaleId(Long localeId)
     {
-        this.messageId = messageId;
+        this.localeId = localeId;
     }
 
-    public Long getMessageId() 
+    public Long getLocaleId()
     {
-        return messageId;
+        return localeId;
     }
     public void setLocaleName(String localeName) 
     {
@@ -76,7 +75,7 @@ public class I18nLocaleInfo extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("messageId", getMessageId())
+            .append("localeId", getLocaleId())
             .append("localeName", getLocaleName())
             .append("locale", getLocale())
             .append("localeStatus", getLocaleStatus())

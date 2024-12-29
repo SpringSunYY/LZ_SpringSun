@@ -39,6 +39,15 @@ const menus = [
         //     {label: "General", key: "Settings-General", menuId: 11, path: "/home"},
         //     {label: "安全", key: "Settings-Security", menuId: 12, path: "/home"},
         // ],
+    },    {
+        label: "XC",
+        key: "Home",
+        menuId: 101,
+        path: "/",
+        // children: [
+        //     {label: "General", key: "Settings-General", menuId: 11, path: "/home"},
+        //     {label: "安全", key: "Settings-Security", menuId: 12, path: "/home"},
+        // ],
     }
 ];
 // @ts-ignore
@@ -145,7 +154,7 @@ const GeekLayout: React.FC = () => {
                                                 }}
                                             >
                                                 <span className={"menu-content menu-content-hover"}>
-                                                  {menu.label}
+                                                  {t(menu.label)}
                                                  </span>
                                                 </Button>
                                             {/* 大屏幕下的菜单项 */}
@@ -161,7 +170,7 @@ const GeekLayout: React.FC = () => {
                                                     menu.children.map((child) => (
                                                         <MenuItem key={child.menuId}
                                                                   onClick={() => handleMenuItemClick(child)}>
-                                                            {child.label}
+                                                            {t(child.label)}
                                                         </MenuItem>
                                                     ))
                                                 )}
