@@ -18,7 +18,7 @@
         />
       </el-form-item>
       <el-form-item label="状态" prop="localeStatus">
-        <el-select v-model="queryParams.localeStatus" placeholder="请选择状态" clearable>
+        <el-select v-model="queryParams.localeStatus"  style="width: 200px" placeholder="请选择状态" clearable>
           <el-option
               v-for="dict in c_locale_status"
               :key="dict.value"

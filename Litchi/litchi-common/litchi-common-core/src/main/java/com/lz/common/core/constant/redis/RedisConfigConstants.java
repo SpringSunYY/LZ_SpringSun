@@ -1,4 +1,4 @@
-package com.lz.common.core.constant;
+package com.lz.common.core.constant.redis;
 
 /**
  * Project: Litchi
@@ -13,4 +13,8 @@ public class RedisConfigConstants {
      * Localization 国际化
      */
     public static final String LOCALIZATION = "localization:";
+    /**
+     * config 配置
+     */
+    public static final String CONFIG = "config:";
 }

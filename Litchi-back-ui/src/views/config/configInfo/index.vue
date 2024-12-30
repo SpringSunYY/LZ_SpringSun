@@ -17,6 +17,16 @@
             @keyup.enter="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="配置类型" prop="configType">
+        <el-select v-model="queryParams.configType" placeholder="请选择配置类型"  style="width: 200px" clearable>
+          <el-option
+              v-for="dict in c_config_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item label="创建人" prop="createBy">
         <el-input
             v-model="queryParams.createBy"
@@ -107,7 +117,11 @@
       <el-table-column label="配置名称" align="center" prop="configName" v-if="columns[1].visible" :show-overflow-tooltip="true"/>
       <el-table-column label="配置键名" align="center" prop="configKey" v-if="columns[2].visible" :show-overflow-tooltip="true"/>
       <el-table-column label="配置键值" align="center" prop="configValue" v-if="columns[3].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="配置类型" align="center" prop="configType" v-if="columns[4].visible" :show-overflow-tooltip="true"/>
+      <el-table-column label="配置类型" align="center" prop="configType" v-if="columns[4].visible">
+        <template #default="scope">
+          <dict-tag :options="c_config_type" :value="scope.row.configType"/>
+        </template>
+      </el-table-column>
       <el-table-column label="创建人" align="center" prop="createBy" v-if="columns[5].visible" :show-overflow-tooltip="true"/>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180" v-if="columns[6].visible" :show-overflow-tooltip="true">
         <template #default="scope">
@@ -121,7 +135,7 @@
         </template>
       </el-table-column>
       <el-table-column label="备注" align="center" prop="remark" v-if="columns[9].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right" width="150">
         <template #default="scope">
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['config:configInfo:edit']">修改</el-button>
           <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['config:configInfo:remove']">删除</el-button>
@@ -149,6 +163,16 @@
         <el-form-item label="配置键值" prop="configValue">
           <el-input v-model="form.configValue" type="textarea" placeholder="请输入内容" />
         </el-form-item>
+        <el-form-item label="配置类型" prop="configType">
+          <el-select v-model="form.configType" placeholder="请选择配置类型">
+            <el-option
+                v-for="dict in c_config_type"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
         </el-form-item>
@@ -167,6 +191,7 @@
 import { listConfigInfo, getConfigInfo, delConfigInfo, addConfigInfo, updateConfigInfo } from "@/api/config/configInfo";
 
 const { proxy } = getCurrentInstance();
+const { c_config_type } = proxy.useDict('c_config_type');
 
 const configInfoList = ref([]);
 const open = ref(false);

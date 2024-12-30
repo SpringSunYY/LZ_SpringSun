@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.lz.common.core.constant.RedisConfigConstants.LOCALIZATION;
+import static com.lz.common.core.constant.redis.RedisConfigConstants.LOCALIZATION;
 
 /**
  * 国际化信息Service业务层处理

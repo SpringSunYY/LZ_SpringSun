@@ -1,6 +1,8 @@
 package com.lz.config.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lz.config.domain.ConfigInfo;
 
 /**
@@ -9,7 +11,7 @@ import com.lz.config.domain.ConfigInfo;
  * @author YY
  * @date 2024-12-20
  */
-public interface ConfigInfoMapper 
+public interface ConfigInfoMapper extends BaseMapper<ConfigInfo>
 {
     /**
      * 查询配置

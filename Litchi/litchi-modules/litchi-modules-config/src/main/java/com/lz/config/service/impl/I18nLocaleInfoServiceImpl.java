@@ -19,7 +19,7 @@ import com.lz.config.mapper.I18nLocaleInfoMapper;
 import com.lz.config.domain.I18nLocaleInfo;
 import com.lz.config.service.II18nLocaleInfoService;
 
-import static com.lz.common.core.constant.RedisConfigConstants.LOCALIZATION;
+import static com.lz.common.core.constant.redis.RedisConfigConstants.LOCALIZATION;
 
 /**
  * 国际化国家Service业务层处理

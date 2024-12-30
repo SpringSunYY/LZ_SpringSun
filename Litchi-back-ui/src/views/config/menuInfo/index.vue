@@ -26,7 +26,7 @@
         />
       </el-form-item>
       <el-form-item label="显示位置" prop="menuAddress">
-        <el-select v-model="queryParams.menuAddress" placeholder="请选择显示位置" clearable>
+        <el-select v-model="queryParams.menuAddress"  style="width: 200px" placeholder="请选择显示位置" clearable>
           <el-option
               v-for="dict in c_menu_address"
               :key="dict.value"
@@ -36,7 +36,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="是否外链" prop="isFrame">
-        <el-select v-model="queryParams.isFrame" placeholder="请选择是否外链" clearable>
+        <el-select v-model="queryParams.isFrame"  style="width: 200px" placeholder="请选择是否外链" clearable>
           <el-option
               v-for="dict in c_menu_is_frame"
               :key="dict.value"
@@ -46,7 +46,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="是否缓存" prop="isChache">
-        <el-select v-model="queryParams.isChache" placeholder="请选择是否缓存" clearable>
+        <el-select v-model="queryParams.isChache"  style="width: 200px" placeholder="请选择是否缓存" clearable>
           <el-option
               v-for="dict in c_menu_is_chache"
               :key="dict.value"
@@ -56,7 +56,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="菜单类型" prop="menuType">
-        <el-select v-model="queryParams.menuType" placeholder="请选择菜单类型" clearable>
+        <el-select v-model="queryParams.menuType"  style="width: 200px" placeholder="请选择菜单类型" clearable>
           <el-option
               v-for="dict in c_menu_type"
               :key="dict.value"
@@ -66,7 +66,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="是否显示" prop="visible">
-        <el-select v-model="queryParams.visible" placeholder="请选择是否显示" clearable>
+        <el-select v-model="queryParams.visible"  style="width: 200px" placeholder="请选择是否显示" clearable>
           <el-option
               v-for="dict in c_menu_visible"
               :key="dict.value"
@@ -76,7 +76,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="菜单状态" prop="status">
-        <el-select v-model="queryParams.status" placeholder="请选择菜单状态" clearable>
+        <el-select v-model="queryParams.status"  style="width: 200px" placeholder="请选择菜单状态" clearable>
           <el-option
               v-for="dict in c_menu_status"
               :key="dict.value"
