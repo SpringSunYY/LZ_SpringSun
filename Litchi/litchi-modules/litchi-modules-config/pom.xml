@@ -69,6 +69,10 @@
             <groupId>com.lz</groupId>
             <artifactId>litchi-common-swagger</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.lz</groupId>
+            <artifactId>litchi-common-i18n</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

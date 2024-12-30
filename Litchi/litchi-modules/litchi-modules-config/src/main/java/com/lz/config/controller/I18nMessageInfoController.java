@@ -1,5 +1,6 @@
 package com.lz.config.controller;
 
+import com.lz.common.core.utils.StringUtils;
 import com.lz.common.core.utils.poi.ExcelUtil;
 import com.lz.common.core.web.controller.BaseController;
 import com.lz.common.core.web.domain.AjaxResult;
@@ -8,7 +9,9 @@ import com.lz.common.log.annotation.Log;
 import com.lz.common.log.enums.BusinessType;
 import com.lz.common.security.annotation.RequiresPermissions;
 import com.lz.config.domain.I18nMessageInfo;
+import com.lz.config.domain.dto.LocalizationDto;
 import com.lz.config.service.II18nMessageInfoService;
+import com.lz.i18n.service.I18nService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +30,9 @@ public class I18nMessageInfoController extends BaseController
 {
     @Autowired
     private II18nMessageInfoService i18nMessageInfoService;
+
+    @Autowired
+    private I18nService i18nService;
 
     /**
      * 查询国际化信息列表
@@ -102,5 +108,24 @@ public class I18nMessageInfoController extends BaseController
     @GetMapping("/ing/{ing}")
     public AjaxResult getLocalization(@PathVariable("ing") String ing){
         return success(i18nMessageInfoService.getLocalization(ing));
+    }
+
+
+    @GetMapping(value = "/msg/{msg}")
+    public AjaxResult getMsg(@PathVariable("msg") String msg) {
+        System.err.println("msg = " + msg);
+        String message = i18nService.getMessage(msg);
+        System.err.println("message="+message);
+        if (StringUtils.isEmpty(msg)) {
+            System.out.println("message = " + message);
+        }
+        return success(message);
+    }
+
+    @PutMapping(value = "/setLocalization")
+    public AjaxResult setMsg(@RequestBody LocalizationDto localizationDto) {
+        System.out.println("msg = " + localizationDto.getMsg());
+        i18nService.setUserI18n(localizationDto.getMsg());
+        return success();
     }
 }

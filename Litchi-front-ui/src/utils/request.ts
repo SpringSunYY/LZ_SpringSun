@@ -45,7 +45,7 @@ http.interceptors.request.use(config => {
 
     // get请求映射params参数
     if (config.method === 'get' && config.params) {
-        let url = config.url + '?' + lz.tansParams(config.params);
+        let url = config.url + '?' + lz.tansParams({ params: config.params });
         url = url.slice(0, -1);
         config.params = {};
         config.url = url;

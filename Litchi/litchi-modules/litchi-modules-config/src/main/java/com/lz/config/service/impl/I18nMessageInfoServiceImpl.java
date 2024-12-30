@@ -119,7 +119,7 @@ public class I18nMessageInfoServiceImpl implements II18nMessageInfoService {
     @Override
     public int deleteI18nMessageInfoByMessageIds(String[] messageIds) {
         QueryWrapper<I18nMessageInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.in("message_id", messageIds);
+        queryWrapper.in("message_id", (Object[]) messageIds);
         List<I18nMessageInfo> i18nMessageInfos = i18nMessageInfoMapper.selectList(queryWrapper);
         for (I18nMessageInfo info : i18nMessageInfos) {
             redisService.deleteCacheMapValue(LOCALIZATION + info.getLocale(), info.getMessageKey());

@@ -19,7 +19,6 @@ public class I18nLocaleInfo extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 编号 */
-
     @TableId
     private Long localeId;
 

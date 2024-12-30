@@ -1,6 +1,6 @@
-import i18n, { BackendModule } from 'i18next'; // 导入 i18next 和 BackendModule 类型
-import { initReactI18next } from 'react-i18next';
-import { getLocalization } from "@/apis/config/i18nMessageInfo.ts";
+import i18n, {BackendModule} from 'i18next'; // 导入 i18next 和 BackendModule 类型
+import {initReactI18next} from 'react-i18next';
+import {getLocalization, setLocalization} from "@/apis/config/i18nMessageInfo.ts";
 
 // 获取浏览器语言，并设置为默认语言
 const defaultLanguage = 'en'; // 设置为默认语言，如果浏览器语言不可用，则使用 'en'
@@ -32,7 +32,7 @@ const LocalStorageBackend: BackendModule = {
         } else {
             try {
                 const response = await getLocalization(language);
-                const data =  response.data;
+                const data = response.data;
 
                 // 确保返回的数据符合类型要求（object）
                 if (data && typeof data === 'object') {
@@ -87,6 +87,9 @@ export const switchLanguage = (language: string) => {
         // 确保语言切换后从后台加载新的语言资源
         i18n.loadNamespaces('translation', () => { // 确保加载当前语言的翻译资源
             console.log(`加载了 ${language} 语言资源`);
+            if (language) {
+                setLocalization(language);
+            }
         });
         localStorage.setItem('lang', language);
     }).catch((error) => {

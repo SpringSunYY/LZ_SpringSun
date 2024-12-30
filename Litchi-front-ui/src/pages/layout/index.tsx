@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AppBar, Box, Button, Drawer, Grid, Menu, MenuItem, Modal, useMediaQuery} from "@mui/material";
 import {Outlet, useNavigate} from "react-router-dom";
 import {useTheme} from "@mui/system";
@@ -7,6 +7,8 @@ import './index.scss'
 import MySvgIcon from "@/compoents/SvgIcon";
 import {useTranslation} from "react-i18next";
 import {switchLanguage} from "@/i18n.ts";
+import {I18nLocaleInfoType} from "@/types/config/i18nLocaleInfo.ts";
+import {listI18nLocaleInfo} from "@/apis/config/i18nLocaleInfo.ts";
 // 菜单数据
 const menus = [
     {
@@ -39,7 +41,7 @@ const menus = [
         //     {label: "General", key: "Settings-General", menuId: 11, path: "/home"},
         //     {label: "安全", key: "Settings-Security", menuId: 12, path: "/home"},
         // ],
-    },    {
+    }, {
         label: "XC",
         key: "Home",
         menuId: 101,
@@ -72,6 +74,8 @@ const GeekLayout: React.FC = () => {
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // 检测屏幕尺寸
     const {t} = useTranslation();
     const [openLanguage, setOpenLanguage] = useState<boolean | null>(false);
+    const [localeInfoList, setLocaleInfoList] = useState<I18nLocaleInfoType[]>([]);
+    const [localeInfoQuery] = useState<I18nLocaleInfoType>({localeStatus: '0'});
     // 切换语言的处理函数
     const handleSwitchLanguage = (lang: string) => {
         switchLanguage(lang); // 切换语言
@@ -126,6 +130,16 @@ const GeekLayout: React.FC = () => {
         setDrawerOpen(!drawerOpen);
     };
 
+    //获取语言
+    useEffect(() => {
+        console.log('Fetching data with:', localeInfoQuery);
+        listI18nLocaleInfo(localeInfoQuery).then(r => {
+                if (r.rows) {
+                    setLocaleInfoList(r.rows)
+                }
+            }
+        )
+    }, [localeInfoQuery])
     return (
         <div>
             <header className="header">
@@ -197,7 +211,7 @@ const GeekLayout: React.FC = () => {
                                             </Grid>
                                             <Grid item xs={2} className={"menu-content-hover"}>
                                                 <MySvgIcon name={"changeLanguage"}
-                                                            // @ts-ignore
+                                                    // @ts-ignore
                                                            onClick={(event) => handleClickLanguage(event)}
                                                            size={"1.5em"}/>
                                                 <Menu
@@ -208,11 +222,14 @@ const GeekLayout: React.FC = () => {
                                                         "aria-labelledby": `language`,
                                                     }}
                                                 >
-                                                    <MenuItem>
-                                                        <button onClick={() => handleSwitchLanguage('en')}>English
-                                                        </button>
-                                                        <button onClick={() => handleSwitchLanguage('zh')}>中文</button>
-                                                    </MenuItem>
+                                                    {localeInfoList.map((info) => (
+                                                        <MenuItem key={info.localeId}
+                                                                  onClick={() => {
+                                                                      handleSwitchLanguage(info.locale)
+                                                                  }}>
+                                                            {info.localeName}
+                                                        </MenuItem>
+                                                    ))}
                                                 </Menu>
                                             </Grid>
                                             <Grid item xs={2} className={"menu-content-hover"}>

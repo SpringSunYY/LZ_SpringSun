@@ -5,6 +5,7 @@ import {ToastContainer} from "react-toastify";
 import {useSelector} from "react-redux";
 import {RootState} from "@/store";
 import {checkPermiSingle} from "@/utils/permission.ts";
+import {getMsg} from "@/apis/config/i18nMessageInfo.ts";
 
 const Home = () => {
     const getCodeMsg = () => {
@@ -27,6 +28,13 @@ const Home = () => {
             console.error('获取用户列表失败:', error);
         });
     };
+    const getMsgInfo = () => {
+        const msg="hello";
+        console.log(msg);
+        getMsg(msg).then(r => {
+            console.log('res', r);
+        })
+    }
     const userInfo = useSelector((state: RootState) => state.user.userInfo);  // 从 Redux 中获取用户数据
     const getUserInfo = () => {
         console.log(userInfo);
@@ -42,6 +50,9 @@ const Home = () => {
                 }}/>
             <Button variant="contained" color="primary" onClick={getUserList}>
                 获取用户
+            </Button>
+            <Button variant="contained" color="primary" onClick={getMsgInfo}>
+                获取信息
             </Button>
             <Button disabled={!checkPermiSingle('system:config:remove')} variant="contained" color="primary"
                     onClick={getUserInfo}>
