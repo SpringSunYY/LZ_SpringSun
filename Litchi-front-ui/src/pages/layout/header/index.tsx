@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import lzIcon from "@/assets/icons/svg/lz.svg";
 import MySvgIcon from "@/compoents/SvgIcon";
 import {useNavigate} from "react-router-dom";
-import {useTheme} from "@mui/system";
 import {useTranslation} from "react-i18next";
 import {I18nLocaleInfoType} from "@/types/config/i18nLocaleInfo.ts";
 import {switchLanguage} from "@/i18n.ts";
@@ -71,8 +70,8 @@ const Heard = () => {
         const [anchorEl, setAnchorEl] = useState<null | HTMLElement | SVGSVGElement>(null); // 当前菜单的锚点
         const [openMenu, setOpenMenu] = useState<number | null>(null); // 当前打开的菜单
         const [drawerOpen, setDrawerOpen] = useState(false);
-        const theme = useTheme();
-        const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // 检测屏幕尺寸
+        const isSmallScreen = useMediaQuery('(max-width:800px)'); // 检测屏幕尺寸
+        const isMediumScreen = useMediaQuery('(max-width:1000px)'); // 检测屏幕尺寸
         const {t} = useTranslation();
         const [openLanguage, setOpenLanguage] = useState<boolean | null>(false);
         const [localeInfoList, setLocaleInfoList] = useState<I18nLocaleInfoType[]>([]);
@@ -226,66 +225,72 @@ const Heard = () => {
                                     ))}
                                     </Grid>
                                     <Grid item xs={4} className={"menu-right menu-content"}>
-                                        <Grid container spacing={1} columns={18}>
-                                            <Grid item xs={2} className={"menu-content-hover"}>
-                                                <MySvgIcon name={"qq"} size={"1.5em"}/>
-                                            </Grid>
-                                            <Grid item xs={2} className={"menu-content-hover"}>
-                                                <MySvgIcon name={"wx"} size={"1.5em"}/>
-                                            </Grid>
-                                            <Grid item xs={2} className={"menu-content-hover"}>
-                                                <MySvgIcon name={"facebook"} size={"1.5em"}/>
-                                            </Grid>
-                                            <Grid item xs={2} className={"menu-content-hover"}>
-                                                <MySvgIcon name={"twitter"} size={"1.5em"}/>
-                                            </Grid>
-                                            <Grid item xs={2} className={"menu-content-hover"}>
-                                                <MySvgIcon name={"lz"} size={"1.5em"}/>
-                                            </Grid>
-                                            <Grid item xs={2} className={"menu-content-hover"}>
-                                                <MySvgIcon name={"changeLanguage"}
-                                                           onClick={(event) => handleClickLanguage(event as React.MouseEvent<SVGSVGElement>)}
-                                                           size={"1.5em"}/>
-                                                <Menu
-                                                    anchorEl={anchorEl} // 当前按钮作为菜单的锚点
-                                                    open={openLanguage === true} // 根据状态控制是否打开菜单
-                                                    onClose={handleCloseLanguage} // 关闭菜单
-                                                    MenuListProps={{
-                                                        "aria-labelledby": `language`,
-                                                    }}
-                                                >
-                                                    {localeInfoList.map((info) => (
-                                                        <MenuItem key={info.localeId}
-                                                                  onClick={() => {
-                                                                      handleSwitchLanguage(info?.locale)
-                                                                  }}>
-                                                            {info.localeName}
-                                                        </MenuItem>
-                                                    ))}
-                                                </Menu>
-                                            </Grid>
-                                            <Grid item xs={2} className={"menu-content-hover"}>
-                                                <MySvgIcon onClick={handleOpenModal} name={"search"} size={"1.5em"}/>
-                                                <Modal
-                                                    open={open}
-                                                    onClose={handleCloseModal}
-                                                    aria-labelledby="parent-modal-title"
-                                                    aria-describedby="parent-modal-description"
-                                                >
-                                                    <Box sx={{...style, width: '80%'}}>
-                                                        <h2 id="parent-modal-title">Text in a modal</h2>
-                                                        <p id="parent-modal-description">
-                                                            Duis mollis, est non commodo luctus, nisi erat porttitor
-                                                            ligula.
-                                                        </p>
-                                                        {/*<ChildModal/>*/}
-                                                    </Box>
-                                                </Modal>
-                                            </Grid>
-                                            <Grid item xs={4}>
+                                        {isMediumScreen ? (
+                                            <Grid container>
                                                 <Button variant="outlined">{t('hello')}</Button>
                                             </Grid>
-                                        </Grid>
+                                        ) : (
+                                            <Grid container spacing={1} columns={18}>
+                                                <Grid item xs={2} className={"menu-content-hover"}>
+                                                    <MySvgIcon name={"qq"} size={"1.5em"}/>
+                                                </Grid>
+                                                <Grid item xs={2} className={"menu-content-hover"}>
+                                                    <MySvgIcon name={"wx"} size={"1.5em"}/>
+                                                </Grid>
+                                                <Grid item xs={2} className={"menu-content-hover"}>
+                                                    <MySvgIcon name={"facebook"} size={"1.5em"}/>
+                                                </Grid>
+                                                <Grid item xs={2} className={"menu-content-hover"}>
+                                                    <MySvgIcon name={"twitter"} size={"1.5em"}/>
+                                                </Grid>
+                                                <Grid item xs={2} className={"menu-content-hover"}>
+                                                    <MySvgIcon name={"lz"} size={"1.5em"}/>
+                                                </Grid>
+                                                <Grid item xs={2} className={"menu-content-hover"}>
+                                                    <MySvgIcon name={"changeLanguage"}
+                                                               onClick={(event) => handleClickLanguage(event as React.MouseEvent<SVGSVGElement>)}
+                                                               size={"1.5em"}/>
+                                                    <Menu
+                                                        anchorEl={anchorEl} // 当前按钮作为菜单的锚点
+                                                        open={openLanguage === true} // 根据状态控制是否打开菜单
+                                                        onClose={handleCloseLanguage} // 关闭菜单
+                                                        MenuListProps={{
+                                                            "aria-labelledby": `language`,
+                                                        }}
+                                                    >
+                                                        {localeInfoList.map((info) => (
+                                                            <MenuItem key={info.localeId}
+                                                                      onClick={() => {
+                                                                          handleSwitchLanguage(info?.locale)
+                                                                      }}>
+                                                                {info.localeName}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </Menu>
+                                                </Grid>
+                                                <Grid item xs={2} className={"menu-content-hover"}>
+                                                    <MySvgIcon onClick={handleOpenModal} name={"search"} size={"1.5em"}/>
+                                                    <Modal
+                                                        open={open}
+                                                        onClose={handleCloseModal}
+                                                        aria-labelledby="parent-modal-title"
+                                                        aria-describedby="parent-modal-description"
+                                                    >
+                                                        <Box sx={{...style, width: '80%'}}>
+                                                            <h2 id="parent-modal-title">Text in a modal</h2>
+                                                            <p id="parent-modal-description">
+                                                                Duis mollis, est non commodo luctus, nisi erat porttitor
+                                                                ligula.
+                                                            </p>
+                                                            {/*<ChildModal/>*/}
+                                                        </Box>
+                                                    </Modal>
+                                                </Grid>
+                                                <Grid item xs={4}>
+                                                    <Button variant="outlined">{t('hello')}</Button>
+                                                </Grid>
+                                            </Grid>
+                                        )}
                                     </Grid>
                                 </Grid>
                             )}

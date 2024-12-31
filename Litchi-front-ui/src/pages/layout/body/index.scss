@@ -2,14 +2,28 @@
   background-image: url("/src/assets/images/bg1.jpg");
   background-repeat: no-repeat; /* 背景图不重复 */
   background-attachment: fixed;
+  background-position: center; /* 背景居中 */
+  background-size: cover; /* 背景按比例缩放并填充容器 */
   height: 100em;
   z-index: 0;
-  .container{
+  transition: background-image 1s ease-in-out, background-size 1s ease-in-out; /* 背景图片和尺寸的过渡 */
+  .container {
     background-image: url("/src/assets/images/map_line.png");
-    background-repeat: no-repeat; /* 背景图不重复 */
+    background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: bottom;
-    height: 100em;
+    background-position: bottom center;
+    background-size: 80em; /* 背景图片按比例缩放，确保完整显示 */
+    height: 100%;
     z-index: 1;
+    animation: fadeInBackground 3s ease-in-out forwards; /* 3秒过渡渐显 */
+  }
+}
+/* 定义渐显动画 */
+@keyframes fadeInBackground {
+  0% {
+    opacity: 0; /* 初始状态：完全透明 */
+  }
+  100% {
+    opacity: 1; /* 最终状态：完全可见 */
   }
 }
