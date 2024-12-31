@@ -227,7 +227,7 @@ const Heard = () => {
                                     <Grid item xs={4} className={"menu-right menu-content"}>
                                         {isMediumScreen ? (
                                             <Grid container>
-                                                <Button variant="outlined">{t('hello')}</Button>
+                                                <Button variant="outlined">{t('login')}</Button>
                                             </Grid>
                                         ) : (
                                             <Grid container spacing={1} columns={18}>
@@ -287,7 +287,7 @@ const Heard = () => {
                                                     </Modal>
                                                 </Grid>
                                                 <Grid item xs={4}>
-                                                    <Button variant="outlined">{t('hello')}</Button>
+                                                    <Button variant="outlined">{t('login')}</Button>
                                                 </Grid>
                                             </Grid>
                                         )}

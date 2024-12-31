@@ -80,6 +80,7 @@ export const switchLanguage = (language: string) => {
     const namespaces = ['translation'];  // 如果有多个命名空间可以扩展这个数组
     namespaces.forEach((ns) => {
         const cacheKey = `${language}-${ns}`;
+        console.log(cacheKey);
         localStorage.removeItem(cacheKey);  // 移除缓存中的翻译文件
     });
     // 切换语言并更新语言数据

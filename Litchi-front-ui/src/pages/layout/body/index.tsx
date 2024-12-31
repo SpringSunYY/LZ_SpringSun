@@ -1,10 +1,10 @@
 import "./index.scss"
+import Container1 from "@/pages/layout/body/container1";
+
 const Body = () => {
     return (
         <div className={"body"}>
-            <div className={"container"}>
-
-            </div>
+            <Container1></Container1>
         </div>
     )
 }

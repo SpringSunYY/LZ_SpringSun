@@ -5,10 +5,10 @@ import './index.scss'
 import Header from "@/pages/layout/header";
 import Body from "@/pages/layout/body";
 
-const GeekLayout: React.FC = () => {
+const AppLayout: React.FC = () => {
     useTheme();
     return (
-        <div>
+        <div className="appLayout">
             <Header></Header>
             <Body></Body>
             {/* 子路由内容 */}
@@ -20,5 +20,5 @@ const GeekLayout: React.FC = () => {
     );
 };
 
-export default GeekLayout;
+export default AppLayout;
 
