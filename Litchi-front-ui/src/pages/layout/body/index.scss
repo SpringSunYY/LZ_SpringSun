@@ -1,0 +1,15 @@
+.body {
+  background-image: url("/src/assets/images/bg1.jpg");
+  background-repeat: no-repeat; /* 背景图不重复 */
+  background-attachment: fixed;
+  height: 100em;
+  z-index: 0;
+  .container{
+    background-image: url("/src/assets/images/map_line.png");
+    background-repeat: no-repeat; /* 背景图不重复 */
+    background-attachment: fixed;
+    background-position: bottom;
+    height: 100em;
+    z-index: 1;
+  }
+}

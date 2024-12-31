@@ -1,68 +1,94 @@
+/* 通用样式，重置 margin 和 padding */
 * {
   margin: 0;
   padding: 0;
 }
 
-
+/* header 样式 */
 .header {
+  position: sticky; /* 固定在页面顶部 */
+  z-index: 15;
+  display: block;
+  min-width: 375px !important; /* 确保最小宽度为 375px */
   .appBar {
     width: 100%;
-    height: 7em;
     min-width: 375px !important;
-    background: #615dfa;
+    background: rgba(97, 93, 250, 0.09);
+    transition: height 0.3s ease-in-out; /* 高度变化时应用平滑过渡 */
+    /* 当滚动页面时的状态 */
+    &.scrolled {
+      background: rgba(255, 255, 255, 0); /* 滚动时背景色变成半透明白色 */
+      padding: 1em 0; /* 滚动时减少 padding */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 滚动时加上阴影效果 */
+      transition: width 2s ease; /* 背景色的过渡时间设置为 1s */
+      border: 2px solid rgba(255, 0, 0, 0);
+      border-radius: 5px;
+      width: 90%; /* 设置宽度 */
+      margin: 0 auto; /* 水平居中 */
+      display: block; /* 设置为块级元素，确保能应用 margin: 0 auto */
+      box-sizing: border-box; /* 包含 padding 和 border */
+    }
 
     .toolBar {
       width: 90%;
       margin: 0 auto;
       min-width: 375px !important;
-      height: 7em;
-
-      .title {
-        float: left;
-        color: white;
-        height: 100%;
-        align-items: center; /* 垂直居中 */
-      }
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* 水平居中对齐 */
+      flex-wrap: wrap; /* 允许元素换行，避免在小屏幕时过度拥挤 */
 
       .title-log {
-        padding-top: 1em;
+        display: flex;
+        justify-content: center; /* 水平居中 */
+        align-items: center; /* 垂直居中 */
+        flex-grow: 1; /* 自动填充剩余空间 */
+        transition: padding 0.3s ease-in-out; /* 标题区域的内边距平滑过渡 */
       }
 
       .menu {
-        height: 7em;
-        align-items: center; /* 垂直居中 */
-        //margin-left: 5em;
-        /* 为所有 .menu-content-hover 统一定义样式 */
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+      }
 
-
-        .menu-content {
-          display: flex;
-          color: white;
-          height: 7em;
-          font-size: 1.2em;
-          transition: color 0.3s ease; /* 添加平滑的颜色过渡 */
-          align-items: center;
-        }
-
-
-        .menu-item {
-          float: left;
-          padding-top: 0 !important;
-        }
-
-        .menu-right {
-          float: right;
-          padding-bottom: 1em;
-          height: 7em;
-          //margin-left: 50em;
-        }
+      .menu-content {
+        font-size: 20px;
+        color: white;
       }
     }
   }
 }
 
+/* 鼠标悬停时的菜单项样式 */
 .menu-content-hover:hover {
   color: #5aeab2 !important;
 }
 
+/* 小屏幕时的响应式样式 */
+@media (max-width: 768px) {
+  .header {
+    .appBar {
+      height: 5em; /* 在小屏幕时调整 AppBar 高度 */
+    }
 
+    .toolBar {
+      flex-direction: column; /* 小屏幕时，ToolBar 的元素垂直排列 */
+      justify-content: center;
+      height: auto;
+      padding: 0.5em 0; /* 添加内边距，避免过于紧凑 */
+    }
+
+    .title-log {
+      padding-top: 0.5em; /* 在小屏幕上调整标题的顶部内边距 */
+      width: 20em;
+      height: 20em;
+    }
+
+    .menu {
+      display: none; /* 小屏幕时隐藏菜单，改为侧边栏或其他形式 */
+    }
+  }
+}
