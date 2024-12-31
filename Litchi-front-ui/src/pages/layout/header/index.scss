@@ -10,21 +10,23 @@
   z-index: 15;
   display: block;
   min-width: 375px !important; /* 确保最小宽度为 375px */
+  margin: 0  auto!important;
   .appBar {
     width: 100%;
     min-width: 375px !important;
     background: rgba(97, 93, 250, 0.09);
-    transition: height 0.3s ease-in-out; /* 高度变化时应用平滑过渡 */
+    transition: height 0.3s ease-in-out,width 0.4s ease-in-out; /* 高度变化时应用平滑过渡 */
     /* 当滚动页面时的状态 */
     &.scrolled {
       background: rgba(255, 255, 255, 0); /* 滚动时背景色变成半透明白色 */
-      padding: 1em 0; /* 滚动时减少 padding */
+      //padding: 1em 0; /* 滚动时减少 padding */
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 滚动时加上阴影效果 */
-      transition: width 2s ease; /* 背景色的过渡时间设置为 1s */
+      transition: background 2s ease, box-shadow 2s ease; /* 仅针对背景色和阴影应用过渡 */
       border: 2px solid rgba(255, 0, 0, 0);
       border-radius: 5px;
-      width: 90%; /* 设置宽度 */
-      margin: 0 auto; /* 水平居中 */
+      margin: 0 10em;
+      width: 80%; /* 设置宽度 */
+      //margin: 0 auto; /* 水平居中 */
       display: block; /* 设置为块级元素，确保能应用 margin: 0 auto */
       box-sizing: border-box; /* 包含 padding 和 border */
     }

@@ -169,7 +169,7 @@ const Heard = () => {
         }, []);
         return (
             <header className="header">
-                <AppBar className={`appBar ${scrolled ? 'scrolled' : ''}`} style={{height: `${headerHeight}em`, transition: 'height 0.3s ease-in-out'}}>
+                <AppBar className={`appBar ${scrolled ? 'scrolled' : ''}`} style={{height: `${headerHeight}em`}}>
                     <Grid container className={"toolBar"}>
                         <Grid item xs={2} className="title-log">
                             <img src={lzIcon} width={`${iconSize}em`} // 动态调整图标的大小
