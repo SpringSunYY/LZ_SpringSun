@@ -8,11 +8,14 @@ import com.lz.common.core.utils.DateUtils;
 import com.lz.common.core.utils.StringUtils;
 import com.lz.common.redis.service.RedisService;
 import com.lz.common.security.utils.SecurityUtils;
+import com.lz.config.domain.ConfigInfo;
 import com.lz.config.domain.I18nLocaleInfo;
 import com.lz.config.domain.I18nMessageInfo;
 import com.lz.config.mapper.I18nMessageInfoMapper;
+import com.lz.config.service.IConfigInfoService;
 import com.lz.config.service.II18nLocaleInfoService;
 import com.lz.config.service.II18nMessageInfoService;
+import com.lz.i18n.service.I18nService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -22,7 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.lz.common.core.constant.redis.RedisConfigConstants.DEFAULT_LANGUAGE_TIMEOUT;
 import static com.lz.common.core.constant.redis.RedisConfigConstants.LOCALIZATION;
+import static com.lz.common.core.constant.redis.RedisI18nConstants.CONFIG_DEFAULT_LANGUAGE;
+import static com.lz.common.core.constant.redis.RedisI18nConstants.FAILED_TO_SWITCH_LANGUAGE;
 
 /**
  * 国际化信息Service业务层处理
@@ -40,6 +46,12 @@ public class I18nMessageInfoServiceImpl implements II18nMessageInfoService {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private IConfigInfoService configInfoService;
+
+    @Autowired
+    private I18nService i18nService;
 
     /**
      * 查询国际化信息
@@ -156,5 +168,17 @@ public class I18nMessageInfoServiceImpl implements II18nMessageInfoService {
         cacheMap = i18nMessageInfos.stream().collect(Collectors.toMap(I18nMessageInfo::getMessageKey, I18nMessageInfo::getMessage));
         redisService.setCacheMap(LOCALIZATION + i18nMessageInfo.getLocale(), cacheMap);
         return cacheMap;
+    }
+
+    @Override
+    public void setUserI18n(String msg) {
+        String value = configInfoService.selectConfigInfoByConfigKeyReturnValue(DEFAULT_LANGUAGE_TIMEOUT);
+        try {
+            System.err.println(value);
+            long parseLong = Long.parseLong(value);
+            i18nService.setUserI18n(msg, parseLong);
+        } catch (NumberFormatException e) {
+            throw new ServiceException(i18nService.getMessage(FAILED_TO_SWITCH_LANGUAGE));
+        }
     }
 }

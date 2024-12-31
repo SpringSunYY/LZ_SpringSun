@@ -54,10 +54,6 @@ public class LoginUser implements Serializable
     private Set<String> roles;
 
     /**
-     * 登录类型
-     */
-    private String type;
-    /**
      * 用户信息
      */
     private SysUser sysUser;
@@ -140,14 +136,6 @@ public class LoginUser implements Serializable
     public void setRoles(Set<String> roles)
     {
         this.roles = roles;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public SysUser getSysUser()

@@ -77,8 +77,10 @@ const GeekLayout: React.FC = () => {
     const [localeInfoList, setLocaleInfoList] = useState<I18nLocaleInfoType[]>([]);
     const [localeInfoQuery] = useState<I18nLocaleInfoType>({localeStatus: '0'});
     // 切换语言的处理函数
-    const handleSwitchLanguage = (lang: string) => {
-        switchLanguage(lang); // 切换语言
+    const handleSwitchLanguage = (lang?: string) => {
+        if (lang) {
+            switchLanguage(lang); // 切换语言
+        }
     };
     const [open, setOpen] = React.useState(false);
     const handleOpenModal = () => {
@@ -225,7 +227,7 @@ const GeekLayout: React.FC = () => {
                                                     {localeInfoList.map((info) => (
                                                         <MenuItem key={info.localeId}
                                                                   onClick={() => {
-                                                                      handleSwitchLanguage(info.locale)
+                                                                      handleSwitchLanguage(info?.locale)
                                                                   }}>
                                                             {info.localeName}
                                                         </MenuItem>

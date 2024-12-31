@@ -28,7 +28,7 @@ public interface IConfigInfoService {
     public ConfigInfo selectConfigInfoByConfigKey(String configKey);
 
     /**
-     * description:
+     * description: 获取配置，默认添加前缀config
      * author: YY
      * method: selectConfigInfoByConfigKeyReturnValue
      * date: 2024/12/30 21:47

@@ -17,4 +17,8 @@ public class RedisI18nConstants {
      * 国际化 默认语言配置
      */
     public static final String CONFIG_DEFAULT_LANGUAGE = "config:default:language";
+    /**
+     * 切换语言失败
+     */
+    public static final String FAILED_TO_SWITCH_LANGUAGE = "Failed to switch language";
 }

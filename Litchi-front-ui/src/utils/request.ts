@@ -45,7 +45,7 @@ http.interceptors.request.use(config => {
 
     // get请求映射params参数
     if (config.method === 'get' && config.params) {
-        let url = config.url + '?' + lz.tansParams({ params: config.params });
+        let url = config.url + '?' + lz.tansParams({params: config.params});
         url = url.slice(0, -1);
         config.params = {};
         config.url = url;
@@ -103,7 +103,8 @@ http.interceptors.response.use(
         // 未设置状态码则默认成功状态
         const code = res.data.code || 200;
         // 获取错误信息
-        const msg = errorCode[code] || res.data.msg || errorCode['default'];
+        const msg = res.data.msg || errorCode[code] || errorCode['default'];
+        console.log(msg)
         // 二进制数据则直接返回
         if (res.request.responseType === 'blob' || res.request.responseType === 'arraybuffer') {
             return res.data;

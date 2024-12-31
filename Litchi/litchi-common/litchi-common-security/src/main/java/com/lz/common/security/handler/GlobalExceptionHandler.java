@@ -1,6 +1,16 @@
 package com.lz.common.security.handler;
 
+import com.lz.common.core.constant.HttpStatus;
+import com.lz.common.core.exception.DemoModeException;
+import com.lz.common.core.exception.InnerAuthException;
+import com.lz.common.core.exception.ServiceException;
+import com.lz.common.core.exception.auth.NotPermissionException;
+import com.lz.common.core.exception.auth.NotRoleException;
 import com.lz.common.core.exception.sql.MySQLIntegrityConstraintViolationException;
+import com.lz.common.core.text.Convert;
+import com.lz.common.core.utils.StringUtils;
+import com.lz.common.core.utils.html.EscapeUtil;
+import com.lz.common.core.web.domain.AjaxResult;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,18 +21,6 @@ import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import com.lz.common.core.constant.HttpStatus;
-import com.lz.common.core.exception.DemoModeException;
-import com.lz.common.core.exception.InnerAuthException;
-import com.lz.common.core.exception.ServiceException;
-import com.lz.common.core.exception.auth.NotPermissionException;
-import com.lz.common.core.exception.auth.NotRoleException;
-import com.lz.common.core.text.Convert;
-import com.lz.common.core.utils.StringUtils;
-import com.lz.common.core.utils.html.EscapeUtil;
-import com.lz.common.core.web.domain.AjaxResult;
-
-import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * 全局异常处理器

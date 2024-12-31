@@ -124,8 +124,7 @@ public class I18nMessageInfoController extends BaseController
 
     @PutMapping(value = "/setLocalization")
     public AjaxResult setMsg(@RequestBody LocalizationDto localizationDto) {
-        System.out.println("msg = " + localizationDto.getMsg());
-        i18nService.setUserI18n(localizationDto.getMsg());
+        i18nMessageInfoService.setUserI18n(localizationDto.getMsg());
         return success();
     }
 }

@@ -25,7 +25,7 @@ const LocalStorageBackend: BackendModule = {
     // 读取翻译文件
     read: async (language: string, namespace: string, callback: (err: Error | null, data: object | false) => void) => {
         const cachedData = localStorage.getItem(`${language}-${namespace}`);
-        console.log(`${language}-${namespace}`)
+        // console.log(`${language}-${namespace}`)
         if (cachedData) {
             // 如果缓存中有数据，直接调用回调并返回数据
             callback(null, JSON.parse(cachedData));
@@ -86,7 +86,7 @@ export const switchLanguage = (language: string) => {
     i18n.changeLanguage(language).then(() => {
         // 确保语言切换后从后台加载新的语言资源
         i18n.loadNamespaces('translation', () => { // 确保加载当前语言的翻译资源
-            console.log(`加载了 ${language} 语言资源`);
+            // console.log(`加载了 ${language} 语言资源`);
             if (language) {
                 setLocalization(language);
             }
