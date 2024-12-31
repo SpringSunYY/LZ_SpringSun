@@ -25,7 +25,6 @@
    ```java
    package com.lz.i18n.service;
    
-   import com.lz.common.core.constant.redis.RedisCommonConstants;
    import com.lz.common.core.constant.redis.RedisI18nConstants;
    import com.lz.common.core.utils.StringUtils;
    import com.lz.common.core.utils.ip.IpUtils;
@@ -33,7 +32,10 @@
    import jakarta.annotation.Resource;
    import org.springframework.stereotype.Component;
    
+   import java.util.concurrent.TimeUnit;
+   
    import static com.lz.common.core.constant.redis.RedisConfigConstants.LOCALIZATION;
+   import static com.lz.common.core.constant.redis.RedisI18nConstants.CONFIG_DEFAULT_LANGUAGE;
    
    /**
     * Project: Litchi
@@ -58,10 +60,10 @@
         * param: value
         * return: void
         **/
-       public void setUserI18n(final String value) {
+       public void setUserI18n(final String value, Long timeout) {
            //使用ip地址作为国际化
            String ipAddr = IpUtils.getIpAddr();
-           redisService.setCacheObject(RedisI18nConstants.I18N + ipAddr + RedisCommonConstants.SEPARATE, value);
+           redisService.setCacheObject(RedisI18nConstants.I18N + ipAddr, value, timeout, TimeUnit.SECONDS);
        }
    
        /**
@@ -73,19 +75,30 @@
         * param: key
         * return: java.lang.String
         **/
-       public String getUserI18n(final String key) {
+       public String getUserI18n() {
+           //使用ip地址作为国际化
+           String ipAddr = IpUtils.getIpAddr();
            //获取用户国际化语言
-           String cache = redisService.getCacheObject(RedisI18nConstants.I18N + key);
-           if (StringUtils.isEmpty(cache)) {
-               String ipAddr = IpUtils.getIpAddr();
-               cache = redisService.getCacheObject(RedisI18nConstants.I18N + ipAddr + RedisCommonConstants.SEPARATE);
+           String value = redisService.getCacheObject(RedisI18nConstants.I18N + ipAddr);
+           //如果没有获取默认
+           if (StringUtils.isEmpty(value)) {
+               value = redisService.getCacheObject(CONFIG_DEFAULT_LANGUAGE);
            }
-           return cache;
+           return value;
        }
    
+       /**
+        * description: 获取message
+        * author: YY
+        * method: getMessage
+        * date: 2024/12/31 15:35
+        * param:
+        * param: key
+        * return: java.lang.String
+        **/
        public String getMessage(final String key) {
            //获取国家语言
-           String userI18n = getUserI18n(key);
+           String userI18n = getUserI18n();
            String value = redisService.getCacheMapValue(LOCALIZATION + userI18n, key);
            if (StringUtils.isEmpty(value)) {
                return key;

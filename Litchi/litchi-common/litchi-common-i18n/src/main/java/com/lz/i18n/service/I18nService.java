@@ -1,6 +1,5 @@
 package com.lz.i18n.service;
 
-import com.lz.common.core.constant.redis.RedisCommonConstants;
 import com.lz.common.core.constant.redis.RedisI18nConstants;
 import com.lz.common.core.utils.StringUtils;
 import com.lz.common.core.utils.ip.IpUtils;

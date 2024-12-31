@@ -5,6 +5,7 @@ interface SvgIconProps extends SVGProps<SVGSVGElement> {
     prefix?: string;
     color?: string; // color 可以传递，默认为 currentColor
     size?: string | number; // 控制大小，接受字符串或数字
+    onClick?: (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
 }
 
 const MySvgIcon: React.FC<SvgIconProps> = ({
