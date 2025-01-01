@@ -22,7 +22,7 @@ const Container1: React.FC<Container1Props> = ({isMediumScreen = false}) => {
                             <div className="item-number">10,95,219</div>
                             <div className="conn-people">{t('Connected People')}</div>
                             <a href="/" className="button-slide">
-                                <MySvgIcon name={"start"} size={40}></MySvgIcon>
+                                <MySvgIcon name={"start"} size={80}></MySvgIcon>
                             </a>
                         </Grid>
                         <Grid item sm={6} className={"right"}>
