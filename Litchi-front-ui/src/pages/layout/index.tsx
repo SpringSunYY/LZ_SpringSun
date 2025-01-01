@@ -4,6 +4,7 @@ import {useTheme} from "@mui/system";
 import './index.scss'
 import Header from "@/pages/layout/header";
 import Body from "@/pages/layout/body";
+import BackToTop from "@/compoents/BackToTop";
 
 const AppLayout: React.FC = () => {
     useTheme();
@@ -15,6 +16,7 @@ const AppLayout: React.FC = () => {
             <div className={"body"}>
                 <Body></Body>
             </div>
+            <BackToTop></BackToTop>
             {/* 子路由内容 */}
             <div>
                 {/* 在这里显示子路由内容 */}

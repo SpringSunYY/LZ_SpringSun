@@ -18,15 +18,17 @@
     height: 100%; /* 让容器的高度填满父容器 */
     z-index: 1;
     padding-top: 10vh;
+
     .left {
       padding-top: 25vh;
       padding-bottom: 30vh;
       color: #ffffff;
       padding-left: 0 !important;
+
       .item-title {
         font-size: 60px;
         font-weight: 700;
-        font-family: "Nunito", sans-serif;
+        font-family: Nunito, sans-serif;
         line-height: 52px;
         margin-bottom: 1em;
       }
@@ -46,6 +48,7 @@
       .conn-people {
         padding-bottom: 1em;
       }
+
       .item-content {
         margin-top: 1em;
       }
@@ -62,6 +65,7 @@
     .right {
       height: 100%;
       padding-top: 20vh;
+
       .shape {
         height: 100%;
         background-image: url("@/assets/images/shape_1.png");

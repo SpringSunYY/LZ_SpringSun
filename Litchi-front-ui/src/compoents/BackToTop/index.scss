@@ -1,0 +1,43 @@
+/* 向上消失的动画 */
+@keyframes disappear {
+  0% {
+    transform: translateY(0);  /* 初始位置 */
+    opacity: 1;                /* 完全可见 */
+  }
+  100% {
+    transform: translateY(-1000px); /* 向上移动 50px */
+    opacity: 0;                   /* 变得完全透明 */
+  }
+}
+
+/* 跳动的动画 */
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-40px);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(0px);
+  }
+  80% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* 悬停效果 */
+.backToTop:hover {
+  color: #5aeab2 !important;
+  background-color: white !important;
+  transition: background-color 0.3s, color 0.3s;
+}
