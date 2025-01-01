@@ -29,6 +29,20 @@
       //margin: 0 auto; /* 水平居中 */
       display: block; /* 设置为块级元素，确保能应用 margin: 0 auto */
       box-sizing: border-box; /* 包含 padding 和 border */
+
+      .menu-content {
+        font-size: 20px;
+        color: rgb(97, 93, 250) !important;
+      }
+      .menu-content-button {
+        font-size: 16px;
+        font-weight: bold;
+        color: rgb(97, 93, 250) !important;
+      }
+      /* 鼠标悬停时的菜单项样式 */
+      .menu-content-hover:hover {
+        color: #5aeab2 !important;
+      }
     }
 
     .toolBar {

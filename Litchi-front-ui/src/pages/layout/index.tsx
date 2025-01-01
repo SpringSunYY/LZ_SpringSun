@@ -9,7 +9,9 @@ const AppLayout: React.FC = () => {
     useTheme();
     return (
         <div className="appLayout">
-            <Header></Header>
+            <div className={"header"}>
+                <Header></Header>
+            </div>
             <Body></Body>
             {/* 子路由内容 */}
             <div>
