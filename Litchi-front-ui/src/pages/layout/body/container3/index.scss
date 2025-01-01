@@ -1,0 +1,105 @@
+.container3 {
+  background-image: url("@/assets/images/map_1.png");
+  background-repeat: no-repeat; /* 背景图不重复 */
+  background-position: bottom left; /* 背景居中 */
+  background-color: rgba(26, 26, 26, 0.09);
+  height: 100%;
+  .container {
+    //width: 100%; /* 容器宽度最大为1200px，但填充满父容器 */
+    .left {
+      padding-top: 20vh;
+      color: #000000;
+      .map-marker {
+        position: relative; // 给父容器设置相对定位
+
+        li {
+          list-style: none; // 去掉圆点
+          margin: 0;
+          padding: 0;
+          position: absolute; // 每个 li 使用绝对定位
+        }
+
+        // 使用 SCSS 的 nth-child 选择器来设置每个 li 的位置
+        li:nth-child(1) {
+          top: 20em;
+          left: 30em;
+        }
+
+        li:nth-child(2) {
+          top: 2em;
+          left: 10em;
+        }
+
+        li:nth-child(3) {
+          top: 5em;
+          left: 3em;
+        }
+
+        li:nth-child(4) {
+          top: 10em;
+          left: 5em;
+        }
+
+        li:nth-child(5) {
+          top: 1em;
+          left: 5em;
+        }
+
+        li:after {
+          content: "";
+          height: 6px;
+          width: 33px;
+          background-color: #bcbcbc;
+          border-radius: 50%;
+          position: absolute;
+          top: 33px;
+          left: -5px;
+          -webkit-animation: pulse 1500ms infinite;
+          animation: pulse 1500ms infinite;
+        }
+      }
+    }
+
+    .right {
+      padding-top: 15vh;
+      padding-bottom: 20vh;
+      .item-title {
+        font-size: 60px;
+        font-weight: 1000;
+        font-family: YouYuan, serif;
+        line-height: 52px;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        color: #615dfa;
+      }
+
+      .item-content {
+        margin-top: 1em;
+        color: #1a1a1a;
+        font-size: 30px;
+        font-family: Comic Sans MS, cursive, YouYuan;
+      }
+
+      .button-slide {
+        padding-left: 20vh;
+        color: white;
+      }
+
+      .button-slide:hover {
+        color: #5aeab2 !important;
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #0c1fd7;
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(12, 31, 215, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(12, 31, 215, 0);
+  }
+}

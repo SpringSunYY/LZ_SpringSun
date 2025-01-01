@@ -260,3 +260,193 @@ export default i18n;
 
 ```
 
+### 自定义返回顶部组件
+
+```tsx
+import React, { useEffect, useState } from 'react';
+import { IconButton } from '@mui/material';
+import MySvgIcon from "@/compoents/SvgIcon";
+import "./index.scss"; // 引入样式文件
+
+// 定义 CSS 动画
+const useStyles = {
+    jump: {
+        animation: 'jump 1s ease-out', // 动画持续 1s，更长的时间来显示跳动
+    },
+    disappear: {
+        animation: 'disappear 0.8s ease-out forwards', // 向上消失的动画，持续 0.8s
+    },
+};
+
+const BackToTop: React.FC = () => {
+    const [visible, setVisible] = useState<boolean>(false);
+    const [triggerAnimation, setTriggerAnimation] = useState<boolean>(false);
+    const [isDisappearing, setIsDisappearing] = useState<boolean>(false);
+    const [hasAppeared, setHasAppeared] = useState<boolean>(false); // 控制是否已出现
+
+    // 监听滚动事件，判断是否显示回到顶部按钮
+    const handleScroll = () => {
+        if (window.scrollY > 300) {
+            setVisible(true);
+
+            if (!hasAppeared) {
+                setTriggerAnimation(true);  // 只有第一次出现时才触发跳动动画
+                setHasAppeared(true);        // 标记按钮已经出现
+                setTimeout(() => setTriggerAnimation(false), 1000); // 动画结束后停止
+            }
+        } else {
+            setVisible(false);
+        }
+    };
+
+    // 回到顶部的功能
+    const handleBackToTop = () => {
+        setIsDisappearing(true); // 开始消失动画
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+
+        // 动画结束后将按钮隐藏
+        setTimeout(() => {
+            setVisible(false);
+            setIsDisappearing(false); // 完成消失动画
+        }, 2000); // 消失动画持续 1s，更长时间
+    };
+
+    // 组件挂载时添加滚动监听事件，卸载时移除监听
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    return (
+        <div>
+            {visible && (
+                <IconButton
+                    className="backToTop" // 使用外部样式
+                    onClick={handleBackToTop}
+                    style={{
+                        position: 'fixed',
+                        bottom: '10vh',
+                        right: '10vh',
+                        height: '10vh',
+                        width: '10vh',
+                        backgroundColor: '#1976d2',
+                        color: '#fff',
+                        ...(triggerAnimation ? useStyles.jump : {}),
+                        ...(isDisappearing ? useStyles.disappear : {}), // 向上消失动画
+                    }}
+                >
+                    <MySvgIcon name="back-to-top" size="5vh" /> {/* 使用自定义图标 */}
+                </IconButton>
+            )}
+        </div>
+    );
+};
+
+export default BackToTop;
+
+```
+
+```scss
+/* 向上消失的动画 */
+@keyframes disappear {
+  0% {
+    transform: translateY(0);  /* 初始位置 */
+    opacity: 1;                /* 完全可见 */
+  }
+  100% {
+    transform: translateY(-1000px); /* 向上移动 50px */
+    opacity: 0;                   /* 变得完全透明 */
+  }
+}
+
+/* 跳动的动画 */
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-40px);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(0px);
+  }
+  80% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* 悬停效果 */
+.backToTop:hover {
+  color: #5aeab2 !important;
+  background-color: white !important;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+```
+
+### 自定义svg icon组件
+
+```
+import React, { SVGProps, useState, useEffect } from 'react';
+
+interface SvgIconProps extends SVGProps<SVGSVGElement> {
+    name: string;
+    prefix?: string;
+    color?: string; // color 可以传递，默认为 currentColor
+    size?: string | number; // 控制大小，接受字符串或数字
+    onClick?: (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
+}
+
+const MySvgIcon: React.FC<SvgIconProps> = ({
+                                               name,
+                                               prefix = 'icon',
+                                               color = 'currentColor', // 默认使用 currentColor
+                                               size = '1em', // 默认大小是1em，可以调整为相对大小
+                                               ...props
+                                           }) => {
+    const [isNetwork, setIsNetwork] = useState<boolean>(false);
+    const symbolId = `#${prefix}-${name}`;
+
+    // 判断 name 是否是一个网络 URL
+    useEffect(() => {
+        setIsNetwork(name.startsWith('http') || name.startsWith('https'));
+    }, [name]);
+
+    return (
+        <svg
+            {...props}
+            aria-hidden="true"
+            width={size}  // 控制宽度
+            height={size} // 控制高度
+            style={{fill: color}}
+        >
+            {isNetwork ? (
+                // 如果是网络 URL，直接用网络地址
+                <use href={name}/>
+            ) : (
+                // 本地加载，使用 symbolId
+                <use href={symbolId}/>
+            )}
+        </svg>
+    );
+};
+
+export default MySvgIcon;
+
+```
+
