@@ -292,7 +292,7 @@ const Heard = () => {
                                                                 paddingY: '0em', // 调整上下内边距，例如 0.5em
                                                                 paddingX: '0.5em',   // 可以调整左右内边距
                                                                 textTransform: 'none' // 禁止大写转换
-                                                            }}>{t('login')}</Button>
+                                                            }}>{t('Login')}</Button>
                                                 </Grid>
                                             </Grid>
                                         )}

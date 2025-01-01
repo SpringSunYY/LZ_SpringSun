@@ -10,12 +10,13 @@
   z-index: 15;
   display: block;
   min-width: 375px !important; /* 确保最小宽度为 375px */
-  margin: 0  auto!important;
+  margin: 0 auto !important;
+
   .appBar {
     width: 100%;
     min-width: 375px !important;
     background: rgba(97, 93, 250, 0.09);
-    transition: height 0.3s ease-in-out,width 0.4s ease-in-out; /* 高度变化时应用平滑过渡 */
+    transition: height 0.3s ease-in-out, width 0.4s ease-in-out; /* 高度变化时应用平滑过渡 */
     /* 当滚动页面时的状态 */
     &.scrolled {
       background: rgba(255, 255, 255, 0); /* 滚动时背景色变成半透明白色 */
@@ -24,21 +25,23 @@
       transition: background 2s ease, box-shadow 2s ease; /* 仅针对背景色和阴影应用过渡 */
       border: 2px solid rgba(255, 0, 0, 0);
       border-radius: 5px;
-      margin: 0 10em;
+      margin-right: 20vh;
       width: 80%; /* 设置宽度 */
       //margin: 0 auto; /* 水平居中 */
-      display: block; /* 设置为块级元素，确保能应用 margin: 0 auto */
+      //display: block; /* 设置为块级元素，确保能应用 margin: 0 auto */
       box-sizing: border-box; /* 包含 padding 和 border */
 
       .menu-content {
         font-size: 20px;
         color: rgb(97, 93, 250) !important;
       }
+
       .menu-content-button {
         font-size: 16px;
         font-weight: bold;
         color: rgb(97, 93, 250) !important;
       }
+
       /* 鼠标悬停时的菜单项样式 */
       .menu-content-hover:hover {
         color: #5aeab2 !important;

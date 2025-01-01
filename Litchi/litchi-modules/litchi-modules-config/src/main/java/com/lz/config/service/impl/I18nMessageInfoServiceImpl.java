@@ -186,7 +186,7 @@ public class I18nMessageInfoServiceImpl implements II18nMessageInfoService {
     public void setUserI18n(String msg) {
         String value = configInfoService.selectConfigInfoByConfigKeyReturnValue(DEFAULT_LANGUAGE_TIMEOUT);
         try {
-            System.err.println(value);
+//            System.err.println(value);
             long parseLong = Long.parseLong(value);
             i18nService.setUserI18n(msg, parseLong);
         } catch (NumberFormatException e) {

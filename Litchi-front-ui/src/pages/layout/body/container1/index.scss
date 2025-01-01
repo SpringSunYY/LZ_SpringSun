@@ -4,15 +4,11 @@
   background-attachment: fixed;
   background-position: center; /* 背景居中 */
   background-size: cover; /* 背景按比例缩放并填充容器 */
-  height: 85vh; /* 高度为视口高度 */
   z-index: 0;
-  display: flex; /* 设置为 flexbox 布局 */
-  justify-content: center; /* 水平居中 */
-  align-items: center; /* 垂直居中 */
+  margin: 0 auto;
   transition: background-image 1s ease-in-out, background-size 1s ease-in-out;
 
   .container {
-    max-width: 1200px;
     width: 100%; /* 容器宽度最大为1200px，但填充满父容器 */
     background-image: url("/src/assets/images/map_line.png");
     background-repeat: no-repeat;
@@ -22,16 +18,18 @@
     height: 100%; /* 让容器的高度填满父容器 */
     z-index: 1;
     animation: fadeInBackground 3s ease-in-out forwards;
-    padding-top: 45vh;
-
+    padding-top: 10vh;
     .left {
+      padding-top: 25vh;
+      padding-bottom: 30vh;
       color: #ffffff;
+      padding-left: 0 !important;
       .item-title {
         font-size: 60px;
         font-weight: 700;
         font-family: "Nunito", sans-serif;
         line-height: 52px;
-        margin-bottom: 38px;
+        //margin-bottom: 38px;
       }
 
       .item-title:hover {
@@ -42,12 +40,15 @@
         font-weight: 700;
         color: #ffffff;
         display: block;
-        margin-bottom: 5px;
+        //margin-bottom: 5px;
         font-size: 36px;
       }
 
       .conn-people {
-        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+      .item-content {
+        margin-top: 10px;
       }
 
       .button-slide {
@@ -61,20 +62,11 @@
 
     .right {
       height: 100%;
-      //float: right;
-      background-image: url("@/assets/images/people_1.png");
-      background-repeat: no-repeat;
-      //background-attachment: fixed;
-      //background-position: bottom center;
-      background-size: 90%;
-      z-index: 0;
-
+      padding-top: 20vh;
       .shape {
         height: 100%;
         background-image: url("@/assets/images/shape_1.png");
         background-repeat: no-repeat;
-        //background-attachment: fixed;
-        //background-position: bottom center;
         background-size: 90%;
         z-index: 1;
       }
