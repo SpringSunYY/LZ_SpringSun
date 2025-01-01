@@ -1,20 +1,19 @@
 package com.lz.config.service.impl;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.lz.common.core.exception.ServiceException;
 import com.lz.common.core.exception.sql.MySQLIntegrityConstraintViolationException;
 import com.lz.common.core.utils.DateUtils;
 import com.lz.common.core.utils.StringUtils;
 import com.lz.common.redis.service.RedisService;
 import com.lz.common.security.utils.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lz.config.domain.ConfigInfo;
+import com.lz.config.mapper.ConfigInfoMapper;
+import com.lz.config.service.IConfigInfoService;
+import jakarta.annotation.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import com.lz.config.mapper.ConfigInfoMapper;
-import com.lz.config.domain.ConfigInfo;
-import com.lz.config.service.IConfigInfoService;
+
+import java.util.List;
 
 import static com.lz.common.core.constant.redis.RedisConfigConstants.CONFIG;
 
@@ -22,14 +21,14 @@ import static com.lz.common.core.constant.redis.RedisConfigConstants.CONFIG;
  * 配置Service业务层处理
  *
  * @author YY
- * @date 2024-12-20
+ * date 2024-12-20
  */
 @Service
 public class ConfigInfoServiceImpl implements IConfigInfoService {
-    @Autowired
+    @Resource
     private ConfigInfoMapper configInfoMapper;
 
-    @Autowired
+    @Resource
     private RedisService redisService;
 
     /**

@@ -1,11 +1,48 @@
 .container2 {
-  height: 100vh;
+  height: 100vh; /* 高度为视口高度 */
+  z-index: 0;
+  display: flex; /* 设置为 flexbox 布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
 
   .container {
-
+    max-width: 1200px;
+    width: 100%; /* 容器宽度最大为1200px，但填充满父容器 */
 
     .left {
+      color: #000000;
 
+      .item-title {
+        font-size: 60px;
+        font-weight: 700;
+        font-family: "Nunito", sans-serif;
+        line-height: 52px;
+        margin-bottom: 38px;
+      }
+
+      .item-title:hover {
+        color: #5aeab2 !important;
+      }
+
+      .item-number {
+        font-weight: 700;
+        color: #ffffff;
+        display: block;
+        margin-bottom: 5px;
+        font-size: 36px;
+      }
+
+      .conn-people {
+        margin-bottom: 10px;
+      }
+
+      .button-slide {
+        color: white;
+      }
+
+      .button-slide:hover {
+        color: #5aeab2 !important;
+      }
     }
 
     .item-title:hover {

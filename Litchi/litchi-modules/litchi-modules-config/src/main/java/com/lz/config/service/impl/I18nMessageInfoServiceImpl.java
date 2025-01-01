@@ -8,17 +8,19 @@ import com.lz.common.core.utils.DateUtils;
 import com.lz.common.core.utils.StringUtils;
 import com.lz.common.redis.service.RedisService;
 import com.lz.common.security.utils.SecurityUtils;
-import com.lz.config.domain.ConfigInfo;
+import com.lz.config.domain.I18nKeyInfo;
 import com.lz.config.domain.I18nLocaleInfo;
 import com.lz.config.domain.I18nMessageInfo;
 import com.lz.config.mapper.I18nMessageInfoMapper;
 import com.lz.config.service.IConfigInfoService;
+import com.lz.config.service.II18nKeyInfoService;
 import com.lz.config.service.II18nLocaleInfoService;
 import com.lz.config.service.II18nMessageInfoService;
 import com.lz.i18n.service.I18nService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +29,6 @@ import java.util.stream.Collectors;
 
 import static com.lz.common.core.constant.redis.RedisConfigConstants.DEFAULT_LANGUAGE_TIMEOUT;
 import static com.lz.common.core.constant.redis.RedisConfigConstants.LOCALIZATION;
-import static com.lz.common.core.constant.redis.RedisI18nConstants.CONFIG_DEFAULT_LANGUAGE;
 import static com.lz.common.core.constant.redis.RedisI18nConstants.FAILED_TO_SWITCH_LANGUAGE;
 
 /**
@@ -38,20 +39,23 @@ import static com.lz.common.core.constant.redis.RedisI18nConstants.FAILED_TO_SWI
  */
 @Service
 public class I18nMessageInfoServiceImpl implements II18nMessageInfoService {
-    @Autowired
+    @Resource
     private I18nMessageInfoMapper i18nMessageInfoMapper;
 
-    @Autowired
+    @Resource
     private II18nLocaleInfoService i18nLocaleInfoService;
 
-    @Autowired
+    @Resource
     private RedisService redisService;
 
-    @Autowired
+    @Resource
     private IConfigInfoService configInfoService;
 
-    @Autowired
+    @Resource
     private I18nService i18nService;
+
+    @Resource
+    private II18nKeyInfoService i18nKeyInfoService;
 
     /**
      * 查询国际化信息
@@ -81,8 +85,16 @@ public class I18nMessageInfoServiceImpl implements II18nMessageInfoService {
      * @param i18nMessageInfo 国际化信息
      * @return 结果
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public int insertI18nMessageInfo(I18nMessageInfo i18nMessageInfo) {
+        //查询是否有这个key
+        I18nKeyInfo keyInfo = i18nKeyInfoService.selectI18nKeyInfoByKeyName(i18nMessageInfo.getMessageKey());
+        if (StringUtils.isNull(keyInfo)) {
+            keyInfo = new I18nKeyInfo();
+            keyInfo.setKeyName(i18nMessageInfo.getMessageKey());
+            i18nKeyInfoService.insertI18nKeyInfo(keyInfo);
+        }
         i18nMessageInfo.setCreateTime(DateUtils.getNowDate());
         i18nMessageInfo.setCreateBy(SecurityUtils.getUsername());
         int i = 0;

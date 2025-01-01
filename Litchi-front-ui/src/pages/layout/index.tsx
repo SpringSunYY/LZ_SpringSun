@@ -12,7 +12,9 @@ const AppLayout: React.FC = () => {
             <div className={"header"}>
                 <Header></Header>
             </div>
-            <Body></Body>
+            <div className={"body"}>
+                <Body></Body>
+            </div>
             {/* 子路由内容 */}
             <div>
                 {/* 在这里显示子路由内容 */}

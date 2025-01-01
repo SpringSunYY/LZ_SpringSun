@@ -2,12 +2,24 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="键" prop="messageKey">
-        <el-input
+        <el-select
             v-model="queryParams.messageKey"
-            placeholder="请输入键"
-            clearable
-            @keyup.enter="handleQuery"
-        />
+            filterable
+            remote
+            reserve-keyword
+            placeholder="请输入key"
+            remote-show-suffix
+            :remote-method="remoteGetMessageKeyList"
+            :loading="messageKeyLoading"
+            style="width: 200px"
+        >
+          <el-option
+              v-for="item in messageKeyList"
+              :key="item.keyName"
+              :label="item.keyName"
+              :value="item.keyName"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item label="简称" prop="locale">
         <el-select
@@ -19,7 +31,7 @@
             remote-show-suffix
             :remote-method="remoteGetLocaleList"
             :loading="localeLoading"
-            style="width: 240px"
+            style="width: 200px"
         >
           <el-option
               v-for="item in localeList"
@@ -169,7 +181,25 @@
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="i18nMessageInfoRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="键" prop="messageKey">
-          <el-input v-model="form.messageKey" placeholder="请输入键"/>
+          <el-select
+              v-model="form.messageKey"
+              filterable
+              remote
+              reserve-keyword
+              allow-create
+              placeholder="请输入key"
+              remote-show-suffix
+              :remote-method="remoteGetMessageKeyList"
+              :loading="messageKeyLoading"
+              style="width: 240px"
+          >
+            <el-option
+                v-for="item in messageKeyList"
+                :key="item.keyName"
+                :label="item.keyName"
+                :value="item.keyName"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="简称" prop="locale">
           <el-select
@@ -217,6 +247,7 @@ import {
   updateI18nMessageInfo
 } from "@/api/config/i18nMessageInfo";
 import {listI18nLocaleInfo} from "@/api/config/i18nLocaleInfo.js";
+import {listI18nKeyInfo} from "@/api/config/i18nKeyInfo.js";
 
 const {proxy} = getCurrentInstance();
 
@@ -240,6 +271,13 @@ const data = reactive({
     pageSize: 10,
     locale: '',
     localeStatus: '0',
+  },
+  messageKeyList: [],
+  messageKeyLoading: false,
+  messageKeyQueryParams: {
+    pageNum: 1,
+    pageSize: 10,
+    keyName: ''
   },
   form: {},
   queryParams: {
@@ -284,7 +322,44 @@ const data = reactive({
   ],
 });
 
-const {queryParams, form, rules, columns, localeQueryParams, localeList, localeLoading} = toRefs(data);
+const {
+  queryParams,
+  form,
+  rules,
+  columns,
+  localeQueryParams,
+  localeList,
+  localeLoading,
+  messageKeyQueryParams,
+  messageKeyList,
+  messageKeyLoading
+} = toRefs(data);
+
+const remoteGetMessageKeyList = (query) => {
+  if (query) {
+    // console.log(query)
+    messageKeyLoading.value = true;
+
+    messageKeyQueryParams.value.keyName = query;
+    setTimeout(() => {
+      getMessageKeyList()
+    }, 200)
+  } else {
+    if (form.value.locale) {
+      messageKeyQueryParams.value.keyName = form.value.messageKey;
+    } else {
+      messageKeyQueryParams.value.keyName = ''
+    }
+    getMessageKeyList()
+  }
+}
+
+function getMessageKeyList() {
+  listI18nKeyInfo(messageKeyQueryParams.value).then(response => {
+    messageKeyList.value = response.rows;
+    messageKeyLoading.value = false
+  })
+}
 
 const remoteGetLocaleList = (query) => {
   if (query) {
@@ -306,7 +381,6 @@ const remoteGetLocaleList = (query) => {
 }
 
 function getLocaleList() {
-
   listI18nLocaleInfo(localeQueryParams.value).then(response => {
     localeList.value = response.rows;
     localeLoading.value = false
@@ -435,4 +509,5 @@ function handleExport() {
 
 getList();
 getLocaleList();
+getMessageKeyList()
 </script>
