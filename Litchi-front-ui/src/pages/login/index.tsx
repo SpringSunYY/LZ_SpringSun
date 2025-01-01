@@ -23,7 +23,9 @@ const Login = () => {
     // 提交表单
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        store.dispatch(fetchLogin(loginUser))
+        await store.dispatch(fetchLogin(loginUser))
+        //重定向到登录页面
+        window.location.href = '/';
         store.dispatch(fetchUserInfo())
     };
 

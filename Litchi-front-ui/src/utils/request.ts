@@ -113,7 +113,7 @@ http.interceptors.response.use(
         if (code === 401) {
             if (!isRelogin.show) {
                 isRelogin.show = true;
-                toast.warn('登录状态已过期，您可以继续留在该页面，或者重新登录', {
+                const toastId = toast.warn('登录状态已过期，您可以继续留在该页面，或者重新登录', {
                     position: 'top-center', // 使用字符串形式
                     autoClose: 3000,
                     closeButton: false,
@@ -121,6 +121,8 @@ http.interceptors.response.use(
                         isRelogin.show = false;
                         //重定向到登录页面
                         window.location.href = '/login';
+                        // 手动关闭 Toast 提示框
+                        toast.dismiss(toastId);
                     },
                     draggable: false,
                     onClose: () => {
