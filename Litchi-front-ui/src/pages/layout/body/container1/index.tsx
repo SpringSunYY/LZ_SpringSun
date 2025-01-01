@@ -17,8 +17,7 @@ const Container1: React.FC<Container1Props> = ({isMediumScreen = false}) => {
                     <Grid container spacing={2} className={"container"}>
                         <Grid item sm={6} className="left">
                             <h1 className="item-title">{t('SpringSun')}</h1>
-                            <p className={"item-content"}>Having real social contacts can sometimes be difficult FUN, everything becomes much
-                                simpler!</p>
+                            <p className={"item-content"}>{t('SpringSun Idea')}</p>
                             <div className="item-number">10,95,219</div>
                             <div className="conn-people">{t('Connected People')}</div>
                             <a href="/" className="button-slide">

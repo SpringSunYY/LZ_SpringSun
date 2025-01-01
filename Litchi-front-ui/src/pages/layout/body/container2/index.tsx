@@ -10,8 +10,8 @@ const Container2 = () => {
             <Container>
                 <Grid container spacing={2} className={"container"}>
                     <Grid item sm={6} className="left">
-                        <div className="item-join">what we do</div>
-                        <h1 className="item-title">Why Join Our Cirkle from Social Network ?</h1>
+                        <div className="item-join">{t('what we do')}</div>
+                        <h1 className="item-title">{t('why join')}</h1>
                         <p className={"item-content"}>{t('why join detail')}</p>
                         <a href="/" className="svg">
                             <MySvgIcon name={"plant"} size={80}></MySvgIcon>
@@ -25,11 +25,8 @@ const Container2 = () => {
                                 </div>
                             </Grid>
                             <Grid item sm={8} className={"right-content"}>
-                                <h1 >Meet Great People</h1>
-                                <p>
-                                    when an unknown printer took a galley of scrambled it to make a type specimen It has
-                                    survived not only.
-                                </p>
+                                <h1>{t('what we do know')}</h1>
+                                <p>{t('what we do know detail')}</p>
                             </Grid>
                             <Grid item sm={5}>
                                 <div className={"left-svg left-middle"}>
@@ -37,11 +34,8 @@ const Container2 = () => {
                                 </div>
                             </Grid>
                             <Grid item sm={7} className={"right-content"}>
-                                <h1>Meet Great People</h1>
-                                <p>
-                                    when an unknown printer took a galley of scrambled it to make a type specimen It has
-                                    survived not only.
-                                </p>
+                                <h1>{t('what we do discuss')}</h1>
+                                <p>{t('what we do discuss detail')}</p>
                             </Grid>
                             <Grid item sm={4}>
                                 <div className={"left-svg"}>
@@ -49,11 +43,8 @@ const Container2 = () => {
                                 </div>
                             </Grid>
                             <Grid item sm={8} className={"right-content"}>
-                                <h1>Meet Great People</h1>
-                                <p>
-                                    when an unknown printer took a galley of scrambled it to make a type specimen It has
-                                    survived not only.
-                                </p>
+                                <h1>{t('what we do discuss')}</h1>
+                                <p>{t('what we do discuss detail')}</p>
                             </Grid>
                         </Grid>
                     </Grid>

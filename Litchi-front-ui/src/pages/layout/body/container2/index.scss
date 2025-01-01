@@ -10,7 +10,7 @@
       .item-title {
         font-size: 36px;
         line-height: 42px;
-        font-family: OCR A Std, monospace;
+        font-family: OCR A Std, monospace, YouYuan;
         margin-bottom: 38px;
       }
 
@@ -29,7 +29,7 @@
         color: #71728c;
         margin-bottom: 30px;
         width: 90%;
-        font-family: Arial, sans-serif;
+        font-family: Arial, sans-serif, YouYuan;
       }
 
       .svg {
@@ -52,7 +52,6 @@
         background-color: rgba(0, 0, 0, 0.08);
         color: #615dfa;
         border-radius: 4em;
-        //right: -35px;
         display: flex;
         align-items: center;
         justify-content: center; /* 水平居中 */
@@ -72,7 +71,7 @@
         h1 {
           font-size: 30px;
           margin-bottom: 12px;
-          font-family: Comic Sans MS, Comic Sans, cursive;
+          font-family: Comic Sans MS, cursive, YouYuan;
           line-height: 20px;
         }
 
@@ -84,7 +83,7 @@
         p {
           color: #71728c;
           margin-bottom: 30px;
-          font-family: Arial, sans-serif;
+          font-family: Arial, sans-serif,YouYuan;
         }
       }
     }
