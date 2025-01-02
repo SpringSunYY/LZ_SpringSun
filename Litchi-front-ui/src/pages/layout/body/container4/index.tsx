@@ -2,6 +2,7 @@ import "./index.scss"
 import {Container, Grid} from "@mui/material";
 import CircleImage from "@/compoents/CircleImage";
 import {useTranslation} from "react-i18next";
+import SlideIconButton from "@/compoents/SlideIconButton";
 
 const Container4 = () => {
     const {t} = useTranslation();
@@ -43,6 +44,7 @@ const Container4 = () => {
                         <li>
                             <CircleImage src={"/src/assets/images/team/team_4.jpg"} size={"25em"} title={"XC"}
                                          hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
+                            <SlideIconButton label={"跟上我的脚步"} size="large"/>
                         </li>
                     </Grid>
                     <Grid item xs={4} className={"middle-right"}>
