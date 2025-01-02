@@ -12,7 +12,7 @@ const Body = () => {
             <Container1 isMediumScreen={isMediumScreen}></Container1>
             <Container2></Container2>
             <Container3></Container3>
-            <Container4></Container4>
+            <Container4 isMediumScreen={isMediumScreen}></Container4>
         </div>
     )
 }

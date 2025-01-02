@@ -5,8 +5,10 @@
   .container {
     height: 100%;
     width: 100%;
-    margin-top: 10vh;
-
+    margin-top: 5vh;
+    li{
+      list-style: none;
+    }
     .content-top {
       text-align: center;
 
@@ -22,12 +24,19 @@
 
     .content-middle {
       li {
-        list-style: none;
         width: 100%;
       }
 
       .middle-middle {
         margin-top: 10em;
+        position: relative;
+
+        .start-button {
+          margin-top: 5em;
+          display: flex;
+          align-items: center; /* 保证文字和图标垂直居中 */
+          justify-content: center;
+        }
       }
 
       .middle-right li:nth-child(1) {
