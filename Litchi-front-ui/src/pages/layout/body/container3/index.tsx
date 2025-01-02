@@ -18,9 +18,9 @@ const Container3 = () => {
                         </ul>
                     </Grid>
                     <Grid item sm={6} className={"right"}>
-                        <p className={"item-content"}>{t('what we do')}</p>
+                        <p className={"item-content"}>{t('Our scope')}</p>
                         <h1 className="item-title">{t('SpringSun')}</h1>
-                        <div className="item-detail">{t('why join detail')}</div>
+                        <div className="item-detail">{t('Our scope detail')}</div>
                     </Grid>
                 </Grid>
             </Container>

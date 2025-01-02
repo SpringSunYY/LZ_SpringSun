@@ -43,8 +43,8 @@ const Container2 = () => {
                                 </div>
                             </Grid>
                             <Grid item sm={8} className={"right-content"}>
-                                <h1>{t('what we do discuss')}</h1>
-                                <p>{t('what we do discuss detail')}</p>
+                                <h1>{t('what we do active')}</h1>
+                                <p>{t('what we do active detail')}</p>
                             </Grid>
                         </Grid>
                     </Grid>
