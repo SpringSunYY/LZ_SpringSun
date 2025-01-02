@@ -1,5 +1,6 @@
 .container4 {
   height: 100%;
+  overflow: hidden; // 防止飞动元素超出容器
 
   .container {
     height: 100%;
@@ -20,10 +21,221 @@
     }
 
     .content-middle {
-      ul li {
+      li {
         list-style: none;
         width: 100%;
       }
+
+      .middle-middle {
+        margin-top: 10em;
+      }
+
+      .middle-right li:nth-child(1) {
+        padding-right: 100em;
+      }
+
+      .middle-left li:nth-child(1) {
+        padding-left: 5em;
+      }
+
+      .middle-right li:nth-child(2) {
+        padding-left: 5em;
+      }
+
+      .middle-left li:nth-child(2) {
+      }
+
+      .middle-right li:nth-child(3) {
+        padding-right: 10em;
+      }
+
+      .middle-left li:nth-child(3) {
+        padding-left: 10em;
+      }
+
+      .middle-bottom {
+        position: relative; // 使其子元素相对于此容器定位
+        height: 100%; // 确保容器高度填满父容器
+        width: 100%; // 确保宽度填满父容器
+
+        .shape-wrap {
+          position: relative; // 让所有的 li 相对这个容器定位
+          width: 100%;
+          height: 100%;
+        }
+
+        .shape-wrap li {
+          position: absolute; // 使每个 li 独立出文档流
+          z-index: 10; // 确保元素在其他内容之上
+        }
+
+        .shape-wrap li:nth-child(1n) {
+          top: 160%;
+          left: 13%;
+          -webkit-animation: movingleftright1 15000ms linear infinite;
+          animation: movingleftright1 15000ms linear infinite;
+        }
+
+        .shape-wrap li:nth-child(2n) {
+          top: 20%;
+          left: 45%;
+          -webkit-animation: movingleftright2 25000ms linear infinite;
+          animation: movingleftright2 25000ms linear infinite;
+        }
+
+        .shape-wrap li:nth-child(3n) {
+          top: 800%;
+          left: 72%;
+          -webkit-animation: movingleftright3 20000ms linear infinite;
+          animation: movingleftright3 20000ms linear infinite;
+        }
+
+        .shape-wrap li:nth-child(4n) {
+          top: 18%;
+          left: 90%;
+          -webkit-animation: movingleftright2 30000ms linear infinite;
+          animation: movingleftright2 30000ms linear infinite;
+        }
+
+        .shape-wrap li:nth-child(5n) {
+          bottom: 22%;
+          top: auto;
+          left: 10%;
+          -webkit-animation: movingleftright1 20000ms linear infinite;
+          animation: movingleftright1 20000ms linear infinite;
+        }
+
+        .shape-wrap li:nth-child(6n) {
+          bottom: 6%;
+          top: auto;
+          left: 48%;
+          -webkit-animation: movingleftright3 15000ms linear infinite;
+          animation: movingleftright3 15000ms linear infinite;
+        }
+
+        .shape-wrap li:nth-child(7n) {
+          bottom: 12%;
+          top: auto;
+          left: 80%; // 可根据需要调整
+          -webkit-animation: movingleftright2 25000ms linear infinite;
+          animation: movingleftright2 25000ms linear infinite;
+        }
+      }
     }
+  }
+}
+
+// 移动的动画效果：左右移动
+@-webkit-keyframes movingleftright1 {
+  0% {
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    -webkit-transform: translateX(50px) translateY(-50px);
+    transform: translateX(50px) translateY(-50px);
+  }
+  75% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0) translateX(0);
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes movingleftright1 {
+  0% {
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    -webkit-transform: translateX(50px) translateY(-50px);
+    transform: translateX(50px) translateY(-50px);
+  }
+  75% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0) translateX(0);
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@-webkit-keyframes movingleftright2 {
+  0% {
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    -webkit-transform: translateX(-50px) translateY(50px);
+    transform: translateX(-50em) translateY(50px);
+  }
+  75% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+  100% {
+    -webkit-transform: translateY(0) translateX(0);
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes movingleftright2 {
+  0% {
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    -webkit-transform: translateX(-50px) translateY(50px);
+    transform: translateX(-50px) translateY(50px);
+  }
+  75% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+  100% {
+    -webkit-transform: translateY(0) translateX(0);
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@-webkit-keyframes movingleftright3 {
+  0% {
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    -webkit-transform: translateX(100px) translateY(-50px);
+    transform: translateX(100px) translateY(-50px);
+  }
+  75% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+  100% {
+    -webkit-transform: translateY(0) translateX(0);
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes movingleftright3 {
+  0% {
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    -webkit-transform: translateX(100px) translateY(-50px);
+    transform: translateX(100px) translateY(-50px);
+  }
+  75% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+  }
+  100% {
+    -webkit-transform: translateY(0) translateX(0);
+    transform: translateY(0) translateX(0);
   }
 }

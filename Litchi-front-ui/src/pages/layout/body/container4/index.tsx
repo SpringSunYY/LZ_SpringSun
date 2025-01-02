@@ -1,48 +1,67 @@
 import "./index.scss"
-import {Container} from "@mui/material";
+import {Container, Grid} from "@mui/material";
 import CircleImage from "@/compoents/CircleImage";
+import {useTranslation} from "react-i18next";
 
 const Container4 = () => {
-    // const {t} = useTranslation();
+    const {t} = useTranslation();
     return (
         <div className={"container4"}>
             <Container className={"container"}>
                 <div className="content-top">
-                    <h1>我们活跃的会员</h1>
-                    <p>我们拥有活跃的会员，他们不仅参与各种活动，还在社区中分享经验与知识，为平台的发展贡献力量。</p>
+                    <h1>{t('our team')}</h1>
+                    <p>{t('our team detail')}</p>
                 </div>
-                <div className="content-middle">
-                    <ul>
+                <Grid container spacing={2} className="content-middle">
+                    <Grid item xs={12} className={"middle-bottom"}>
+                        <ul className="shape-wrap">
+                            <li><img src="/src/assets/images/team/shape_9.png" alt="shape"/></li>
+                            <li><img src="/src/assets/images/team/shape_1.png" alt="shape"/></li>
+                            <li><img src="/src/assets/images/team/shape_2.png" alt="shape"/></li>
+                            <li><img src="/src/assets/images/team/shape_circle_1.png" alt="shape"/></li>
+                            <li><img src="/src/assets/images/team/shape_circle_2.png" alt="shape"/></li>
+                            <li><img src="/src/assets/images/team/shape_circle_3.png" alt="shape"/></li>
+                            <li><img src="/src/assets/images/team/shape_3.png" alt="shape"/></li>
+                            <li><img src="/src/assets/images/team/shape_4.png" alt="shape"/></li>
+                        </ul>
+                    </Grid>
+                    <Grid className={"middle-left"} item xs={4}>
                         <li>
-                            <CircleImage src={"/src/assets/images/team_1.jpg"} size={"10em"} title={"SpringSun"}
+                            <CircleImage src={"/src/assets/images/team/team_1.jpg"} size={"20em"} title={"SpringSun"}
                                          hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
                         </li>
                         <li>
-                            <CircleImage src={"/src/assets/images/team_3.jpg"} size={"10em"} title={"YY"}
+                            <CircleImage src={"/src/assets/images/team/team_3.jpg"} size={"10em"} title={"YY"}
                                          hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
                         </li>
                         <li>
-                            <CircleImage src={"/src/assets/images/team_3.jpg"} size={"10em"} title={"小猜"}
+                            <CircleImage src={"/src/assets/images/team/team_3.jpg"} size={"15em"} title={"小猜"}
+                                         hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
+                        </li>
+                    </Grid>
+                    <Grid item xs={4} className={"middle-middle"}>
+                        <li>
+                            <CircleImage src={"/src/assets/images/team/team_4.jpg"} size={"25em"} title={"XC"}
+                                         hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
+                        </li>
+                    </Grid>
+                    <Grid item xs={4} className={"middle-right"}>
+                        <li>
+                            <CircleImage src={"/src/assets/images/team/team_5.jpg"} size={"15em"}
+                                         title={"要是能重来我要学李白"}
                                          hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
                         </li>
                         <li>
-                            <CircleImage src={"/src/assets/images/team_4.jpg"} size={"10em"} title={"XC"}
+                            <CircleImage src={"/src/assets/images/team/team_6.jpg"} size={"10em"} title={"牛人"}
                                          hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
                         </li>
                         <li>
-                            <CircleImage src={"/src/assets/images/team_5.jpg"} size={"10em"} title={"要是能重来我要学李白"}
+                            <CircleImage src={"/src/assets/images/team/team_7.jpg"} size={"20em"} title={"牛人"}
                                          hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
                         </li>
-                        <li>
-                            <CircleImage src={"/src/assets/images/team_6.jpg"} size={"10em"} title={"牛人"}
-                                         hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
-                        </li>
-                        <li>
-                            <CircleImage src={"/src/assets/images/team_7.jpg"} size={"10em"} title={"牛人"}
-                                         hoverBackgroundColor={"rgba(97,93,250,0.7)"} content={"1046"} alt={"img"}/>
-                        </li>
-                    </ul>
-                </div>
+                    </Grid>
+
+                </Grid>
             </Container>
         </div>
     )
