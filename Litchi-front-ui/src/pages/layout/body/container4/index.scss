@@ -2,11 +2,28 @@
   height: 100%;
 
   .container {
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
     height: 100%;
     width: 100%;
-    padding-top: 10vh;
+    margin-top: 10vh;
+
+    .content-top {
+      text-align: center;
+
+      h1 {
+        font-size: 36px;
+        line-height: 42px;
+      }
+
+      p {
+        color: rgba(26, 26, 26, 0.6);
+      }
+    }
+
+    .content-middle {
+      ul li {
+        list-style: none;
+        width: 100%;
+      }
+    }
   }
 }
