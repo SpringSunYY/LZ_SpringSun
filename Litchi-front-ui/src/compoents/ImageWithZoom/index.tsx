@@ -26,7 +26,7 @@ const ImageWithZoom: React.FC<ImageWithZoomProps> = ({
 
     return (
         <div
-            className="image-wrapper"
+            className="image-with-zoom"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{width, height}}  // 单独设置宽高

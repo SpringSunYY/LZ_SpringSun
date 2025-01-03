@@ -1,6 +1,6 @@
 import "./index.scss"
 import {Container, Grid} from "@mui/material";
-import CircleImage from "@/compoents/CircleImage";
+import CircleImage from "@/compoents/ImageCircle";
 import {useTranslation} from "react-i18next";
 import SlideIconButton from "@/compoents/SlideIconButton";
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './index.scss';
 
-interface CircleImageProps {
+interface ImageCircleProps {
     src: string;
     alt?: string;
     size?: number | string;  // 图片的大小，单位可以是 px, em, vh, vw, % 等
@@ -12,7 +12,7 @@ interface CircleImageProps {
     hoverBackgroundColor?: string;  // 鼠标悬停时显示文字背景的颜色
 }
 
-const CircleImage: React.FC<CircleImageProps> = ({
+const ImageCircle: React.FC<ImageCircleProps> = ({
                                                      src,
                                                      alt,
                                                      size = 200,
@@ -26,20 +26,20 @@ const CircleImage: React.FC<CircleImageProps> = ({
 
     return (
         <div
-            className="circle-image-wrapper"
+            className="circle-image"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{ width: size, height: size }}
         >
             <img
-                className="circle-image"
+                className="image"
                 src={src}
                 alt={alt}
                 style={{ width: size, height: size }}
             />
             {isHovered && (
                 <div
-                    className="image-content"
+                    className="content"
                     style={{ backgroundColor: hoverBackgroundColor }}  // 使用自定义的背景颜色
                 >
                     {title && <h1 style={{ fontSize: titleFontSize }}>{title}</h1>}
@@ -50,4 +50,4 @@ const CircleImage: React.FC<CircleImageProps> = ({
     );
 }
 
-export default CircleImage;
+export default ImageCircle;
