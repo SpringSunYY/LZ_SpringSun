@@ -34,7 +34,14 @@
       }
 
       .svg {
+        display: inline-block; /* 确保 SVG 能应用 transform */
         color: #615dfa;
+        transition: transform 0.5s ease; /* 添加平滑过渡 */
+      }
+
+      .svg:hover {
+        color: #5aeab2 !important;
+        transform: rotate(360deg); /* 旋转 360 度 */
       }
 
       .button-slide:hover {
@@ -88,5 +95,26 @@
         }
       }
     }
+  }
+}
+@-webkit-keyframes movinground {
+  0% {
+    -webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+  }
+
+  60% {
+    -webkit-transform: rotate(180deg) scale(1.5);
+    transform: rotate(180deg) scale(1.5);
+  }
+
+  80% {
+    -webkit-transform: rotate(90deg) scale(0.6);
+    transform: rotate(90deg) scale(0.6);
+  }
+
+  100% {
+    -webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
   }
 }
