@@ -5,6 +5,7 @@ import {useMediaQuery} from "@mui/material";
 import Container3 from "@/pages/layout/body/container3";
 import Container4 from "@/pages/layout/body/container4";
 import Container5 from "@/pages/layout/body/container5";
+import Container6 from "@/pages/layout/body/container6";
 
 const Body = () => {
     const isMediumScreen = useMediaQuery('(max-width:1000px)'); // 检测屏幕尺寸
@@ -24,6 +25,9 @@ const Body = () => {
             </div>
             <div className={"container5"}>
                 <Container5 isMediumScreen={isMediumScreen}></Container5>
+            </div>
+            <div className={"container6"}>
+                <Container6 isMediumScreen={isMediumScreen}></Container6>
             </div>
         </div>
     )
