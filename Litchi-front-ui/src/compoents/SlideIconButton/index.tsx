@@ -41,6 +41,7 @@ const SlideIconButton: React.FC<SlideIconButtonProps> = ({
                 height: height, // 设置按钮高度
                 borderColor: 'rgba(0,0,0,0.12)',
                 borderRadius: borderRadius,
+                textTransform:'none'
             }}
         >
             {label}

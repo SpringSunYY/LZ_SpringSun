@@ -1,3 +1,78 @@
-.container5{
+.container5 {
+  margin-top: 10vh;
+  background-image: url("@/assets/images/bg1.jpg");
+  background-size: 100% 100%;
+  //overflow: hidden; // 防止飞动元素超出容器
+  .container {
+    .left {
+      position: relative;
+      min-height: 375px;
+      margin-top: 1em;
+      .title {
+        width: 80%;
+        margin-top: 1em;
+        color: #ffffff;
+        margin-bottom: 15px;
+        font-size: 36px;
+        line-height: 42px;
+        font-family: Nunito, sans-serif;
+        font-weight: 700;
+      }
 
+      .content {
+        width: 90%;
+        color: #ffffff;
+        margin-bottom: 28px;
+        font-family: "Nunito", sans-serif;
+        font-size: 16px;
+        line-height: 28px;
+        font-weight: 400;
+      }
+      li{
+        top: 0;
+        right: 35px;
+        list-style: none;
+        z-index: 10;
+        position: absolute; // 让所有的 li 相对这个容器定位
+        text-align: center;
+        -webkit-animation: movinground 50000ms linear infinite;
+        animation: movinground 50000ms linear infinite;
+      }
+    }
+
+    .right {
+      position: relative; /* 设置为相对定位，为绝对定位的子元素提供参照 */
+
+      img {
+        position: absolute;
+        top: 50%; /* 垂直居中 */
+        left: 50%; /* 水平居中 */
+        transform: translate(-50%, -50%); /* 通过transform来精确居中，结合left和top */
+        width: 100%; /* 可以设置宽度为100%或者自定义 */
+        height: auto; /* 让高度自动适应 */
+      }
+    }
+  }
+}
+
+@-webkit-keyframes movinground {
+  0% {
+    -webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+  }
+
+  60% {
+    -webkit-transform: rotate(180deg) scale(1.5);
+    transform: rotate(180deg) scale(1.5);
+  }
+
+  80% {
+    -webkit-transform: rotate(90deg) scale(0.6);
+    transform: rotate(90deg) scale(0.6);
+  }
+
+  100% {
+    -webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+  }
 }
