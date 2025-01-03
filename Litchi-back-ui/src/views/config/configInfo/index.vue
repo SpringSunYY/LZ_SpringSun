@@ -248,9 +248,9 @@ const data = reactive({
     { key: 4, label: '配置类型', visible: true },
     { key: 5, label: '创建人', visible: true },
     { key: 6, label: '创建时间', visible: true },
-    { key: 7, label: '更新人', visible: true },
-    { key: 8, label: '更新时间', visible: true },
-    { key: 9, label: '备注', visible: true },
+    { key: 7, label: '更新人', visible: false },
+    { key: 8, label: '更新时间', visible: false },
+    { key: 9, label: '备注', visible: false },
   ],
 });
 

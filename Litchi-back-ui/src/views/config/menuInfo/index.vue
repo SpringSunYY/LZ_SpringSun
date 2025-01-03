@@ -404,9 +404,9 @@ const data = reactive({
     { key: 15, label: '菜单图标', visible: true },
     { key: 16, label: '创建人', visible: true },
     { key: 17, label: '创建时间', visible: true },
-    { key: 18, label: '更新人', visible: true },
-    { key: 19, label: '更新时间', visible: true },
-    { key: 20, label: '备注', visible: true },
+    { key: 18, label: '更新人', visible: false },
+    { key: 19, label: '更新时间', visible: false },
+    { key: 20, label: '备注', visible: false },
   ],
 });
 
