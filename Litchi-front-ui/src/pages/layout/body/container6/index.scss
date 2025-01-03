@@ -1,84 +1,25 @@
 .container6 {
+  background-color: rgba(26, 26, 26, 0.04);
   .container {
-    pointer-events: none; /* 禁止所有元素响应鼠标事件 */
-
-    .left {
-      position: relative;
-      min-height: 375px;
-      margin-top: 1em;
+    padding-top: 2em;
+    .content {
+      width: 40% !important;
+      text-align: center;
 
       .title {
-        width: 80%;
-        margin-top: 1em;
-        color: #ffffff;
-        margin-bottom: 15px;
-        font-size: 36px;
-        line-height: 42px;
-        font-family: Nunito, sans-serif;
-        font-weight: 700;
-        pointer-events: auto; /* 允许点击标题 */
+        font-family: Comic Sans MS, cursive, YouYuan;
+      }
+      .title:hover {
+        color: #5aeab2 ;
       }
 
-      .content {
-        width: 90%;
-        color: #ffffff;
-        margin-bottom: 28px;
-        font-family: "Nunito", sans-serif;
-        font-size: 16px;
-        line-height: 28px;
-        font-weight: 400;
-        pointer-events: auto; /* 允许点击内容 */
-      }
-
-      .icon-button {
-        pointer-events: auto; /* 允许点击按钮 */
-      }
-
-      li {
-        top: 0;
-        right: 35px;
-        list-style: none;
-        z-index: 1;
-        position: absolute;
-        text-align: center;
-        -webkit-animation: movinground 50000ms linear infinite;
-        animation: movinground 50000ms linear infinite;
+      .detail {
+        color: #71728c;
+        padding-bottom: 1em;
       }
     }
-
-    .right {
-      position: relative;
-      img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: auto;
-      }
+    .images{
+      padding-bottom: 1em;
     }
-  }
-}
-
-
-@-webkit-keyframes movinground {
-  0% {
-    -webkit-transform: rotate(0deg) scale(1);
-    transform: rotate(0deg) scale(1);
-  }
-
-  60% {
-    -webkit-transform: rotate(180deg) scale(1.5);
-    transform: rotate(180deg) scale(1.5);
-  }
-
-  80% {
-    -webkit-transform: rotate(90deg) scale(0.6);
-    transform: rotate(90deg) scale(0.6);
-  }
-
-  100% {
-    -webkit-transform: rotate(0deg) scale(1);
-    transform: rotate(0deg) scale(1);
   }
 }
