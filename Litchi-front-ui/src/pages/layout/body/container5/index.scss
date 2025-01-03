@@ -1,13 +1,15 @@
 .container5 {
-  margin-top: 10vh;
   background-image: url("@/assets/images/bg1.jpg");
   background-size: 100% 100%;
-  //overflow: hidden; // 防止飞动元素超出容器
+
   .container {
+    pointer-events: none; /* 禁止所有元素响应鼠标事件 */
+
     .left {
       position: relative;
       min-height: 375px;
       margin-top: 1em;
+
       .title {
         width: 80%;
         margin-top: 1em;
@@ -17,6 +19,7 @@
         line-height: 42px;
         font-family: Nunito, sans-serif;
         font-weight: 700;
+        pointer-events: auto; /* 允许点击标题 */
       }
 
       .content {
@@ -27,13 +30,19 @@
         font-size: 16px;
         line-height: 28px;
         font-weight: 400;
+        pointer-events: auto; /* 允许点击内容 */
       }
-      li{
+
+      .icon-button {
+        pointer-events: auto; /* 允许点击按钮 */
+      }
+
+      li {
         top: 0;
         right: 35px;
         list-style: none;
-        z-index: 10;
-        position: absolute; // 让所有的 li 相对这个容器定位
+        z-index: 1;
+        position: absolute;
         text-align: center;
         -webkit-animation: movinground 50000ms linear infinite;
         animation: movinground 50000ms linear infinite;
@@ -41,19 +50,19 @@
     }
 
     .right {
-      position: relative; /* 设置为相对定位，为绝对定位的子元素提供参照 */
-
+      position: relative;
       img {
         position: absolute;
-        top: 50%; /* 垂直居中 */
-        left: 50%; /* 水平居中 */
-        transform: translate(-50%, -50%); /* 通过transform来精确居中，结合left和top */
-        width: 100%; /* 可以设置宽度为100%或者自定义 */
-        height: auto; /* 让高度自动适应 */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: auto;
       }
     }
   }
 }
+
 
 @-webkit-keyframes movinground {
   0% {

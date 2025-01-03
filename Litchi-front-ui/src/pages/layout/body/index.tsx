@@ -10,11 +10,21 @@ const Body = () => {
     const isMediumScreen = useMediaQuery('(max-width:1000px)'); // 检测屏幕尺寸
     return (
         <div className={"body"}>
-            <Container1 isMediumScreen={isMediumScreen}></Container1>
-            <Container2></Container2>
-            <Container3></Container3>
-            <Container4 isMediumScreen={isMediumScreen}></Container4>
-            <Container5 isMediumScreen={isMediumScreen}></Container5>
+            <div className={"container1"}>
+                <Container1 isMediumScreen={isMediumScreen}></Container1>
+            </div>
+            <div className={"container2"}>
+                <Container2></Container2>
+            </div>
+            <div className={"container3"}>
+                <Container3></Container3>
+            </div>
+            <div className={"container4"}>
+                <Container4 isMediumScreen={isMediumScreen}></Container4>
+            </div>
+            <div className={"container5"}>
+                <Container5 isMediumScreen={isMediumScreen}></Container5>
+            </div>
         </div>
     )
 }
