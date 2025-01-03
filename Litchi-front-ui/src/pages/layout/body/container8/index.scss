@@ -1,7 +1,9 @@
 .container8 {
   background-color: rgba(26, 26, 26, 0.04);
+
   .container {
     padding-top: 2em;
+
     .content {
       width: 40% !important;
       text-align: center;
@@ -9,16 +11,18 @@
       .title {
         font-family: Comic Sans MS, cursive, YouYuan;
       }
+
       .title:hover {
-        color: #5aeab2 ;
+        color: #5aeab2;
       }
 
       .detail {
         color: #71728c;
-        padding-bottom: 1em;
+        //padding-bottom: 1em;
       }
     }
-    .images{
+
+    .images {
       padding-bottom: 1em;
     }
   }

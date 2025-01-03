@@ -36,14 +36,10 @@ const Container5: React.FC<Container5Props> = ({isMediumScreen = false}: { isMed
                 <Container>
                     <Grid container className={"container"}>
                         <Grid item xs={12} className={"left"}>
-                            <h1 className={"title"}>Cirkle Makes Your Life Easier & Simple</h1>
-                            <p className={"content"}>Aliquam lorem ante dapibus in viverra quis feugiat atellu Peaselus
-                                vierra nullaut metus
-                                varius laoreet unknown printer took scrambled make.Aliquam lorem ante dapibus in viverra
-                                quis feugiat atellu Peaselus vierra nullaut metus varius laoreet unknown printer took
-                                scrambled make.</p>
+                            <h1 className={"title"}>{t('why choose title')}</h1>
+                            <p className={"content"}>{t('why choose detail')}</p>
                             <p className={"icon-button"}>
-                                <SlideIconButton label={"Read more"}/>
+                                <SlideIconButton label={t('why choose button')}/>
                             </p>
                         </Grid>
                     </Grid>

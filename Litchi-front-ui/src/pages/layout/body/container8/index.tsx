@@ -1,7 +1,6 @@
 import "./index.scss"
 import {useTranslation} from "react-i18next";
 import {Container, Grid} from "@mui/material";
-import ImageWithZoom from "@/compoents/ImageWithZoom";
 import ImageMask from "@/compoents/ImageMask";
 
 interface Container8Props {
@@ -15,40 +14,57 @@ const Container8: React.FC<Container8Props> = ({isMediumScreen = false}: { isMed
         <div className={"container6"}>
             {!isMediumScreen ? (
                 <Container>
-                    <Grid container spacing={2} className={"container"}>
+                    <Grid container spacing={1} className={"container"}>
                         <Grid item xs={12} className={"content"}>
                             <Container>
                                 <h1 className={"title"}>
-                                    {t('Location Find Start Title')}
+                                    {t('Groups Area Start Title')}
                                 </h1>
                                 <p className={"detail"}>
-                                    {t('Location Find Start Detail')}
+                                    {t('Groups Area Start Detail')}
                                 </p>
                             </Container>
                         </Grid>
-                        <Grid item xs={6} className={"images"}>
-                            <ImageMask src={"/src/assets/images/location/location_1.jpg"} title={"GuangZhou"}
-                                       width={"100%"} height={'313px'} titleFontSize={40} content={"荔枝"}/>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Grid container spacing={1} columns={10}>
-                                <Grid item xs={5}>
-                                    <ImageWithZoom src={"/src/assets/images/location/location_2.jpg"}
-                                                   label={"GuangZhou"}
-                                                   width={"280px"} height={'150px'}/>
-                                </Grid>
-                                <Grid item xs={5}>
-                                    <ImageWithZoom src={"/src/assets/images/location/location_3.jpg"} label={"Europe"}
-                                                   width={"280px"} height={'150px'}/>
-                                </Grid>
-                                <Grid item xs={5}>
-                                    <ImageWithZoom src={"/src/assets/images/location/location_4.jpg"} label={"BeiJing"}
-                                                   width={"280px"} height={'150px'}/>
-                                </Grid>
-                                <Grid item xs={5}>
-                                    <ImageWithZoom src={"/src/assets/images/location/location_1.jpg"} label={"ShangHai"}
-                                                   width={"280px"} height={'150px'}/>
-                                </Grid>
+                        <Grid container spacing={1} className={"images"}>
+                            <Grid item xs={3}>
+                                <ImageMask src={"/src/assets/images/groups/groups_1.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={20}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <ImageMask src={"/src/assets/images/groups/groups_2.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={20}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <ImageMask src={"/src/assets/images/groups/groups_3.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={20}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <ImageMask src={"/src/assets/images/groups/groups_4.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={20}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <ImageMask src={"/src/assets/images/groups/groups_5.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={20}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <ImageMask src={"/src/assets/images/groups/groups_6.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={20}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <ImageMask src={"/src/assets/images/groups/groups_7.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={20}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <ImageMask src={"/src/assets/images/groups/groups_8.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={20}
+                                           content={"小小ITYY也有大大梦想呀"}/>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -60,10 +76,10 @@ const Container8: React.FC<Container8Props> = ({isMediumScreen = false}: { isMed
                         <Grid item xs={12} className={"content"}>
                             <Container>
                                 <h1 className={"title"}>
-                                    {t('Location Find Start Title')}
+                                    {t('Groups Area Start Title')}
                                 </h1>
                                 <p className={"detail"}>
-                                    {t('Location Find Start Detail')}
+                                    {t('Groups Area Start Detail')}
                                 </p>
                             </Container>
                         </Grid>

@@ -4,14 +4,14 @@ import './index.scss';
 interface ImageMaskProps {
     src: string;
     alt?: string;
-    width?: string;
-    height?: string;
+    width?: string|number;
+    height?: string|number;
     title?: string;
-    titleFontSize?: string;
+    titleFontSize?: string|number;
     titleColor?: string;
     titleFontWeight?: string;
     content?: string;
-    contentFontSize?: string;
+    contentFontSize?: string|number;
     contentFontColor?: string;
 }
 
