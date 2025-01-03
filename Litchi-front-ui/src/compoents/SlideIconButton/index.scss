@@ -4,7 +4,6 @@
   padding: 10px 20px;
   background-color: #6200ea; /* 默认按钮背景色 */
   color: #000000;
-  border-radius: 50px; /* 圆形背景 */
   font-weight: bold;
   transition: color 0.4s ease;
   display: flex;
@@ -13,7 +12,7 @@
   z-index: 1; /* 保证按钮内容（文字和图标）在前面 */
 
   &:hover {
-    background-color:white;
+    background-color: white;
   }
 
   &::before {
@@ -23,7 +22,7 @@
     left: 0; /* 从左侧开始填充 */
     width: 100%;
     height: 100%;
-    background-color:var(--fill-color); /* 填充颜色 */
+    background-color: var(--fill-color); /* 填充颜色 */
     transform: scaleX(0);
     transform-origin: right; /* 从左到右的动画 */
     transition: transform 0.4s ease;
@@ -36,7 +35,7 @@
 
   .MuiButton-endIcon {
     margin-left: 10%; /* 图标和文字之间的间距 */
-    background-color:var(--fill-color) ; /* 图标背景色继承按钮背景色 */
+    background-color: var(--fill-color); /* 图标背景色继承按钮背景色 */
     border-radius: 50%; /* 图标背景为圆形 */
     padding: 4px; /* 图标背景的内边距 */
     z-index: 2; /* 确保图标在最上层 */

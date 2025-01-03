@@ -12,6 +12,7 @@ interface SlideIconButtonProps {
     bgColor?: string;
     width?: string | number; // 自定义宽度
     height?: string | number; // 自定义高度
+    borderRadius?: number | string;
 }
 
 const SlideIconButton: React.FC<SlideIconButtonProps> = ({
@@ -22,6 +23,7 @@ const SlideIconButton: React.FC<SlideIconButtonProps> = ({
                                                              bgColor = 'rgb(255,255,255)',
                                                              width = '200px', // 默认宽度自适应
                                                              height = '40px', // 默认高度自适应
+                                                             borderRadius = '50px',
                                                          }) => {
     return (
         <Button
@@ -38,6 +40,7 @@ const SlideIconButton: React.FC<SlideIconButtonProps> = ({
                 width: width, // 设置按钮宽度
                 height: height, // 设置按钮高度
                 borderColor: 'rgba(0,0,0,0.12)',
+                borderRadius: borderRadius,
             }}
         >
             {label}
