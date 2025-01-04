@@ -4,14 +4,14 @@ import MySvgIcon from "@/compoents/SvgIcon";
 import {useTranslation} from "react-i18next";
 import people_1 from "@/assets/images/people_1.png"
 
-interface Container1Props {
+interface BannerStartProps {
     isMediumScreen?: boolean;
 }
 
-const Container1: React.FC<Container1Props> = ({isMediumScreen = false}) => {
+const BannerStart: React.FC<BannerStartProps> = ({isMediumScreen = false}: { isMediumScreen?: any }) => {
     const {t} = useTranslation();
     return (
-        <div className={"container1"}>
+        <div className={"banners-start"}>
             <Container>
                 {!isMediumScreen ? (
                     <Grid container spacing={2} className={"container"}>
@@ -46,4 +46,4 @@ const Container1: React.FC<Container1Props> = ({isMediumScreen = false}) => {
         </div>
     )
 }
-export default Container1
+export default BannerStart

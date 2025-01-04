@@ -3,15 +3,15 @@ import {useTranslation} from "react-i18next";
 import {Container, Grid} from "@mui/material";
 import ImageWithZoom from "@/compoents/ImageWithZoom";
 
-interface Container6Props {
+interface LocationFindStartProps {
     isMediumScreen?: boolean;
 }
 
-const Container6: React.FC<Container6Props> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
+const LocationFindStart: React.FC<LocationFindStartProps> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
     const {t} = useTranslation();
     console.log(t);
     return (
-        <div className={"container6"}>
+        <div className={"location-find-start"}>
             {!isMediumScreen ? (
                 <Container>
                     <Grid container spacing={2} className={"container"}>
@@ -73,4 +73,4 @@ const Container6: React.FC<Container6Props> = ({isMediumScreen = false}: { isMed
         </div>
     )
 }
-export default Container6
+export default LocationFindStart

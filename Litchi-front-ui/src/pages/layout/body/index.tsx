@@ -1,37 +1,41 @@
 import "./index.scss"
-import Container1 from "@/pages/layout/body/container1";
-import Container2 from "@/pages/layout/body/container2";
+import BannerStart from "@/pages/layout/body/bannerStart";
+import WhyChooseStart from "@/pages/layout/body/whyChooseStart";
 import {useMediaQuery} from "@mui/material";
-import Container3 from "@/pages/layout/body/container3";
-import Container4 from "@/pages/layout/body/container4";
-import Container5 from "@/pages/layout/body/container5";
-import Container6 from "@/pages/layout/body/container6";
-import Container8 from "@/pages/layout/body/container8";
+import CommunityStart from "@/pages/layout/body/communityStart";
+import TeamAreaStart from "@/pages/layout/body/teamAreaStart";
+import WhyChooseStartIng from "@/pages/layout/body/whyChooseStartIng";
+import LocationFindStart from "@/pages/layout/body/locationFindStart";
+import GroupsAreaStart from "@/pages/layout/body/groupsAreaStart";
+import BannerAppsStart from "@/pages/layout/body/bannerAppsStart";
 
 const Body = () => {
     const isMediumScreen = useMediaQuery('(max-width:1000px)'); // 检测屏幕尺寸
     return (
         <div className={"body"}>
-            <div className={"container1"}>
-                <Container1 isMediumScreen={isMediumScreen}></Container1>
+            <div className={"banners-start-content"}>
+                <BannerStart isMediumScreen={isMediumScreen}></BannerStart>
             </div>
-            <div className={"container2"}>
-                <Container2></Container2>
+            <div className={"why-choose-start-content"}>
+                <WhyChooseStart></WhyChooseStart>
             </div>
-            <div className={"container3"}>
-                <Container3></Container3>
+            <div className={"community-start-content"}>
+                <CommunityStart></CommunityStart>
             </div>
-            <div className={"container4"}>
-                <Container4 isMediumScreen={isMediumScreen}></Container4>
+            <div className={"team-area-start-content"}>
+                <TeamAreaStart isMediumScreen={isMediumScreen}></TeamAreaStart>
             </div>
-            <div className={"container5"}>
-                <Container5 isMediumScreen={isMediumScreen}></Container5>
+            <div className={"why-choose-start-ing-content"}>
+                <WhyChooseStartIng isMediumScreen={isMediumScreen}></WhyChooseStartIng>
             </div>
-            <div className={"container6"}>
-                <Container6 isMediumScreen={isMediumScreen}></Container6>
+            <div className={"location-find-start-content"}>
+                <LocationFindStart isMediumScreen={isMediumScreen}></LocationFindStart>
             </div>
-            <div className={"container7"}>
-                <Container8 isMediumScreen={isMediumScreen}></Container8>
+            <div className={"banner-apps-start-content"}>
+                <BannerAppsStart isMediumScreen={isMediumScreen}></BannerAppsStart>
+            </div>
+            <div className={"groups-area-start-content"}>
+                <GroupsAreaStart isMediumScreen={isMediumScreen}></GroupsAreaStart>
             </div>
         </div>
     )

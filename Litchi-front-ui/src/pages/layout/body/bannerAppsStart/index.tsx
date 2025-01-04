@@ -3,14 +3,14 @@ import {useTranslation} from "react-i18next";
 import {Container, Grid} from "@mui/material";
 import SlideIconButton from "@/compoents/SlideIconButton";
 
-interface Container5Props {
+interface BannerAppsStartProps {
     isMediumScreen?: boolean;
 }
 
-const Container5: React.FC<Container5Props> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
+const BannerAppsStart: React.FC<BannerAppsStartProps> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
     const {t} = useTranslation();
     return (
-        <div className={"container5"}>
+        <div className={"banner-apps-start"}>
             {!isMediumScreen ? (
                 <Container>
                     <Grid container className={"container"}>
@@ -48,4 +48,4 @@ const Container5: React.FC<Container5Props> = ({isMediumScreen = false}: { isMed
         </div>
     )
 }
-export default Container5
+export default BannerAppsStart

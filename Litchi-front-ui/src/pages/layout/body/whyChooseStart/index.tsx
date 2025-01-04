@@ -3,10 +3,10 @@ import {Container, Grid} from "@mui/material";
 import MySvgIcon from "@/compoents/SvgIcon";
 import {useTranslation} from "react-i18next";
 
-const Container2 = () => {
+const WhyChooseStart = () => {
     const {t} = useTranslation();
     return (
-        <div className={"container2"}>
+        <div className={"why-choose-start"}>
             <Container>
                 <Grid container spacing={2} className={"container"}>
                     <Grid item sm={6} className="left">
@@ -53,4 +53,4 @@ const Container2 = () => {
         </div>
     )
 }
-export default Container2
+export default WhyChooseStart

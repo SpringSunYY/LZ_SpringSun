@@ -11,7 +11,7 @@ const Container8: React.FC<Container8Props> = ({isMediumScreen = false}: { isMed
     const {t} = useTranslation();
     console.log(t);
     return (
-        <div className={"container6"}>
+        <div className={"groups-area-start"}>
             {!isMediumScreen ? (
                 <Container>
                     <Grid container spacing={1} className={"container"}>

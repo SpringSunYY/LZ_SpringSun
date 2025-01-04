@@ -4,14 +4,14 @@ import CircleImage from "@/compoents/ImageCircle";
 import {useTranslation} from "react-i18next";
 import SlideIconButton from "@/compoents/SlideIconButton";
 
-interface Container4Props {
+interface TeamAreaStartProps {
     isMediumScreen?: boolean;
 }
 
-const Container4: React.FC<Container4Props> = ({isMediumScreen = false}) => {
+const TeamAreaStart: React.FC<TeamAreaStartProps> = ({isMediumScreen = false}) => {
     const {t} = useTranslation();
     return (
-        <div className={"container4"}>
+        <div className={"team-area-start"}>
             <Container className={"container"}>
                 <div className="content-top">
                     <h1>{t('our team')}</h1>
@@ -86,4 +86,4 @@ const Container4: React.FC<Container4Props> = ({isMediumScreen = false}) => {
         </div>
     )
 }
-export default Container4
+export default TeamAreaStart

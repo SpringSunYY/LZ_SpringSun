@@ -2,10 +2,10 @@ import "./index.scss"
 import {Container, Grid} from "@mui/material";
 import {useTranslation} from "react-i18next";
 
-const Container3 = () => {
+const CommunityStart = () => {
     const {t} = useTranslation();
     return (
-        <div className={"container3"}>
+        <div className={"community-start"}>
             <Container>
                 <Grid container spacing={2} className={"container"}>
                     <Grid item sm={6} className="left">
@@ -27,4 +27,4 @@ const Container3 = () => {
         </div>
     )
 }
-export default Container3
+export default CommunityStart
