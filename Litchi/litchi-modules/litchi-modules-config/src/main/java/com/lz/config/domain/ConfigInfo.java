@@ -8,9 +8,9 @@ import com.lz.common.core.web.domain.BaseEntity;
 
 /**
  * 配置对象 c_config_info
- * 
+ *
  * @author YY
- * @date 2024-12-20
+ * @date 2025-01-08
  */
 public class ConfigInfo extends BaseEntity
 {
@@ -36,65 +36,79 @@ public class ConfigInfo extends BaseEntity
     @Excel(name = "配置类型")
     private String configType;
 
-    public void setConfigId(Long configId) 
+    /** 排序 */
+    @Excel(name = "排序")
+    private Long configRank;
+
+    public void setConfigId(Long configId)
     {
         this.configId = configId;
     }
 
-    public Long getConfigId() 
+    public Long getConfigId()
     {
         return configId;
     }
-    public void setConfigName(String configName) 
+    public void setConfigName(String configName)
     {
         this.configName = configName;
     }
 
-    public String getConfigName() 
+    public String getConfigName()
     {
         return configName;
     }
-    public void setConfigKey(String configKey) 
+    public void setConfigKey(String configKey)
     {
         this.configKey = configKey;
     }
 
-    public String getConfigKey() 
+    public String getConfigKey()
     {
         return configKey;
     }
-    public void setConfigValue(String configValue) 
+    public void setConfigValue(String configValue)
     {
         this.configValue = configValue;
     }
 
-    public String getConfigValue() 
+    public String getConfigValue()
     {
         return configValue;
     }
-    public void setConfigType(String configType) 
+    public void setConfigType(String configType)
     {
         this.configType = configType;
     }
 
-    public String getConfigType() 
+    public String getConfigType()
     {
         return configType;
+    }
+    public void setConfigRank(Long configRank)
+    {
+        this.configRank = configRank;
+    }
+
+    public Long getConfigRank()
+    {
+        return configRank;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("configId", getConfigId())
-            .append("configName", getConfigName())
-            .append("configKey", getConfigKey())
-            .append("configValue", getConfigValue())
-            .append("configType", getConfigType())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
+                .append("configId", getConfigId())
+                .append("configName", getConfigName())
+                .append("configKey", getConfigKey())
+                .append("configValue", getConfigValue())
+                .append("configType", getConfigType())
+                .append("configRank", getConfigRank())
+                .append("createBy", getCreateBy())
+                .append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy())
+                .append("updateTime", getUpdateTime())
+                .append("remark", getRemark())
+                .toString();
     }
 }

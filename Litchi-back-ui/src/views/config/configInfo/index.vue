@@ -18,7 +18,7 @@
         />
       </el-form-item>
       <el-form-item label="配置类型" prop="configType">
-        <el-select v-model="queryParams.configType" placeholder="请选择配置类型"  style="width: 200px" clearable>
+        <el-select v-model="queryParams.configType" style="width: 200px" placeholder="请选择配置类型" clearable>
           <el-option
               v-for="dict in c_config_type"
               :key="dict.value"
@@ -26,6 +26,14 @@
               :value="dict.value"
           />
         </el-select>
+      </el-form-item>
+      <el-form-item label="排序" prop="configRank">
+        <el-input
+            v-model="queryParams.configRank"
+            placeholder="请输入排序"
+            clearable
+            @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="创建人" prop="createBy">
         <el-input
@@ -77,7 +85,8 @@
             icon="Plus"
             @click="handleAdd"
             v-hasPermi="['config:configInfo:add']"
-        >新增</el-button>
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -87,7 +96,8 @@
             :disabled="single"
             @click="handleUpdate"
             v-hasPermi="['config:configInfo:edit']"
-        >修改</el-button>
+        >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -97,7 +107,8 @@
             :disabled="multiple"
             @click="handleDelete"
             v-hasPermi="['config:configInfo:remove']"
-        >删除</el-button>
+        >删除
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -106,39 +117,55 @@
             icon="Download"
             @click="handleExport"
             v-hasPermi="['config:configInfo:export']"
-        >导出</el-button>
+        >导出
+        </el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="configInfoList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编号" align="center" prop="configId" v-if="columns[0].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="配置名称" align="center" prop="configName" v-if="columns[1].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="配置键名" align="center" prop="configKey" v-if="columns[2].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="配置键值" align="center" prop="configValue" v-if="columns[3].visible" :show-overflow-tooltip="true"/>
+      <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="编号" align="center" prop="configId" v-if="columns[0].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="配置名称" align="center" prop="configName" v-if="columns[1].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="配置键名" align="center" prop="configKey" v-if="columns[2].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="配置键值" align="center" prop="configValue" v-if="columns[3].visible"
+                       :show-overflow-tooltip="true"/>
       <el-table-column label="配置类型" align="center" prop="configType" v-if="columns[4].visible">
         <template #default="scope">
           <dict-tag :options="c_config_type" :value="scope.row.configType"/>
         </template>
       </el-table-column>
-      <el-table-column label="创建人" align="center" prop="createBy" v-if="columns[5].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="创建时间" align="center" prop="createTime" width="180" v-if="columns[6].visible" :show-overflow-tooltip="true">
+      <el-table-column label="排序" align="center" prop="configRank" v-if="columns[5].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="创建人" align="center" prop="createBy" v-if="columns[6].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180" v-if="columns[7].visible"
+                       :show-overflow-tooltip="true">
         <template #default="scope">
           <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新人" align="center" prop="updateBy" v-if="columns[7].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="更新时间" align="center" prop="updateTime" width="180" v-if="columns[8].visible" :show-overflow-tooltip="true">
+      <el-table-column label="更新人" align="center" prop="updateBy" v-if="columns[8].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="180" v-if="columns[9].visible"
+                       :show-overflow-tooltip="true">
         <template #default="scope">
           <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {h}:{i}:{s}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center" prop="remark" v-if="columns[9].visible" :show-overflow-tooltip="true"/>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" fixed="right" width="150">
+      <el-table-column label="备注" align="center" prop="remark" v-if="columns[10].visible"
+                       :show-overflow-tooltip="true"/>
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['config:configInfo:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['config:configInfo:remove']">删除</el-button>
+          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)"
+                     v-hasPermi="['config:configInfo:edit']">修改
+          </el-button>
+          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)"
+                     v-hasPermi="['config:configInfo:remove']">删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -155,13 +182,13 @@
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="configInfoRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="配置名称" prop="configName">
-          <el-input v-model="form.configName" placeholder="请输入配置名称" />
+          <el-input v-model="form.configName" placeholder="请输入配置名称"/>
         </el-form-item>
         <el-form-item label="配置键名" prop="configKey">
-          <el-input v-model="form.configKey" placeholder="请输入配置键名" />
+          <el-input v-model="form.configKey" placeholder="请输入配置键名"/>
         </el-form-item>
         <el-form-item label="配置键值" prop="configValue">
-          <el-input v-model="form.configValue" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.configValue" type="textarea" placeholder="请输入内容"/>
         </el-form-item>
         <el-form-item label="配置类型" prop="configType">
           <el-select v-model="form.configType" placeholder="请选择配置类型">
@@ -173,8 +200,11 @@
             ></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="排序" prop="configRank">
+          <el-input-number v-model="form.configRank" placeholder="请输入排序"/>
+        </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />
+          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容"/>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -188,10 +218,10 @@
 </template>
 
 <script setup name="ConfigInfo">
-import { listConfigInfo, getConfigInfo, delConfigInfo, addConfigInfo, updateConfigInfo } from "@/api/config/configInfo";
+import {listConfigInfo, getConfigInfo, delConfigInfo, addConfigInfo, updateConfigInfo} from "@/api/config/configInfo";
 
-const { proxy } = getCurrentInstance();
-const { c_config_type } = proxy.useDict('c_config_type');
+const {proxy} = getCurrentInstance();
+const {c_config_type} = proxy.useDict('c_config_type');
 
 const configInfoList = ref([]);
 const open = ref(false);
@@ -214,6 +244,7 @@ const data = reactive({
     configKey: null,
     configValue: null,
     configType: null,
+    configRank: null,
     createBy: null,
     createTime: null,
     updateBy: null,
@@ -221,40 +252,44 @@ const data = reactive({
   },
   rules: {
     configName: [
-      { required: true, message: "配置名称不能为空", trigger: "blur" }
+      {required: true, message: "配置名称不能为空", trigger: "blur"}
     ],
     configKey: [
-      { required: true, message: "配置键名不能为空", trigger: "blur" }
+      {required: true, message: "配置键名不能为空", trigger: "blur"}
     ],
     configValue: [
-      { required: true, message: "配置键值不能为空", trigger: "blur" }
+      {required: true, message: "配置键值不能为空", trigger: "blur"}
     ],
     configType: [
-      { required: true, message: "配置类型不能为空", trigger: "change" }
+      {required: true, message: "配置类型不能为空", trigger: "change"}
+    ],
+    configRank: [
+      {required: true, message: "排序不能为空", trigger: "blur"}
     ],
     createBy: [
-      { required: true, message: "创建人不能为空", trigger: "blur" }
+      {required: true, message: "创建人不能为空", trigger: "blur"}
     ],
     createTime: [
-      { required: true, message: "创建时间不能为空", trigger: "blur" }
+      {required: true, message: "创建时间不能为空", trigger: "blur"}
     ],
   },
   //表格展示列
   columns: [
-    { key: 0, label: '编号', visible: true },
-    { key: 1, label: '配置名称', visible: true },
-    { key: 2, label: '配置键名', visible: true },
-    { key: 3, label: '配置键值', visible: true },
-    { key: 4, label: '配置类型', visible: true },
-    { key: 5, label: '创建人', visible: true },
-    { key: 6, label: '创建时间', visible: true },
-    { key: 7, label: '更新人', visible: false },
-    { key: 8, label: '更新时间', visible: false },
-    { key: 9, label: '备注', visible: false },
+    {key: 0, label: '编号', visible: true},
+    {key: 1, label: '配置名称', visible: true},
+    {key: 2, label: '配置键名', visible: true},
+    {key: 3, label: '配置键值', visible: true},
+    {key: 4, label: '配置类型', visible: true},
+    {key: 5, label: '排序', visible: false},
+    {key: 6, label: '创建人', visible: true},
+    {key: 7, label: '创建时间', visible: true},
+    {key: 8, label: '更新人', visible: false},
+    {key: 9, label: '更新时间', visible: false},
+    {key: 10, label: '备注', visible: false},
   ],
 });
 
-const { queryParams, form, rules,columns } = toRefs(data);
+const {queryParams, form, rules, columns} = toRefs(data);
 
 /** 查询配置列表 */
 function getList() {
@@ -289,6 +324,7 @@ function reset() {
     configKey: null,
     configValue: null,
     configType: null,
+    configRank: 3,
     createBy: null,
     createTime: null,
     updateBy: null,
@@ -361,12 +397,13 @@ function submitForm() {
 /** 删除按钮操作 */
 function handleDelete(row) {
   const _configIds = row.configId || ids.value;
-  proxy.$modal.confirm('是否确认删除配置编号为"' + _configIds + '"的数据项？').then(function() {
+  proxy.$modal.confirm('是否确认删除配置编号为"' + _configIds + '"的数据项？').then(function () {
     return delConfigInfo(_configIds);
   }).then(() => {
     getList();
     proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
+  }).catch(() => {
+  });
 }
 
 /** 导出按钮操作 */
