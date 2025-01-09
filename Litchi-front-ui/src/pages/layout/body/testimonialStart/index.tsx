@@ -2,6 +2,7 @@ import "./index.scss"
 import {Container} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import ImageCarousel from "@/compoents/ImageCarousel";
+import {useState} from "react";
 
 interface TestimonialStartProps {
     isMediumScreen?: boolean;
@@ -14,13 +15,6 @@ const imageData = [
         title: "author_1.jpg",
         content: "你好你好你好1",
         isCentered: true
-    },
-    {
-        index: 2,
-        src: "/src/assets/images/figure/author_2.jpg",
-        title: "author_2.jpg",
-        content: "你好你好你好2",
-        isCentered: false
     },
     {
         index: 3,
@@ -75,7 +69,16 @@ const imageData = [
 ]
 const TestimonialStart: React.FC<TestimonialStartProps> = ({isMediumScreen = false}) => {
     const {t} = useTranslation();
+    const [activeContent, setActiveContent] = useState<{ title: string; content: string }>({
+        title: '',
+        content: '',
+    });
     console.log(isMediumScreen);
+    // 激活图片时的回调
+    const handleImageActivate = (title: string, content: string) => {
+        setActiveContent({title, content});
+        console.log(activeContent);
+    };
     return (
         <div className={"testimonial-start"}>
             <Container className={"container"}>
@@ -83,13 +86,17 @@ const TestimonialStart: React.FC<TestimonialStartProps> = ({isMediumScreen = fal
                     <h1>{t('our team')}</h1>
                     <p>{t('our team detail')}</p>
                 </div>
-                <ImageCarousel showText={false}
+                <ImageCarousel showText={true}
                                slidesPerView={5}
-                               width={500}
-                               height={100}
+                               width={'100%'}
+                               height={250}
                                loop={true}
+                               isCircle={true}
+                               autoPlayDelay={3000}
                                direction={'horizontal'}
-                               images={imageData}></ImageCarousel>
+                               images={imageData}
+                               onImageActivate={handleImageActivate}
+                ></ImageCarousel>
             </Container>
         </div>
     )
