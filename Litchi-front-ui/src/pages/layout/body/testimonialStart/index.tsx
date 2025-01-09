@@ -83,7 +83,13 @@ const TestimonialStart: React.FC<TestimonialStartProps> = ({isMediumScreen = fal
                     <h1>{t('our team')}</h1>
                     <p>{t('our team detail')}</p>
                 </div>
-                <ImageCarousel images={imageData}></ImageCarousel>
+                <ImageCarousel showText={false}
+                               slidesPerView={5}
+                               width={500}
+                               height={100}
+                               loop={true}
+                               direction={'horizontal'}
+                               images={imageData}></ImageCarousel>
             </Container>
         </div>
     )
