@@ -1,7 +1,7 @@
 .banner-apps-start {
   background-image: url("@/assets/images/banner/shape_2.png");
   background-position: bottom left;
-
+  overflow: hidden; /* 隐藏超出父容器的部分 */
   .container {
     pointer-events: none; /* 禁止所有元素响应鼠标事件 */
 
@@ -59,8 +59,9 @@
         text-align: center;
         -webkit-animation: movinground 50000ms linear infinite;
         animation: movinground 50000ms linear infinite;
-        width: 35em; /* 给li指定宽度 */
+        width: 30em; /* 给li指定宽度 */
         height: 30em; /* 给li指定高度 */
+        transform-origin: center; /* 保持缩放从中心开始 */
       }
     }
   }

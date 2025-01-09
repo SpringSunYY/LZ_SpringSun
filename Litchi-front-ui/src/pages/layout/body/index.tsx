@@ -8,6 +8,7 @@ import WhyChooseStartIng from "@/pages/layout/body/whyChooseStartIng";
 import LocationFindStart from "@/pages/layout/body/locationFindStart";
 import GroupsAreaStart from "@/pages/layout/body/groupsAreaStart";
 import BannerAppsStart from "@/pages/layout/body/bannerAppsStart";
+import TestimonialStart from "@/pages/layout/body/testimonialStart";
 
 const Body = () => {
     const isMediumScreen = useMediaQuery('(max-width:1000px)'); // 检测屏幕尺寸
@@ -36,6 +37,9 @@ const Body = () => {
             </div>
             <div className={"groups-area-start-content"}>
                 <GroupsAreaStart isMediumScreen={isMediumScreen}></GroupsAreaStart>
+            </div>
+            <div className={"testimonial-start-content"}>
+                <TestimonialStart isMediumScreen={isMediumScreen}></TestimonialStart>
             </div>
         </div>
     )
