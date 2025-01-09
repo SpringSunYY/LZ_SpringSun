@@ -1,6 +1,6 @@
 import "./index.scss"
-import {Container} from "@mui/material";
 import {useTranslation} from "react-i18next";
+import {Container, Grid} from "@mui/material";
 import ImageCarousel from "@/compoents/ImageCarousel";
 import {useState} from "react";
 
@@ -65,39 +65,78 @@ const imageData = [
         content: "你好你好你好9",
         isCentered: false
     },
-
 ]
-const TestimonialStart: React.FC<TestimonialStartProps> = ({isMediumScreen = false}) => {
+
+const TestimonialStart: React.FC<TestimonialStartProps> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
     const {t} = useTranslation();
-    const [activeContent, setActiveContent] = useState<{ title: string; content: string }>({
+    const [content, setContent] = useState<{ title: string; content: string }>({
         title: '',
         content: '',
     });
-    console.log(isMediumScreen);
+    console.log(t);
     // 激活图片时的回调
     const handleImageActivate = (title: string, content: string) => {
-        setActiveContent({title, content});
-        console.log(activeContent);
+        setContent({title, content});
     };
     return (
         <div className={"testimonial-start"}>
-            <Container className={"container"}>
-                <div className="content-top">
-                    <h1>{t('our team')}</h1>
-                    <p>{t('our team detail')}</p>
-                </div>
-                <ImageCarousel showText={true}
-                               slidesPerView={5}
-                               width={'100%'}
-                               height={250}
-                               loop={true}
-                               isCircle={true}
-                               autoPlayDelay={3000}
-                               direction={'horizontal'}
-                               images={imageData}
-                               onImageActivate={handleImageActivate}
-                ></ImageCarousel>
-            </Container>
+            {!isMediumScreen ? (
+                <Container>
+                    <Grid container spacing={1} className={"container"}>
+                        <Grid item xs={12} className={"content"}>
+                            <Container>
+                                <h1 className={"title"}>
+                                    {t('Testimonial Start Title')}
+                                </h1>
+                                <p className={"detail"}>
+                                    {t('Testimonial Start Detail')}
+                                </p>
+                            </Container>
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={1} className={"container-info"}>
+                        <Grid item xs={12} className={"content"}>
+                            <Container>
+                                <h1 className={"title"}>
+                                    {content.title}
+                                </h1>
+                                <p className={"detail"}>
+                                    {content.content}
+                                </p>
+                            </Container>
+                        </Grid>
+                    </Grid>
+                    <div className={"container-bottom"}>
+                        <ImageCarousel showText={true}
+                                       slidesPerView={5}
+                                       width={'100%'}
+                                       height={250}
+                                       loop={true}
+                                       isCircle={true}
+                                       autoPlayDelay={3000}
+                                       direction={'horizontal'}
+                                       images={imageData}
+                                       onImageActivate={handleImageActivate}
+                        ></ImageCarousel>
+                    </div>
+                </Container>
+            ) : (
+                <Container>
+                    <Grid container spacing={2} className={"container"}>
+                        <Grid item xs={12} className={"content"}>
+                            <Container>
+                                <h1 className={"title"}>
+                                    {t('Groups Area Start Title')}
+                                </h1>
+                                <p className={"detail"}>
+                                    {t('Groups Area Start Detail')}
+                                </p>
+                            </Container>
+                        </Grid>
+                    </Grid>
+                </Container>
+            )
+            }
         </div>
     )
 }

@@ -1,8 +1,8 @@
 .testimonial-start {
-  background-color: rgba(26, 26, 26, 0.04);
+  background-color: rgba(26, 26, 26, 0.19);
 
   .container {
-    padding-top: 2em;
+    padding-top: 1em;
 
     .content {
       width: 40% !important;
@@ -21,10 +21,30 @@
         //padding-bottom: 1em;
       }
     }
+  }
+  .container-info {
+    margin-top: 2em;
 
-    .images {
-      padding-top: 1em;
-      padding-bottom: 1em;
+    .content {
+      width: 40% !important;
+      text-align: center;
+
+      .title {
+        font-family: Comic Sans MS, cursive, YouYuan;
+        color: #5aeab2;
+      }
+
+      .title:hover {
+        color: rgb(97, 93, 250)
+      }
+
+      .detail {
+        color: #71728c;
+        padding-bottom: 1em;
+      }
+    }
+    .container-bottom{
+      margin-top: 2em ;
     }
   }
 }

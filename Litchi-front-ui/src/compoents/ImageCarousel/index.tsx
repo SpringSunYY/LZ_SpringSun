@@ -20,7 +20,7 @@ interface ImageCarouselProps {
     showText?: boolean; // 是否显示文字
     textSize?: string; // 文字大小
     direction?: 'horizontal' | 'vertical'; // 横向或竖向
-    width?: number|string; //单位px
+    width?: number | string; //单位px
     height?: number;
     isCircle?: boolean; // 是否为圆形图片，默认值为false
     onImageActivate?: (title: string, content: string) => void; // 激活图片时的回调
@@ -65,14 +65,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
     };
 
     // 处理点击事件，停止自动播放
-    const handleImageClick = () => {
+    const handleImageClick = (img: Image) => {
         if (swiperRef.current) {
             swiperRef.current.swiper.autoplay.stop(); // 点击图片时停止自动播放
         }
         // 点击激活图片时传递图片的文字内容
         if (onImageActivate) {
-            const activeImage = images[activeIndex];
-            onImageActivate(activeImage.title, activeImage.content);
+            onImageActivate(img.title, img.content);
         }
     };
 
@@ -118,7 +117,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
                             }}
                         >
                             <img
-                                onClick={handleImageClick} // 点击时停止自动播放
+                                onClick={() => handleImageClick(img)} // 点击时停止自动播放
                                 src={img.src}
                                 alt={img.title}
                                 style={{

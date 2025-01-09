@@ -3,11 +3,11 @@ import {useTranslation} from "react-i18next";
 import {Container, Grid} from "@mui/material";
 import ImageMask from "@/compoents/ImageMask";
 
-interface Container8Props {
+interface GroupsAreaStartProps {
     isMediumScreen?: boolean;
 }
 
-const Container8: React.FC<Container8Props> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
+const GroupsAreaStart: React.FC<GroupsAreaStartProps> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
     const {t} = useTranslation();
     console.log(t);
     return (
@@ -90,4 +90,4 @@ const Container8: React.FC<Container8Props> = ({isMediumScreen = false}: { isMed
         </div>
     )
 }
-export default Container8
+export default GroupsAreaStart
