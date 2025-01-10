@@ -25,7 +25,11 @@ interface ImageCarouselProps {
     isCircle?: boolean; // 是否为圆形图片，默认值为false
     onImageActivate?: (title: string, content: string) => void; // 激活图片时的回调
 }
-
+/**
+ * 自定义图片轮播
+ * 可以横竖，可以点击，可以自动轮播，是正方形还是圆形
+ * 使用了swiper
+ * */
 const ImageCarousel: React.FC<ImageCarouselProps> = ({
                                                          images,
                                                          loop = true,

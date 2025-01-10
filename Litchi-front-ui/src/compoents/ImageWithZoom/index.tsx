@@ -12,6 +12,10 @@ interface ImageWithZoomProps {
     labelFontWeight?: string;
 }
 
+/**
+ * 图片缩放组件
+ * @constructor
+ */
 const ImageWithZoom: React.FC<ImageWithZoomProps> = ({
                                                          src,
                                                          alt,

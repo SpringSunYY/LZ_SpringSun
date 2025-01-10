@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './index.scss';
 
 interface ImageCircleProps {
@@ -12,6 +12,10 @@ interface ImageCircleProps {
     hoverBackgroundColor?: string;  // 鼠标悬停时显示文字背景的颜色
 }
 
+/**
+ * 自定义圆形图片
+ * @constructor
+ */
 const ImageCircle: React.FC<ImageCircleProps> = ({
                                                      src,
                                                      alt,
@@ -29,21 +33,21 @@ const ImageCircle: React.FC<ImageCircleProps> = ({
             className="circle-image"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            style={{ width: size, height: size }}
+            style={{width: size, height: size}}
         >
             <img
                 className="image"
                 src={src}
                 alt={alt}
-                style={{ width: size, height: size }}
+                style={{width: size, height: size}}
             />
             {isHovered && (
                 <div
                     className="content"
-                    style={{ backgroundColor: hoverBackgroundColor }}  // 使用自定义的背景颜色
+                    style={{backgroundColor: hoverBackgroundColor}}  // 使用自定义的背景颜色
                 >
-                    {title && <h1 style={{ fontSize: titleFontSize }}>{title}</h1>}
-                    {content && <p style={{ fontSize: contentFontSize }}>{content}</p>}
+                    {title && <h1 style={{fontSize: titleFontSize}}>{title}</h1>}
+                    {content && <p style={{fontSize: contentFontSize}}>{content}</p>}
                 </div>
             )}
         </div>

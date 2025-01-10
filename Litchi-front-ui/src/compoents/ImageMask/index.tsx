@@ -15,6 +15,11 @@ interface ImageMaskProps {
     contentFontColor?: string;
 }
 
+/**
+ * 图片灰色遮罩层
+ * 鼠标滑动过去后会显示原来的颜色，以及可以自定义文字
+ * @constructor
+ */
 const ImageMask: React.FC<ImageMaskProps> = ({
                                                  src,
                                                  alt,

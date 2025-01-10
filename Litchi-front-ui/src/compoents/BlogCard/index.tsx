@@ -3,19 +3,23 @@ import './index.scss';
 import MySvgIcon from "@/compoents/SvgIcon";  // 导入 SCSS 样式
 
 interface BlogCardProps {
-    imageUrl: string;
-    date: string;
-    dateIcon?: string;
-    title: string;
-    author: string;
-    forum: string;
-    fontSize?: string;
-    dateFontSize?: string;
-    imageWidth?: string;
-    imageHeight?: string;
-    avatar?: string;
+    imageUrl: string;           //图片路径
+    date: string;               //时间
+    dateIcon?: string;          //时间icon,使用的是自定义icon MySvgIcon
+    title: string;              //标题
+    author: string;             //作者
+    forum: string;              //论坛
+    fontSize?: string;          //字体大小 标题字体大小
+    dateFontSize?: string;      //时间字体大小
+    imageWidth?: string;        //图片宽度
+    imageHeight?: string;       //图片高度
+    avatar?: string;            //作者图片头像使用的是自定义icon MySvgIcon
 }
 
+/**
+ * 自定义blogCard组件 用于展示博客信息
+ * @constructor
+ */
 const BlogCard: React.FC<BlogCardProps> = ({
                                                imageUrl,
                                                date,
@@ -59,7 +63,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
                     style={{fontSize: dateFontSize}}
                 >
                     <MySvgIcon size={"1.2em"} name={dateIcon} style={{verticalAlign: 'middle'}}/>
-                    <span >  {date}</span>
+                    <span>  {date}</span>
                 </div>
             </div>
             <div className="blog-card-content">
