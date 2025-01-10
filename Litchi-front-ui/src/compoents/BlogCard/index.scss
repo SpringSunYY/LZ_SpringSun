@@ -1,0 +1,61 @@
+.blog-card {
+  .blog-card-image-container {
+    position: relative;
+    overflow: hidden; /* 防止图片放大时超出容器 */
+
+    .blog-card-image {
+      width: 100%;
+      height: 100%; /* 确保图片高度与容器一致 */
+      transition: all 0.3s ease;  // 添加平滑过渡
+      transform-origin: center center; /* 设置缩放中心点为图片的中心 */
+    }
+
+    .blog-card-date {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      background-color: #6366f1;
+      color: white;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.375rem;
+      font-weight: 500;
+    }
+
+    /* 鼠标悬停时放大图片 */
+    &:hover .blog-card-image {
+      transform: scale(1.2); /* 鼠标悬停时图片放大 */
+    }
+  }
+
+  .blog-card-content {
+    padding: 1rem;
+    .title{
+      color: #000000;
+      padding-bottom: 1em;
+    }
+    .title:hover{
+      color: #5aeab2 ;
+    }
+    .blog-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #4b5563;
+      font-size: 0.875rem;
+
+      .blog-card-author {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .blog-card-categories {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+  }
+}
