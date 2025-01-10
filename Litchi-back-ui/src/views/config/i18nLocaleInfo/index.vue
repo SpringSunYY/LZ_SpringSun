@@ -18,7 +18,7 @@
         />
       </el-form-item>
       <el-form-item label="状态" prop="localeStatus">
-        <el-select v-model="queryParams.localeStatus"  style="width: 200px" placeholder="请选择状态" clearable>
+        <el-select v-model="queryParams.localeStatus" style="width: 200px" placeholder="请选择状态" clearable>
           <el-option
               v-for="dict in c_locale_status"
               :key="dict.value"
@@ -78,6 +78,16 @@
             @click="handleAdd"
             v-hasPermi="['config:i18nLocaleInfo:add']"
         >新增
+        </el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <el-button
+            type="primary"
+            plain
+            icon="Plus"
+            @click="handLoadingMessage"
+            v-hasPermi="['config:i18nLocaleInfo:add']"
+        >重置缓存
         </el-button>
       </el-col>
       <el-col :span="1.5">
@@ -205,7 +215,7 @@ import {
   getI18nLocaleInfo,
   delI18nLocaleInfo,
   addI18nLocaleInfo,
-  updateI18nLocaleInfo
+  updateI18nLocaleInfo, loadingMessage
 } from "@/api/config/i18nLocaleInfo";
 
 const {proxy} = getCurrentInstance();
@@ -268,6 +278,12 @@ const data = reactive({
 });
 
 const {queryParams, form, rules, columns} = toRefs(data);
+
+function handLoadingMessage() {
+  loadingMessage().then(res => {
+    proxy.$modal.msgSuccess("重置成功");
+  })
+}
 
 /** 查询国际化国家列表 */
 function getList() {

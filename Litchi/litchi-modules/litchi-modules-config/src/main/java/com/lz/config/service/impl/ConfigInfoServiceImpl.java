@@ -9,6 +9,7 @@ import com.lz.common.security.utils.SecurityUtils;
 import com.lz.config.domain.ConfigInfo;
 import com.lz.config.mapper.ConfigInfoMapper;
 import com.lz.config.service.IConfigInfoService;
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,22 @@ public class ConfigInfoServiceImpl implements IConfigInfoService {
 
     @Resource
     private RedisService redisService;
+
+    /**
+     * 项目启动时，初始化参数到缓存
+     */
+    @PostConstruct
+    public void init() {
+        loadingConfigCache();
+    }
+
+    private void loadingConfigCache() {
+        ConfigInfo configInfo = new ConfigInfo();
+        List<ConfigInfo> configInfos = configInfoMapper.selectConfigInfoList(configInfo);
+        for (ConfigInfo info : configInfos) {
+            redisService.setCacheObject(CONFIG + info.getConfigKey(), info.getConfigValue());
+        }
+    }
 
     /**
      * 查询配置

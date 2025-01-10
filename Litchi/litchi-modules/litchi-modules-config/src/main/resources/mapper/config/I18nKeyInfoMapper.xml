@@ -27,6 +27,7 @@
             <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and DATE_FORMAT(create_time,'%Y-%m-%d') between #{params.beginCreateTime} and #{params.endCreateTime}</if>
             <if test="params.beginUpdateTime != null and params.beginUpdateTime != '' and params.endUpdateTime != null and params.endUpdateTime != ''"> and DATE_FORMAT(update_time,'%Y-%m-%d') between #{params.beginUpdateTime} and #{params.endUpdateTime}</if>
         </where>
+        order by key_name
     </select>
 
     <select id="selectI18nKeyInfoByKeyId" parameterType="Long" resultMap="I18nKeyInfoResult">

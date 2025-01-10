@@ -34,6 +34,7 @@ public class I18nMessageInfoController extends BaseController
     @Autowired
     private I18nService i18nService;
 
+    //region 若依生成
     /**
      * 查询国际化信息列表
      */
@@ -127,4 +128,6 @@ public class I18nMessageInfoController extends BaseController
         i18nMessageInfoService.setUserI18n(localizationDto.getMsg());
         return success();
     }
+
+    //endregion
 }

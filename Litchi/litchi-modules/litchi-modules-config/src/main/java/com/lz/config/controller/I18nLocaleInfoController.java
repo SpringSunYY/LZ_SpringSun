@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.io.IOException;
+
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,24 +28,24 @@ import com.lz.common.core.web.page.TableDataInfo;
 
 /**
  * 国际化国家Controller
- * 
+ *
  * @author YY
  * @date 2024-12-20
  */
 @RestController
 @RequestMapping("/i18nLocaleInfo")
-public class I18nLocaleInfoController extends BaseController
-{
+public class I18nLocaleInfoController extends BaseController {
     @Autowired
     private II18nLocaleInfoService i18nLocaleInfoService;
+
+    //region 若依生成
 
     /**
      * 查询国际化国家列表
      */
     @RequiresPermissions("config:i18nLocaleInfo:list")
     @GetMapping("/list")
-    public TableDataInfo list(I18nLocaleInfo i18nLocaleInfo)
-    {
+    public TableDataInfo list(I18nLocaleInfo i18nLocaleInfo) {
         startPage();
         List<I18nLocaleInfo> list = i18nLocaleInfoService.selectI18nLocaleInfoList(i18nLocaleInfo);
         return getDataTable(list);
@@ -56,8 +57,7 @@ public class I18nLocaleInfoController extends BaseController
     @RequiresPermissions("config:i18nLocaleInfo:export")
     @Log(title = "国际化国家", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, I18nLocaleInfo i18nLocaleInfo)
-    {
+    public void export(HttpServletResponse response, I18nLocaleInfo i18nLocaleInfo) {
         List<I18nLocaleInfo> list = i18nLocaleInfoService.selectI18nLocaleInfoList(i18nLocaleInfo);
         ExcelUtil<I18nLocaleInfo> util = new ExcelUtil<I18nLocaleInfo>(I18nLocaleInfo.class);
         util.exportExcel(response, list, "国际化国家数据");
@@ -68,8 +68,7 @@ public class I18nLocaleInfoController extends BaseController
      */
     @RequiresPermissions("config:i18nLocaleInfo:query")
     @GetMapping(value = "/{localeId}")
-    public AjaxResult getInfo(@PathVariable("localeId") Long localeId)
-    {
+    public AjaxResult getInfo(@PathVariable("localeId") Long localeId) {
         return success(i18nLocaleInfoService.selectI18nLocaleInfoByLocaleId(localeId));
     }
 
@@ -79,8 +78,7 @@ public class I18nLocaleInfoController extends BaseController
     @RequiresPermissions("config:i18nLocaleInfo:add")
     @Log(title = "国际化国家", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody I18nLocaleInfo i18nLocaleInfo)
-    {
+    public AjaxResult add(@RequestBody I18nLocaleInfo i18nLocaleInfo) {
         return toAjax(i18nLocaleInfoService.insertI18nLocaleInfo(i18nLocaleInfo));
     }
 
@@ -90,8 +88,7 @@ public class I18nLocaleInfoController extends BaseController
     @RequiresPermissions("config:i18nLocaleInfo:edit")
     @Log(title = "国际化国家", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody I18nLocaleInfo i18nLocaleInfo)
-    {
+    public AjaxResult edit(@RequestBody I18nLocaleInfo i18nLocaleInfo) {
         return toAjax(i18nLocaleInfoService.updateI18nLocaleInfo(i18nLocaleInfo));
     }
 
@@ -100,9 +97,8 @@ public class I18nLocaleInfoController extends BaseController
      */
     @RequiresPermissions("config:i18nLocaleInfo:remove")
     @Log(title = "国际化国家", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{localeIds}")
-    public AjaxResult remove(@PathVariable Long[] localeIds)
-    {
+    @DeleteMapping("/{localeIds}")
+    public AjaxResult remove(@PathVariable Long[] localeIds) {
         return toAjax(i18nLocaleInfoService.deleteI18nLocaleInfoByLocaleIds(localeIds));
     }
 
@@ -112,5 +108,17 @@ public class I18nLocaleInfoController extends BaseController
         String format = time.format(DateTimeFormatter.ISO_INSTANT);
         System.err.println("format = " + format);
         return format;  // 返回 UTC 时间
+    }
+    //endregion
+
+    /**
+     * 新增国际化信息
+     */
+    @RequiresPermissions("config:i18nLocaleInfo:add")
+    @Log(title = "重置国际化message", businessType = BusinessType.OTHER)
+    @PostMapping("/loadingMessage")
+    public AjaxResult loadingMessage() {
+        i18nLocaleInfoService.loadingLocaleInfo();
+        return success("重置成功");
     }
 }

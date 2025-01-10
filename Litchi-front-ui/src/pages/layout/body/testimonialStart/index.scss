@@ -8,7 +8,7 @@
     .content {
       width: 40% !important;
       text-align: center;
-
+      position: relative;
       .title {
         font-family: Comic Sans MS, cursive, YouYuan;
         color: white;
@@ -20,6 +20,8 @@
 
       .detail {
         color: rgba(0, 0, 0, 0.47);
+        width: 70%;
+        margin: auto;
         //padding-bottom: 1em;
       }
     }
@@ -44,6 +46,7 @@
       .detail {
         color: rgba(0, 0, 0, 0.47);
         padding-bottom: 1em;
+        padding-top: 1em;
       }
     }
 

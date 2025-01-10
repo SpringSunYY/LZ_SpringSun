@@ -12,6 +12,7 @@ import com.lz.common.redis.service.RedisService;
 import com.lz.common.security.utils.SecurityUtils;
 import com.lz.config.domain.I18nMessageInfo;
 import com.lz.config.mapper.I18nMessageInfoMapper;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,24 @@ public class I18nLocaleInfoServiceImpl implements II18nLocaleInfoService {
 
     @Autowired
     private I18nMessageInfoMapper messageInfoMapper;
+
+    /**
+     * 项目启动时，初始化message 到缓存
+     */
+    @PostConstruct
+    public void init() {
+        loadingLocaleInfo();
+    }
+
+    @Override
+    public void loadingLocaleInfo() {
+        I18nLocaleInfo i18nLocaleInfo = new I18nLocaleInfo();
+        i18nLocaleInfo.setLocaleStatus(CLocaleStatusEnum.LOCALE_STATUS_0.getValue());
+        List<I18nLocaleInfo> i18nLocaleInfos = i18nLocaleInfoMapper.selectI18nLocaleInfoList(i18nLocaleInfo);
+        for (I18nLocaleInfo info : i18nLocaleInfos) {
+            setMessageCache(info);
+        }
+    }
 
     /**
      * 查询国际化国家
@@ -111,13 +130,26 @@ public class I18nLocaleInfoServiceImpl implements II18nLocaleInfoService {
         }
         //如果不是修改为隐藏
         if (changedLocale && i18nLocaleInfo.getLocaleStatus().equals(CLocaleStatusEnum.LOCALE_STATUS_0.getValue())) {
-            I18nMessageInfo i18nMessageInfo = new I18nMessageInfo();
-            i18nMessageInfo.setLocale(i18nLocaleInfo.getLocale());
-            List<I18nMessageInfo> i18nMessageInfos = messageInfoMapper.selectI18nMessageInfoList(i18nMessageInfo);
-            Map<String, String> map = i18nMessageInfos.stream().collect(Collectors.toMap(I18nMessageInfo::getMessageKey, I18nMessageInfo::getMessage));
-            redisService.setCacheMap(LOCALIZATION + i18nLocaleInfo.getLocale(), map);
+            setMessageCache(i18nLocaleInfo);
         }
         return i;
+    }
+
+    /**
+     * description: 设置message缓存
+     * author: YY
+     * method: setMessageCache
+     * date: 2025/1/10 17:21
+     * param:
+     * param: i18nLocaleInfo
+     * return: void
+     **/
+    private void setMessageCache(I18nLocaleInfo i18nLocaleInfo) {
+        I18nMessageInfo i18nMessageInfo = new I18nMessageInfo();
+        i18nMessageInfo.setLocale(i18nLocaleInfo.getLocale());
+        List<I18nMessageInfo> i18nMessageInfos = messageInfoMapper.selectI18nMessageInfoList(i18nMessageInfo);
+        Map<String, String> map = i18nMessageInfos.stream().collect(Collectors.toMap(I18nMessageInfo::getMessageKey, I18nMessageInfo::getMessage));
+        redisService.setCacheMap(LOCALIZATION + i18nLocaleInfo.getLocale(), map);
     }
 
     /**
@@ -128,6 +160,13 @@ public class I18nLocaleInfoServiceImpl implements II18nLocaleInfoService {
      */
     @Override
     public int deleteI18nLocaleInfoByLocaleIds(Long[] localeIds) {
+        QueryWrapper<I18nLocaleInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("locale_id", (Object) localeIds);
+        List<I18nLocaleInfo> i18nLocaleInfos = i18nLocaleInfoMapper.selectList(queryWrapper);
+        for (I18nLocaleInfo info : i18nLocaleInfos) {
+            //删除之前的key
+            redisService.deleteObject(LOCALIZATION + info.getLocale());
+        }
         return i18nLocaleInfoMapper.deleteI18nLocaleInfoByLocaleIds(localeIds);
     }
 
