@@ -22,6 +22,10 @@
         pointer-events: auto; /* 允许点击标题 */
       }
 
+      .title:hover {
+        color: #5aeab2;
+      }
+
       .content {
         width: 90%;
         color: #ffffff;
@@ -51,6 +55,7 @@
 
     .right {
       position: relative;
+
       img {
         position: absolute;
         top: 50%;

@@ -1,3 +1,16 @@
 .blog-area-start {
-
+  .container {
+    padding-top: 5em;
+    padding-bottom: 5em;
+    .title {
+      //color: #0c1fd7;
+    }
+    .detail{
+      width: 70% !important;
+      //padding-top: 1em;
+      color: rgba(26, 26, 26, 0.6);
+      text-indent: 2em; /* 设置首行缩进 2 个字符宽度 */
+    }
+  }
 }
+

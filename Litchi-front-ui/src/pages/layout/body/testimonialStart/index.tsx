@@ -67,7 +67,7 @@ const imageData = [
     },
 ]
 
-const TestimonialStart: React.FC<TestimonialStartProps> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
+const TestimonialStart: React.FC<TestimonialStartProps> = ({isMediumScreen = false}) => {
     const {t} = useTranslation();
     const [content, setContent] = useState<{ title: string; content: string }>({
         title: '',

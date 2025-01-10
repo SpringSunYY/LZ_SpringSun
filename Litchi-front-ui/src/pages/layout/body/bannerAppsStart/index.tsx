@@ -7,7 +7,7 @@ interface BannerAppsStartProps {
     isMediumScreen?: boolean;
 }
 
-const BannerAppsStart: React.FC<BannerAppsStartProps> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
+const BannerAppsStart: React.FC<BannerAppsStartProps> = ({isMediumScreen = false}) => {
     const {t} = useTranslation();
     return (
         <div className={"banner-apps-start"}>

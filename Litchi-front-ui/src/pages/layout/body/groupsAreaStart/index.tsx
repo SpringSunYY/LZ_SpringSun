@@ -7,7 +7,7 @@ interface GroupsAreaStartProps {
     isMediumScreen?: boolean;
 }
 
-const GroupsAreaStart: React.FC<GroupsAreaStartProps> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
+const GroupsAreaStart: React.FC<GroupsAreaStartProps> = ({isMediumScreen = false}) => {
     const {t} = useTranslation();
     console.log(t);
     return (

@@ -7,7 +7,7 @@ interface LocationFindStartProps {
     isMediumScreen?: boolean;
 }
 
-const LocationFindStart: React.FC<LocationFindStartProps> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
+const LocationFindStart: React.FC<LocationFindStartProps> = ({isMediumScreen = false}) => {
     const {t} = useTranslation();
     console.log(t);
     return (

@@ -7,7 +7,7 @@ interface WhyChooseStartIngProps {
     isMediumScreen?: boolean;
 }
 
-const WhyChooseStartIng: React.FC<WhyChooseStartIngProps> = ({isMediumScreen = false}: { isMediumScreen?: boolean }) => {
+const WhyChooseStartIng: React.FC<WhyChooseStartIngProps> = ({isMediumScreen = false}) => {
     const {t} = useTranslation();
     return (
         <div className={"why-choose-start-ing"}>
