@@ -126,12 +126,37 @@ const TestimonialStart: React.FC<TestimonialStartProps> = ({isMediumScreen = fal
                         <Grid item xs={12} className={"content"}>
                             <Container>
                                 <h1 className={"title"}>
-                                    {t('Groups Area Start Title')}
+                                    {t('Testimonial Start Title')}
                                 </h1>
                                 <p className={"detail"}>
-                                    {t('Groups Area Start Detail')}
+                                    {t('Testimonial Start Detail')}
                                 </p>
                             </Container>
+                            <Grid container spacing={1} className={"container-info"}>
+                                <Grid item xs={12} className={"content"}>
+                                    <Container>
+                                        <h1 className={"title"}>
+                                            {content.title}
+                                        </h1>
+                                        <p className={"detail"}>
+                                            {content.content}
+                                        </p>
+                                    </Container>
+                                </Grid>
+                            </Grid>
+                            <div className={"container-bottom"}>
+                                <ImageCarousel showText={false}
+                                               slidesPerView={5}
+                                               width={'100%'}
+                                               height={100}
+                                               loop={true}
+                                               isCircle={true}
+                                               autoPlayDelay={3000}
+                                               direction={'horizontal'}
+                                               images={imageData}
+                                               onImageActivate={handleImageActivate}
+                                ></ImageCarousel>
+                            </div>
                         </Grid>
                     </Grid>
                 </Container>

@@ -66,6 +66,10 @@ const LocationFindStart: React.FC<LocationFindStartProps> = ({isMediumScreen = f
                                 </p>
                             </Container>
                         </Grid>
+                        <Grid item xs={12} className={"images"}>
+                            <ImageWithZoom src={"/src/assets/images/location/location_1.jpg"} label={"GuangZhou"}
+                                           width={"100%"} height={'400px'} labelFontSize={40}/>
+                        </Grid>
                     </Grid>
                 </Container>
             )

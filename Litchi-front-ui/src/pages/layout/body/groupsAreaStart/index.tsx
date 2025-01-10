@@ -83,6 +83,28 @@ const GroupsAreaStart: React.FC<GroupsAreaStartProps> = ({isMediumScreen = false
                                 </p>
                             </Container>
                         </Grid>
+                        <Grid container spacing={1} className={"images"}>
+                            <Grid item xs={6}>
+                                <ImageMask src={"/src/assets/images/groups/groups_1.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={16} contentFontSize={10}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <ImageMask src={"/src/assets/images/groups/groups_2.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={16} contentFontSize={10}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <ImageMask src={"/src/assets/images/groups/groups_3.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={16} contentFontSize={10}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <ImageMask src={"/src/assets/images/groups/groups_4.jpg"} title={"GuangZhou"}
+                                           width={"100%"} height={'auto'} titleFontSize={16} contentFontSize={10}
+                                           content={"小小ITYY也有大大梦想呀"}/>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Container>
             )
