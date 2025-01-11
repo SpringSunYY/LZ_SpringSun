@@ -47,7 +47,7 @@ const Body = () => {
                 <BlogAreaStart isMediumScreen={isMediumScreen}></BlogAreaStart>
             </div>
             <div className={"news-letter-start-content"}>
-                <NewsLetterStart isMediumScreen={isMediumScreen}></NewsLetterStart>
+                <NewsLetterStart></NewsLetterStart>
             </div>
         </div>
     )

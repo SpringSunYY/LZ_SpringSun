@@ -5,6 +5,7 @@ import './index.scss'
 import Header from "@/pages/layout/header";
 import Body from "@/pages/layout/body";
 import BackToTop from "@/compoents/BackToTop";
+import Footer from "@/pages/layout/footer";
 
 const AppLayout: React.FC = () => {
     useTheme();
@@ -15,6 +16,9 @@ const AppLayout: React.FC = () => {
             </div>
             <div className={"body"}>
                 <Body></Body>
+            </div>
+            <div className={"footer"}>
+                <Footer></Footer>
             </div>
             <BackToTop></BackToTop>
             {/* 子路由内容 */}

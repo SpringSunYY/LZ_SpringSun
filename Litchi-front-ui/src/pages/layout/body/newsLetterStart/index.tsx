@@ -1,9 +1,11 @@
 import {Container, InputAdornment, TextField} from "@mui/material";
 import "./index.scss"
 import SlideIconButton from "@/compoents/SlideIconButton";
+import {useTranslation} from "react-i18next";
 
 
 const NewsLetterStart = () => {
+    const {t} = useTranslation();
     return (
         <div className={"news-letter-start"}>
             <Container>
@@ -25,15 +27,13 @@ const NewsLetterStart = () => {
                     </ul>
                 </div>
                 <div className={"news-top"}>
-                    <h1 className={"top-title"}>Subscribe Cirkle Newsletter</h1>
-                    <p className={"top-detail"}>Subscribe to be the first one to know about updates, new features and
-                        much more! Enter your
-                        email</p>
+                    <h1 className={"top-title"}>{t('news letter start title')}</h1>
+                    <p className={"top-detail"}>{t('news letter start detail')}</p>
                 </div>
                 <div className={"news-medium"}>
                     <div className={"medium-content"}>
                         <TextField fullWidth
-                                   label="email"
+                                   label={t('news letter start email')}
                                    id="fullWidth"
                                    variant="standard"
                                    InputProps={{
