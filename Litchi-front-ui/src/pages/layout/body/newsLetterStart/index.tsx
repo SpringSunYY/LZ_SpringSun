@@ -40,7 +40,7 @@ const NewsLetterStart: React.FC<NewsLetterStartProps> = ({
                 <div className={"news-medium"}>
                     <div className={"medium-content"}>
                         <TextField fullWidth
-                                   label="fullWidth"
+                                   label="email"
                                    id="fullWidth"
                                    variant="standard"
                                    InputProps={{
@@ -61,9 +61,6 @@ const NewsLetterStart: React.FC<NewsLetterStartProps> = ({
                                        ),
                                    }}/>
                     </div>
-                </div>
-                <div className={"news-bottom"}>
-
                 </div>
             </Container>
         </div>

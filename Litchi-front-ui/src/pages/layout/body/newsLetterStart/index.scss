@@ -3,12 +3,14 @@
   width: 100%;
   background-color: #f0f4f6;
 
-  .shape{
+  .shape {
     position: relative;
-    li{
+
+    li {
       list-style: none;
       position: absolute;
     }
+
     li:nth-child(1n) {
       top: 50px;
       left: 0;
@@ -16,28 +18,28 @@
       animation: movingleftright1 15000ms infinite;
     }
 
-     li:nth-child(2n) {
+    li:nth-child(2n) {
       top: 150px;
       left: 22%;
       -webkit-animation: movingleftright2 20000ms infinite;
       animation: movingleftright2 20000ms infinite;
     }
 
-     li:nth-child(3n) {
+    li:nth-child(3n) {
       top: 170px;
       left: 50%;
       -webkit-animation: movingleftright3 25000ms infinite;
       animation: movingleftright3 25000ms infinite;
     }
 
-     li:nth-child(4n) {
+    li:nth-child(4n) {
       top: 110px;
       left: 90%;
       -webkit-animation: movingleftright2 15000ms infinite;
       animation: movingleftright2 15000ms infinite;
     }
 
-     li:nth-child(5n) {
+    li:nth-child(5n) {
       top: -120px;
       left: 40%;
       -webkit-animation: movingleftright1 30000ms infinite;
@@ -45,37 +47,41 @@
     }
 
   }
-  .cloud{
+
+  .cloud {
     position: relative;
-    li{
+
+    li {
       list-style: none;
       position: absolute;
     }
-     li:nth-child(1n) {
+
+    li:nth-child(1n) {
       top: 20%;
       -webkit-animation: moveclouds 35s linear infinite;
       animation: moveclouds 35s linear infinite;
     }
 
-     li:nth-child(2n) {
+    li:nth-child(2n) {
       bottom: 0;
       top: auto;
       -webkit-animation: moveclouds 45s linear infinite;
       animation: moveclouds 45s linear infinite;
     }
 
-     li:nth-child(3n) {
+    li:nth-child(3n) {
       -webkit-animation: moveclouds 36s linear infinite;
       animation: moveclouds 36s linear infinite;
     }
 
-     li:nth-child(4n) {
+    li:nth-child(4n) {
       -webkit-animation: moveclouds 40s linear infinite;
       animation: moveclouds 40s linear infinite;
     }
   }
+
   .news-top {
-    padding-top: 1em;
+    padding-top: 2em;
     display: flex;
     flex-direction: column; /* 垂直排列子元素 */
     align-items: center; /* 水平居中 */
@@ -112,12 +118,14 @@
     justify-content: center; /* 垂直居中 */
     text-align: center;
     position: relative;
+    padding-bottom: 2em;
 
     .medium-content {
       width: 70%;
     }
   }
 }
+
 @-webkit-keyframes movingleftright1 {
   0% {
     -webkit-transform: translateX(0) translateY(0);
