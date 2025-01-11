@@ -1,16 +1,9 @@
-import React from "react";
 import {Container, InputAdornment, TextField} from "@mui/material";
 import "./index.scss"
 import SlideIconButton from "@/compoents/SlideIconButton";
 
-interface NewsLetterStartProps {
-    isMediumScreen: boolean;
-}
 
-const NewsLetterStart: React.FC<NewsLetterStartProps> = ({
-                                                             isMediumScreen = false,
-                                                         }) => {
-    console.log(isMediumScreen);
+const NewsLetterStart = () => {
     return (
         <div className={"news-letter-start"}>
             <Container>
