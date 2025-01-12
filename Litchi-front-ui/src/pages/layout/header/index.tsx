@@ -15,11 +15,11 @@ const menus = [
         label: "用户",
         key: "Dashboard",
         menuId: 1,
-        path: "/login",
+        path: "/",
         children: [
-            {label: "登录", key: "Dashboard-Profile", menuId: 2, path: "/login"},
-            {label: "My account", key: "Dashboard-MyAccount", menuId: 3, path: "/login"},
-            {label: "Logout", key: "Dashboard-Logout", menuId: 4, path: "/login"},
+            {label: "登录", key: "Dashboard-Profile", menuId: 2, path: "/"},
+            {label: "My account", key: "Dashboard-MyAccount", menuId: 3, path: "/"},
+            {label: "Logout", key: "Dashboard-Logout", menuId: 4, path: "/"},
         ],
     },
     {
@@ -28,8 +28,8 @@ const menus = [
         menuId: 4,
         path: "/login",
         children: [
-            {label: "General", key: "Settings-General", menuId: 5, path: "/login"},
-            {label: "安全", key: "Settings-Security", menuId: 6, path: "/login"},
+            {label: "General", key: "Settings-General", menuId: 5, path: "/"},
+            {label: "安全", key: "Settings-Security", menuId: 6, path: "/"},
         ],
     },
     {
@@ -166,6 +166,9 @@ const Heard = () => {
                 window.removeEventListener('scroll', handleScroll);
             };
         }, []);
+    const handleLoginClick = () => {
+        navigate("/login") // 跳转到登录页面
+    };
         return (
             <header className="header">
                 <AppBar className={`appBar ${scrolled ? 'scrolled' : ''}`} style={{height: `${headerHeight}em`}}>
@@ -294,6 +297,7 @@ const Heard = () => {
                                                 <Grid item xs={4}>
                                                     <Button className={"menu-content-button menu-content-hover"}
                                                             variant="outlined"
+                                                            onClick={handleLoginClick}  // 登录
                                                             sx={{
                                                                 paddingY: '0em', // 调整上下内边距，例如 0.5em
                                                                 paddingX: '0.5em',   // 可以调整左右内边距
